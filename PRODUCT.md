@@ -30,7 +30,7 @@ Un solo equipo que cubre todo el frente digital de una empresa (automatización 
 
 ## Capabilities and Constraints
 
-- Servicios confirmados (6): automatización de procesos, diseño web, aplicaciones, publicidad en Meta, edición de video, marketing digital.
+- Servicios confirmados (8): automatización de procesos, funnels de venta y diseños web, soluciones con IA, marketing digital, publicidad paga en redes sociales, edición de videos, tiendas virtuales, creación de contenido.
 - Idioma: español neutro latinoamericano.
 - **Abierto:** número de WhatsApp real (marcador `+57 300 000 0000` hasta recibirlo).
 - **Abierto:** resultados reales con números (el cliente los tiene y los enviará; hasta entonces se usan cifras de ejemplo marcadas como tal en el código y en pantalla).

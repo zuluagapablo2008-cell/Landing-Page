@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,700;100,900;125,800;125,900&display=swap">
-<link rel="preload" as="image" href="/assets/mascot/hero-rocket.png">
+<link rel="preload" as="image" href="/assets/mascot/hero-rocket@2x.webp" type="image/webp" fetchpriority="high">
 <script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
 
 <style>
@@ -134,7 +134,9 @@ main, .nav, .foot{position:relative; z-index:1}
   position:fixed; left:0; top:0; width:var(--rocket-w); z-index:41;
   pointer-events:none; will-change:transform;
 }
-.rocket-inner{display:block; width:100%; height:auto; will-change:transform; position:relative; z-index:1}
+/* una sola capa compuesta: el padre. Anidar will-change rasteriza dos veces
+   y el cohete pierde nitidez al escalarse hacia la regla. */
+.rocket-inner{display:block; width:100%; height:auto; position:relative; z-index:1}
 .rocket::before{content:""; position:absolute; left:6%; top:52%; width:46%; height:46%; border-radius:50%; background:radial-gradient(closest-side, rgba(91,84,255,.55), rgba(123,59,255,.18) 55%, transparent 75%); filter:blur(6px); pointer-events:none}
 .js .rocket::before{animation:flame-glow 1.3s ease-in-out infinite alternate}
 @keyframes flame-glow{from{opacity:.55; transform:scale(.92)}to{opacity:.95; transform:scale(1.06)}}
@@ -171,7 +173,7 @@ main, .nav, .foot{position:relative; z-index:1}
 
 /* ---------- hero ---------- */
 .hero{position:relative; padding-top:34px; padding-bottom:36px; min-height:calc(100dvh - var(--nav-h)); display:flex; align-items:stretch}
-.hero-in{display:grid; grid-template-rows:auto minmax(0,1fr) auto auto; gap:14px; width:100%}
+.hero-in{display:grid; grid-template-rows:auto minmax(0,1fr) auto auto; gap:11px; width:100%}
 .hero-copy{display:contents}
 .hero h1{font-size:clamp(2.5rem,11vw,4.9rem)}
 .grad{background:var(--energy); -webkit-background-clip:text; background-clip:text; color:transparent}
@@ -206,8 +208,11 @@ main, .nav, .foot{position:relative; z-index:1}
   .rocket-slot{--rocket-w:420px; width:var(--rocket-w); order:0; margin:0; grid-column:2; grid-row:1 / span 4; justify-self:center; align-self:center}
 }
 /* modo captura: sin entradas, para revisar el render en reposo */
-.shot .rise, .shot .alt-rail, .shot .rocket-inner{animation:none !important}
+.shot .rise, .shot .alt-rail, .shot .rocket-inner, .shot .sheen{animation:none !important}
 .shot .reveal{opacity:1 !important; transform:none !important; transition:none !important}
+.shot .senal b{transform:none !important}
+.shot .estela i{clip-path:none !important}
+.shot .libro-hoy{text-decoration-color:rgba(174,180,207,.45) !important}
 .full .hero{min-height:0}
 .shot .sticky{display:none}
 /* entrada orquestada (solo con JS y sin reduced-motion) */
@@ -220,8 +225,8 @@ main, .nav, .foot{position:relative; z-index:1}
 @keyframes rise{from{opacity:0; transform:translate3d(0,22px,0)}to{opacity:1; transform:none}}
 
 /* ---------- secciones "cota" ---------- */
-.cota{position:relative; padding-top:0; padding-bottom:52px}
-.cota-head{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 14px; align-items:start; margin-bottom:22px; max-width:62ch}
+.cota{position:relative; padding-top:0; padding-bottom:38px}
+.cota-head{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:5px 14px; align-items:start; margin-bottom:15px; max-width:62ch}
 .cota-head > h2{grid-column:1 / -1}
 .cota-head > .lead{grid-column:1}
 .head-mascot{grid-column:2; grid-row:2; width:92px; height:auto; align-self:start; margin-top:-16px; pointer-events:none; user-select:none}
@@ -229,15 +234,15 @@ main, .nav, .foot{position:relative; z-index:1}
 .cota h2{font-size:clamp(1.7rem,6.8vw,2.8rem)}
 .cota-head .lead{margin-top:2px}
 /* estela: el separador de secciones, tomado del trazo del logo */
-.estela{position:relative; height:58px; margin-bottom:4px}
+.estela{position:relative; height:40px; margin-bottom:2px}
 .estela::before{content:""; position:absolute; left:-12px; right:-6px; top:50%; height:2px; transform:rotate(-1.6deg); transform-origin:right center; transition:clip-path 900ms var(--ease-out); border-radius:2px; background:linear-gradient(90deg, rgba(59,107,255,0) 0%, rgba(59,107,255,.55) 45%, #7B3BFF 100%)}
 .estela::after{content:""; position:absolute; right:-6px; top:50%; width:10px; height:10px; margin-top:-4px; border-radius:50%; background:var(--silver); box-shadow:0 0 0 4px rgba(43,130,255,.30); transition:opacity 400ms ease 500ms, transform 500ms var(--ease-out) 500ms}
 .js .estela:not(.in)::before{clip-path:inset(0 0 0 100%)}
 .js .estela:not(.in)::after{opacity:0; transform:scale(.4)}
 @media (min-width:900px){
-  .cota{padding-top:0; padding-bottom:92px}
-  .cota-head{margin-bottom:36px}
-  .estela{height:104px; margin-bottom:8px}
+  .cota{padding-top:0; padding-bottom:62px}
+  .cota-head{margin-bottom:24px}
+  .estela{height:68px; margin-bottom:4px}
   .estela::before{left:-40px; right:0; transform:rotate(-1.1deg)}
   .estela::after{right:0}
 }
@@ -250,7 +255,7 @@ main, .nav, .foot{position:relative; z-index:1}
 .senales-grid{display:grid; gap:0}
 .senal{
   display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:start;
-  padding:15px 0; border-top:1px solid var(--line);
+  padding:12px 0; border-top:1px solid var(--line);
   font-size:clamp(1.2rem,5.3vw,1.7rem); font-weight:700; letter-spacing:-.02em; line-height:1.3; text-wrap:pretty;
 }
 .senal:last-child{border-bottom:1px solid var(--line)}
@@ -260,12 +265,12 @@ main, .nav, .foot{position:relative; z-index:1}
 .mascot{height:auto; pointer-events:none; user-select:none}
 @media (min-width:900px){
   .senales-wrap{max-width:760px}
-  .senal{grid-template-columns:auto minmax(0,1fr); padding:18px 0}
+  .senal{grid-template-columns:auto minmax(0,1fr); padding:14px 0}
 }
 
 /* --- libro Hoy → Con Kairo --- */
 .libro{display:grid; border-top:1px solid var(--line)}
-.libro-row{display:grid; gap:4px 14px; padding:14px 0; border-bottom:1px solid var(--line); grid-template-columns:82px minmax(0,1fr); align-items:start}
+.libro-row{display:grid; gap:3px 14px; padding:11px 0; border-bottom:1px solid var(--line); grid-template-columns:82px minmax(0,1fr); align-items:start}
 .libro-k{font-size:.92rem; font-weight:500; color:var(--ink-3); grid-row:1 / span 2; padding-top:3px; line-height:1.3}
 .libro-hoy, .libro-alt{grid-column:2}
 .libro-hoy{color:var(--ink-3); text-decoration:line-through; text-decoration-color:rgba(174,180,207,.45); text-decoration-thickness:1px; font-size:1rem}
@@ -273,7 +278,7 @@ main, .nav, .foot{position:relative; z-index:1}
 .libro-alt i{flex:none; width:16px; height:16px; margin-top:4px; background:var(--energy); border-radius:50%; position:relative}
 .libro-alt i::after{content:""; position:absolute; left:5px; top:4px; width:4px; height:7px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg)}
 @media (min-width:900px){
-  .libro-row{grid-template-columns:150px minmax(0,1fr) minmax(0,1.2fr); gap:36px; align-items:start; padding:18px 0}
+  .libro-row{grid-template-columns:150px minmax(0,1fr) minmax(0,1.2fr); gap:36px; align-items:start; padding:14px 0}
   .libro-k{grid-row:auto; font-size:.95rem}
   .libro-hoy{grid-column:2}
   .libro-alt{grid-column:3}
@@ -294,7 +299,7 @@ main, .nav, .foot{position:relative; z-index:1}
 .stops{display:grid; gap:0; position:relative; z-index:1}
 .stop{
   display:grid; grid-template-columns:28px minmax(0,1fr); column-gap:22px; align-items:start;
-  padding:16px 0;
+  padding:13px 0;
 }
 .stop-dot{
   width:28px; height:28px; border-radius:50%; background:var(--ground);
@@ -312,7 +317,7 @@ main, .nav, .foot{position:relative; z-index:1}
 .stop p{color:var(--ink-2); font-size:.98rem; max-width:34ch; text-wrap:pretty}
 @media (min-width:900px){
   .route{padding-block:16px 40px}
-  .stop{grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr); column-gap:40px; padding:24px 0}
+  .stop{grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr); column-gap:40px; padding:19px 0}
   .stop .stop-dot{grid-column:2; width:36px; height:36px}
   .stop .stop-dot::after{inset:11px}
   .stop:nth-child(odd) .stop-body{grid-column:3; text-align:left}
@@ -333,27 +338,27 @@ main, .nav, .foot{position:relative; z-index:1}
   padding:6px 10px; border:1px dashed rgba(199,180,255,.45); border-radius:999px;
 }
 .logs{display:grid; gap:0; border-top:1px solid var(--line)}
-.log{display:grid; gap:6px; padding:16px 0 18px; border-bottom:1px solid var(--line)}
+.log{display:grid; gap:5px; padding:13px 0 15px; border-bottom:1px solid var(--line)}
 .log h3{font-size:1.2rem; font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.1}
 .log-what{color:var(--ink-2); font-size:.98rem; max-width:46ch; text-wrap:pretty}
 .log-n{color:var(--ink-2); font-size:1rem; line-height:1.3; margin-top:4px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
 .log-n b{font-size:clamp(2.2rem,9vw,3.2rem); font-stretch:125%; font-weight:900; letter-spacing:-.03em; line-height:1; white-space:nowrap; background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
 @media (min-width:900px){
-  .log{grid-template-columns:200px minmax(0,1fr) 300px; column-gap:40px; align-items:start; padding:22px 0 24px}
+  .log{grid-template-columns:200px minmax(0,1fr) 300px; column-gap:40px; align-items:start; padding:17px 0 19px}
   .log h3{padding-top:6px}
   .log-n{margin-top:0; justify-self:end; text-align:right; flex-direction:column; align-items:flex-end; gap:6px}
 }
 
 /* --- cómo trabajamos · escalera --- */
-.plan{padding-top:0; padding-bottom:52px}
-.plan-head{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 14px; align-items:start; margin-bottom:22px; max-width:62ch}
+.plan{padding-top:0; padding-bottom:38px}
+.plan-head{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:5px 14px; align-items:start; margin-bottom:15px; max-width:62ch}
 .plan-head > h2{grid-column:1 / -1}
 .plan-head > .lead{grid-column:1}
 @media (min-width:900px){ .plan-head > h2{grid-column:1} }
 .plan h2{font-size:clamp(1.7rem,7vw,2.8rem)}
 .steps{display:grid; gap:0; border-left:1px solid var(--line-strong); margin-left:6px; position:relative}
 .steps::before{content:""; position:absolute; left:-2px; top:0; width:3px; height:var(--fill,0%); background:var(--energy-v); border-radius:2px; pointer-events:none}
-.step{position:relative; padding:0 0 22px 26px}
+.step{position:relative; padding:0 0 17px 26px}
 .step::before{
   content:""; position:absolute; left:-6px; top:8px; width:11px; height:11px; border-radius:50%;
   background:var(--ground); border:2px solid rgba(226,233,255,.55);
@@ -370,8 +375,8 @@ main, .nav, .foot{position:relative; z-index:1}
 .step-d{font-size:.85rem; color:var(--ink-3); font-variant-numeric:tabular-nums; white-space:nowrap}
 .step p{color:var(--ink-2); margin-top:5px; max-width:40ch; text-wrap:pretty}
 @media (min-width:900px){
-  .plan{padding-top:0; padding-bottom:92px}
-  .plan-head{margin-bottom:40px}
+  .plan{padding-top:0; padding-bottom:62px}
+  .plan-head{margin-bottom:26px}
   .steps{grid-template-columns:repeat(4,minmax(0,1fr)); border-left:0; margin-left:0; align-items:stretch; gap:0}
   .step{padding:26px 28px 0 0; border-top:1px solid var(--line-strong)}
   .step + .step{border-left:1px solid var(--line-strong); padding-left:24px}
@@ -381,21 +386,21 @@ main, .nav, .foot{position:relative; z-index:1}
   .step::after{display:block}
   .step + .step::after{left:-1px}
   /* escalera: cada etapa un peldaño más arriba; los bordes dibujan los escalones */
-  .step:nth-child(1){margin-top:132px}
-  .step:nth-child(2){margin-top:88px}
-  .step:nth-child(3){margin-top:44px}
+  .step:nth-child(1){margin-top:108px}
+  .step:nth-child(2){margin-top:72px}
+  .step:nth-child(3){margin-top:36px}
   .step:nth-child(4){margin-top:0}
   .step p{max-width:none}
 }
 
 /* --- cierre --- */
-.orbita{position:relative; overflow:hidden; padding-top:0; padding-bottom:72px}
+.orbita{position:relative; overflow:hidden; padding-top:0; padding-bottom:54px}
 .orbita::before{
   content:""; position:absolute; inset:auto -20% -40% -20%; height:70%;
   background:radial-gradient(60% 60% at 50% 100%, rgba(43,130,255,.28), rgba(111,43,245,.10) 45%, transparent 75%);
   pointer-events:none;
 }
-.orbita-in{position:relative; display:grid; gap:18px}
+.orbita-in{position:relative; display:grid; gap:14px}
 .orbita-estela{grid-column:1 / -1; margin-bottom:0; order:-2}
 .orbita-word{font-size:clamp(2.6rem,11vw,5.8rem); line-height:.9; padding-bottom:.06em; color:var(--ink)}
 .orbita h2{font-size:clamp(1.5rem,6.2vw,2.4rem); font-stretch:100%; font-weight:700; letter-spacing:-.025em; line-height:1.15; max-width:22ch; margin-bottom:2px}
@@ -406,18 +411,18 @@ main, .nav, .foot{position:relative; z-index:1}
 .orbita-note b{color:var(--ink-2); font-weight:600}
 .rocket-slot-end{order:-1; width:min(320px, calc(100% + 30px)); justify-self:end; margin-right:-16px; margin-top:-10px; margin-bottom:-6px}
 @media (min-width:900px){
-  .orbita{padding-top:0; padding-bottom:110px}
+  .orbita{padding-top:0; padding-bottom:78px}
   .orbita-in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); align-items:center; gap:40px}
   .orbita-estela{margin-bottom:-40px}
-  .orbita-copy{display:grid; gap:24px}
+  .orbita-copy{display:grid; gap:17px}
   .orbita-actions{grid-auto-flow:column; justify-content:start; align-items:center; gap:18px}
   .orbita-actions .btn{width:auto; padding:0 24px; font-size:1rem}
   .rocket-slot-end{order:0; width:min(440px,100%); justify-self:end; margin:0 -20px 0 0}
 }
 
 /* ---------- pie ---------- */
-.foot{border-top:1px solid var(--line); padding-block:36px calc(28px + var(--sticky-h))}
-.foot-in{display:grid; gap:28px}
+.foot{border-top:1px solid var(--line); padding-block:30px calc(24px + var(--sticky-h))}
+.foot-in{display:grid; gap:22px}
 .foot img:not(.mascot){height:34px; width:auto}
 .foot-cols{display:grid; gap:24px}
 .foot h3{font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--ink-3); margin-bottom:10px}
@@ -548,12 +553,92 @@ main, .nav, .foot{position:relative; z-index:1}
 .sticky .btn{width:100%}
 @media (min-width:900px){ .sticky{display:none} }
 
+/* =====================================================================
+   LUZ QUE VIAJA. La energía de la marca no se queda quieta: recorre los
+   titulares, deja líneas de velocidad detrás de cada estela y marca la
+   altitud junto al cohete. Nada nuevo de color; solo la misma energía
+   en movimiento.
+   ===================================================================== */
+
+/* --- barrido de luz sobre texto con degradado --- */
+.sheen{
+  background-image:
+    linear-gradient(100deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.72) 50%, rgba(255,255,255,0) 62%),
+    var(--sheen-base);
+  background-size:230% 100%, 100% 100%;
+  background-repeat:no-repeat;
+  background-position:-70% 0, 0 0;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.grad.sheen{--sheen-base:var(--energy)}
+.metal.sheen{--sheen-base:var(--metal)}
+@keyframes sheen{
+  0%{background-position:-70% 0, 0 0}
+  58%,100%{background-position:170% 0, 0 0}
+}
+.js .hero h1 .sheen{animation:sheen 7s var(--ease-out) infinite}
+.js .hero h1 .metal.sheen{animation-delay:1.5s}
+.js .hero h1 .grad.sheen{animation-delay:2.1s}
+.js .orbita-word .sheen{animation:sheen 7s var(--ease-out) 1s infinite}
+
+/* --- estela: líneas de velocidad detrás del trazo --- */
+.estela i{
+  position:absolute; right:-6px; top:50%; height:1px; border-radius:1px;
+  transform-origin:right center; pointer-events:none;
+  background:linear-gradient(90deg, rgba(143,168,255,0) 0%, rgba(143,168,255,.34) 64%, rgba(143,168,255,.62) 100%);
+  transition:clip-path 900ms var(--ease-out);
+}
+.estela i:nth-child(1){left:16%; transform:rotate(-1.6deg) translateY(-7px); transition-delay:110ms}
+.estela i:nth-child(2){left:31%; transform:rotate(-1.6deg) translateY(7px); transition-delay:190ms; opacity:.68}
+.js .estela:not(.in) i{clip-path:inset(0 0 0 100%)}
+/* la subida gana intensidad sección a sección */
+#cambio .estela::before{opacity:.84}
+#servicios .estela::before{opacity:.9}
+#resultados .estela::before{opacity:.95}
+#proceso .estela::before, .orbita-estela::before{opacity:1}
+@media (min-width:900px){
+  .estela i:nth-child(1){left:22%; transform:rotate(-1.1deg) translateY(-9px)}
+  .estela i:nth-child(2){left:38%; transform:rotate(-1.1deg) translateY(9px)}
+}
+
+/* --- dolores: la marca de energía se dibuja al entrar --- */
+.senal b{transform-origin:left center; transition:transform 620ms var(--ease-out); transition-delay:calc(var(--i,0) * 60ms + 180ms)}
+.js .senal.reveal:not(.in) b{transform:scaleX(0)}
+
+/* --- libro: el tachado del "hoy" se traza al entrar --- */
+.libro-hoy{transition:text-decoration-color 700ms ease; transition-delay:calc(var(--i,0) * 60ms + 260ms)}
+.js .libro-row.reveal:not(.in) .libro-hoy{text-decoration-color:transparent}
+
+/* --- resultados: la cifra recibe un destello metálico mientras cuenta --- */
+.log-n b{
+  background-image:
+    linear-gradient(100deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.72) 50%, rgba(255,255,255,0) 62%),
+    var(--metal);
+  background-size:230% 100%, 100% 100%;
+  background-repeat:no-repeat;
+  background-position:-70% 0, 0 0;
+}
+.log-n b.counting{animation:sheen 1.4s ease-out 1}
+
+/* --- altímetro: el número viaja pegado al cohete --- */
+/* la lectura va centrada sobre la regla: ahí no toca ni el texto ni la
+   escala fija, y se lee como el instrumento del cohete, no como un dato suelto */
+.alt-tag{text-shadow:0 2px 10px rgba(7,8,15,.95)}
+.alt-scale{transition:color 260ms ease, opacity 260ms ease}
+.alt-scale.near{color:var(--ink); opacity:1}
+
 /* ---------- movimiento reducido ---------- */
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .js .rise, .js .alt-rail, .js .rocket-inner{animation:none}
   .js .reveal{opacity:1; transform:none; transition:none}
   .sticky{transition:none}
+  .js .sheen, .js .hero h1 .sheen, .js .orbita-word .sheen, .log-n b.counting{animation:none !important}
+  .estela i, .libro-hoy{transition:none}
+  .js .estela:not(.in) i{clip-path:none}
+  .senal b{transition:none}
+  .js .senal.reveal:not(.in) b{transform:none}
+  .js .libro-row.reveal:not(.in) .libro-hoy{text-decoration-color:rgba(174,180,207,.45)}
 }
 </style>
 </head>
@@ -569,12 +654,12 @@ main, .nav, .foot{position:relative; z-index:1}
 <!-- El cohete: un solo objeto para la intro, el hero y la regla -->
 <canvas class="sky" id="sky" aria-hidden="true"></canvas>
 <div class="rocket" id="rocket" aria-hidden="true">
-  <img class="rocket-inner" id="rocketImg" src="/assets/mascot/hero-rocket.png" width="646" height="455" alt="">
+  <img class="rocket-inner" id="rocketImg" src="/assets/mascot/hero-rocket@2x.webp" width="1292" height="910" alt="" decoding="sync" fetchpriority="high">
 </div>
 
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#hoy" aria-label="Kairo Escala, inicio"><img src="/assets/logo.png" width="978" height="401" alt="Kairo Escala"></a>
+    <a class="brand" href="#hoy" aria-label="Kairo Escala, inicio"><img src="/assets/logo.webp" width="978" height="401" alt="Kairo Escala"></a>
     <nav class="nav-links" aria-label="Secciones">
       <a href="#servicios">Servicios</a>
       <a href="#resultados">Resultados</a>
@@ -590,7 +675,7 @@ main, .nav, .foot{position:relative; z-index:1}
   <section class="hero sala" id="hoy">
     <div class="wrap hero-in">
       <div class="hero-copy">
-        <h1 class="d-tight rise r1"><span class="metal">Impulsa tu negocio,</span> <span class="grad">escala sin límites.</span></h1>
+        <h1 class="d-tight rise r1"><span class="metal sheen">Impulsa tu negocio,</span> <span class="grad sheen">escala sin límites.</span></h1>
         <div class="hero-row">
           <p class="lead rise r2">Automatización, marketing, IA y ventas en un solo equipo que te devuelve el tiempo.</p>
           <div class="rocket-slot" id="rocketSlot"></div>
@@ -614,11 +699,11 @@ main, .nav, .foot{position:relative; z-index:1}
   <!-- ============ DOLORES ============ -->
   <section class="cota sala" id="dolores">
     <div class="wrap">
-      <div class="estela" aria-hidden="true"></div>
+      <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="cota-head">
         <h2 class="d-wide reveal">Si reconoces dos de estas, <span class="grad">la llamada vale la pena.</span></h2>
         <p class="lead reveal" style="--i:1">Los problemas más comunes de un dueño de empresa.</p>
-        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/pensativo.png" width="236" height="370" alt="" loading="lazy">
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/pensativo@2x.webp" width="472" height="740" alt="" loading="lazy">
       </div>
       <div class="senales-wrap">
         <ol class="senales-grid">
@@ -635,11 +720,11 @@ main, .nav, .foot{position:relative; z-index:1}
   <!-- ============ LO QUE CAMBIA ============ -->
   <section class="cota sala" id="cambio">
     <div class="wrap">
-      <div class="estela" aria-hidden="true"></div>
+      <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="cota-head">
         <h2 class="d-wide reveal">Lo que cambia <span class="grad">con Kairo Escala</span></h2>
         <p class="lead reveal" style="--i:1">Cuatro cosas que dejan de ser tu problema.</p>
-        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/ascendiendo.png?v=5" width="276" height="330" alt="" loading="lazy">
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/ascendiendo@2x.webp" width="552" height="660" alt="" loading="lazy">
       </div>
       <div class="libro">
         <div class="libro-row reveal" style="--i:0">
@@ -669,7 +754,7 @@ main, .nav, .foot{position:relative; z-index:1}
   <!-- ============ SERVICIOS ============ -->
   <section class="cota sala" id="servicios">
     <div class="wrap">
-      <div class="estela" aria-hidden="true"></div>
+      <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="cota-head">
         <h2 class="d-wide reveal">Todo lo que tu negocio necesita, <span class="grad">en un solo equipo</span></h2>
         <p class="lead reveal" style="--i:1">Ocho servicios, un solo responsable. Contratas lo que necesites.</p>
@@ -685,7 +770,7 @@ main, .nav, .foot{position:relative; z-index:1}
           <path class="route-path" id="routePath" d=""/>
           <path class="route-draw" id="routeDraw" d=""/>
         </svg>
-        <img class="route-rocket" id="routeRocket" src="/assets/mascot/acelerando.png?v=4" width="366" height="122" alt="" aria-hidden="true">
+        <img class="route-rocket" id="routeRocket" src="/assets/mascot/acelerando@2x.webp" width="732" height="244" alt="" aria-hidden="true">
 
         <ol class="stops">
           <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3>Automatización <span class="grad">de procesos</span></h3><p>Las tareas repetitivas se hacen solas y tu equipo se dedica a lo importante.</p></div></li>
@@ -704,9 +789,9 @@ main, .nav, .foot{position:relative; z-index:1}
   <!-- ============ RESULTADOS ============ -->
   <section class="cota sala" id="resultados">
     <div class="wrap">
-      <div class="estela" aria-hidden="true"></div>
+      <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="cota-head">
-        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/celebrando.png?v=4" width="210" height="290" alt="" loading="lazy">
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/celebrando@2x.webp" width="420" height="580" alt="" loading="lazy">
         <h2 class="d-wide reveal">Resultados <span class="grad">que se miden</span></h2>
         <p class="lead reveal" style="--i:1">Así se ven los números después de tres años trabajando con empresas como la tuya.
           <!-- EJEMPLO: reemplazar por casos reales del cliente -->
@@ -740,11 +825,11 @@ main, .nav, .foot{position:relative; z-index:1}
   <!-- ============ CÓMO TRABAJAMOS ============ -->
   <section class="plan sala" id="proceso">
     <div class="wrap">
-      <div class="estela" aria-hidden="true"></div>
+      <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="plan-head">
         <h2 class="d-wide reveal">Cómo <span class="grad">trabajamos</span></h2>
         <p class="lead reveal" style="--i:1">Cuatro etapas. Sabes qué se entrega y cuánto cuesta antes de empezar.</p>
-        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/despegue.png?v=4" width="200" height="322" alt="" loading="lazy">
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/despegue@2x.webp" width="400" height="644" alt="" loading="lazy">
       </div>
       <ol class="steps" id="steps">
         <li class="step reveal" style="--i:0">
@@ -770,9 +855,9 @@ main, .nav, .foot{position:relative; z-index:1}
   <!-- ============ CIERRE ============ -->
   <section class="orbita" id="contacto">
     <div class="wrap orbita-in">
-      <div class="estela orbita-estela" aria-hidden="true"></div>
+      <div class="estela orbita-estela" aria-hidden="true"><i></i><i></i></div>
       <div class="orbita-copy">
-        <div class="orbita-word d-wide reveal"><span class="grad">Hablemos.</span></div>
+        <div class="orbita-word d-wide reveal"><span class="grad sheen">Hablemos.</span></div>
         <h2 class="reveal" style="--i:1">Treinta minutos con el equipo para saber cuánto puede crecer tu negocio.</h2>
         <p class="lead reveal" style="--i:2">Cuéntanos cómo opera tu empresa. Te decimos por dónde empezar y cuánto costaría.</p>
         <div class="orbita-actions reveal" style="--i:3">
@@ -794,7 +879,7 @@ main, .nav, .foot{position:relative; z-index:1}
 <footer class="foot">
   <div class="wrap foot-in">
     <div>
-      <img src="/assets/logo.png" width="978" height="401" alt="Kairo Escala" loading="lazy">
+      <img src="/assets/logo.webp" width="978" height="401" alt="Kairo Escala" loading="lazy">
       <p class="small" style="margin-top:14px; max-width:32ch">Equipo de servicios digitales con tres años escalando empresas.</p>
     </div>
     <div class="foot-cols">
@@ -821,7 +906,7 @@ main, .nav, .foot{position:relative; z-index:1}
       </div>
     </div>
     <div class="foot-base">
-      <img class="mascot foot-mascot" src="/assets/mascot/reposo.png?v=4" width="150" height="330" alt="" loading="lazy">
+      <img class="mascot foot-mascot" src="/assets/mascot/reposo@2x.webp" width="300" height="660" alt="" loading="lazy">
       <span>© 2026 Kairo Escala</span>
       <span>Hecho por el mismo equipo que lo opera</span>
     </div>
@@ -853,7 +938,8 @@ main, .nav, .foot{position:relative; z-index:1}
   const fmt = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   const ALT_MAX = 10000;
   /* escala de la regla (solo escritorio por CSS) */
-  [0, .25, .5, .75, 1].forEach(f => { const e = document.createElement('span'); e.className = 'alt-scale num'; e.style.top = ((1 - f) * 100) + '%'; e.textContent = f ? fmt(f * ALT_MAX) : '0'; rail.appendChild(e); });
+  const SCALE = [0, .25, .5, .75, 1];
+  const scaleEls = SCALE.map(f => { const e = document.createElement('span'); e.className = 'alt-scale num'; e.style.top = ((1 - f) * 100) + '%'; e.textContent = f ? fmt(f * ALT_MAX) : '0'; rail.appendChild(e); return e; });
   const ASPECT = 455 / 646;
   const MARKER_W = 44;           /* ancho del cohete cuando viaja por la regla */
   const DOCK_ROT = -56;          /* grados para poner vertical la pose del video (34°) */
@@ -903,10 +989,17 @@ main, .nav, .foot{position:relative; z-index:1}
     /* altímetro junto al cohete: aparece cuando ya está en la regla */
     /* la regla solo existe cuando el cohete baja hacia ella */
     if (p > .3) altEl.classList.add('on'); else if (p < .06) altEl.classList.remove('on');
-    tag.classList.toggle('on', p > .92 && p2 < .05);
-    tag.textContent = fmt(total * ALT_MAX) + ' m';
-    const ty = clamp(cy - 30, M.rail.top + 6, M.rail.top + M.rail.h - 14);
-    tag.style.transform = `translate(${railX.toFixed(1)}px, ${ty.toFixed(1)}px) translateX(-50%)`;
+    /* la lectura acompaña al cohete durante todo el trayecto por la regla */
+    const onRail = p > .5 && p2 < .05;
+    tag.classList.toggle('on', onRail);
+    if (onRail) {
+      tag.textContent = fmt(total * ALT_MAX) + ' m';
+      const ty = clamp(cy - 42, M.rail.top + 6, M.rail.top + M.rail.h - 14);
+      tag.style.transform = `translate(${railX.toFixed(1)}px, ${ty.toFixed(1)}px) translateX(-50%)`;
+      /* la marca de escala más cercana a la altitud actual se enciende */
+      let ni = 0; for (let i = 1; i < SCALE.length; i++) if (Math.abs(SCALE[i] - total) < Math.abs(SCALE[ni] - total)) ni = i;
+      scaleEls.forEach((e, i) => e.classList.toggle('near', i === ni));
+    }
 
     /* ruta de servicios */
     routeFrame();
@@ -989,6 +1082,7 @@ main, .nav, .foot{position:relative; z-index:1}
   const countIO = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return; countIO.unobserve(e.target);
     const el = e.target, m = el.textContent.match(/^(\D*)(\d+)(.*)$/); if (!m || reduce || shot) return;
+    el.classList.add('counting'); el.addEventListener('animationend', () => el.classList.remove('counting'), { once: true });
     const target = +m[2], t0 = performance.now(), dur = 900;
     const step = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(target * (1 - Math.pow(1 - k, 3))); el.textContent = m[1] + v + m[3]; if (k < 1) requestAnimationFrame(step); };
     requestAnimationFrame(step);

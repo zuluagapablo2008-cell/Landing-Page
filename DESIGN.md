@@ -1,6 +1,6 @@
 ---
 name: Kairo Escala
-description: Landing de escalada. Noche azul-negro, una sola energía azul→violeta, Archivo en dos anchos, una regla de progreso sin números y una estela que abre cada sección.
+description: Landing de escalada. Noche azul-negro, una sola energía azul→violeta, Archivo en dos anchos, una regla de altitud con lectura viva junto al cohete y una estela que abre cada sección.
 colors:
   ground: "#07080F"
   ink: "#F3F4FB"
@@ -139,11 +139,11 @@ components:
 
 **Creative North Star: "La escalada"**
 
-La página es una escalada y el scroll es progreso. Una regla de progreso vive pegada al borde izquierdo (marcas hairline y un relleno azul→violeta que crece con el scroll, sin números ni lectura), y la mascota cohete es un solo objeto que asciende al cargar, flota en el hero y, al hacer scroll, se acopla a la regla y sube con ella. Cada sección se abre con una estela: la línea azul→violeta ascendente del trazo del logo, con una cabeza lavanda que brilla. Regla, estela y cohete son el mismo instrumento contado tres veces; nada decora.
+La página es una escalada y el scroll es progreso. Una regla de altitud vive pegada al borde izquierdo (marcas hairline, un relleno azul→violeta que crece con el scroll, una escala fija en escritorio y una lectura en metros que viaja junto al cohete), y la mascota cohete es un solo objeto que asciende al cargar, flota en el hero y, al hacer scroll, se acopla a la regla y sube con ella. Cada sección se abre con una estela: la línea azul→violeta ascendente del trazo del logo, con una cabeza lavanda que brilla. Regla, estela y cohete son el mismo instrumento contado tres veces; nada decora.
 
 El material es noche azul-negra con texto blanco frío, dividida por hairlines tintadas de azul. Hay una sola energía cromática, el degradado azul→violeta, y se gasta con avaricia: llama del cohete, relleno de la regla, estela, botón principal, la marca de cada fila y la segunda cláusula del titular del hero ("escala sin límites.", decisión fijada por el usuario). Densidad editorial: columnas, filas separadas por reglas de 1px y aire; ninguna tarjeta, ningún panel con fondo. Archivo trabaja en dos anchos que hacen todo el contraste tipográfico: expandida (wdth 125) muy negra para titulares de sección, nombres de servicio, cifras y la palabra de cierre; normal (wdth 100) para lectura y para el titular del hero. Los títulos son frases directas; no hay vocabulario de vuelo ni etiquetas sobre los titulares.
 
-Rechazos confirmados por el build: sin hero oscuro con blob degradado, sin tres tarjetas iguales, sin ilustración CSS de la mascota (siempre PNG con alfa), sin kickers ni etiquetas en mayúsculas sobre los titulares, sin iconografía decorativa (los únicos glifos son las flechas de los CTA y el logo de WhatsApp dentro del botón), sin numerales de altitud ni lectura viva.
+Rechazos confirmados por el build: sin hero oscuro con blob degradado, sin tres tarjetas iguales, sin ilustración CSS de la mascota (siempre PNG con alfa), sin kickers ni etiquetas en mayúsculas sobre los titulares, sin iconografía decorativa (los únicos glifos son las flechas de los CTA y el logo de WhatsApp dentro del botón), sin numerales de altitud en los titulares ni en los párrafos (la altitud solo se lee en la regla, pegada al cohete).
 
 **Key Characteristics:**
 - Noche azul-negra (`--ground`) y tinta fría en tres pasos; hairlines azuladas en dos intensidades.
@@ -273,8 +273,8 @@ El separador de secciones, tomado del trazo del logo. Bloque de 72px de alto (15
 ### Abridor de sección (`.cota-head`, `.plan-head`)
 Titular `h2.d-wide` y `.lead`, apilados con gap 14px (12 en proceso), `max-width: 62ch`, precedidos por la estela. Sin cota, sin número, sin etiqueta. Ambos elementos llevan `.reveal` (el lead con `--i:1`).
 
-### Regla de progreso (`.alt`)
-Instrumento fijo al borde izquierdo (`z-index: 40`, `pointer-events: none`), sin lectura. `.alt-rail` con `border-left: 1px solid var(--line-strong)` y dos `repeating-linear-gradient` como marcas: finas de 7px cada 10px en `--line`, gruesas de 13px cada 50px en `--line-strong`. `.alt-fill` es una barra de 3px en `--energy-v` anclada abajo cuya altura es el porcentaje de scroll total. Al cargar, la regla crece desde abajo (`rail-in` 900ms `--ease-out`, `transform-origin: bottom`). No lleva números, unidades ni palabras.
+### Regla de altitud (`.alt`)
+Instrumento fijo al borde izquierdo (`z-index: 40`, `pointer-events: none`). `.alt-rail` con `border-left: 1px solid var(--line-strong)` y dos `repeating-linear-gradient` como marcas: finas de 7px cada 10px en `--line`, gruesas de 13px cada 50px en `--line-strong`. `.alt-fill` es una barra de 3px en `--energy-v` anclada abajo cuya altura es el porcentaje de scroll total. Al cargar, la regla crece desde abajo (`rail-in` 900ms `--ease-out`, `transform-origin: bottom`). La única lectura es la del altímetro: `.alt-tag` centrado sobre la regla, 42px por encima del cohete, visible mientras el cohete viaja acoplado (`p > .5`), y en escritorio la escala fija `.alt-scale`, cuya marca más cercana a la altitud actual se enciende en `--ink`. Ningún número de la regla aparece en un titular ni en un párrafo.
 
 ### Cohete (`.rocket`)
 Un solo elemento `position: fixed` (`z-index: 41`) con la pose `hero-45.png`; JS lo posiciona sobre `.rocket-slot` del hero y, con el scroll, lo acopla a la regla. Intro (WAAPI en `rocketImg`, 1650ms, `cubic-bezier(.16,1,.3,1)`): entra desde abajo-izquierda fuera de pantalla (x = −(cx+w), y = 90% del viewport) rotado 6°, frena al 62% y asienta con un ligero rebote a −1° / 0°. Después flota (`hover-float` 5.6s ease-in-out, delay 1.7s, −9px y −2°). Acople: sobre `sy / dock` (dock = max(240px, 85% del alto del hero)) con `easeInOut` cúbico, interpola posición desde el hueco hasta el centro de la regla a la altura del relleno, escala de 1 a 30px de ancho (`MARKER_W`) y rota −40° (`DOCK_ROT`) para poner vertical la pose de 45°. Todo en un `requestAnimationFrame` por scroll junto con regla y ruta.
@@ -330,7 +330,7 @@ Las demás poses de la hoja (frente, espalda, 135/225/315, arriba, lado-izquierd
 - **Don't** crear tarjetas, paneles con fondo, bordes de caja ni sombras en superficies de contenido.
 - **Don't** separar secciones con `border-top`; eso es para filas y para el pie.
 - **Don't** añadir un tercer ancho o un tercer peso de display; wdth 125 a 800/900 para rótulos, wdth 100 para lectura.
-- **Don't** poner kickers, cotas, numerales de altitud, etiquetas en mayúsculas ni texto en `uppercase` sobre titulares; el build no tiene ninguno.
+- **Don't** poner kickers, cotas, numerales de altitud, etiquetas en mayúsculas ni texto en `uppercase` sobre titulares ni dentro de los párrafos; la altitud solo se lee en la regla.
 - **Don't** usar vocabulario de vuelo en el contenido (plan de vuelo, órbita, registros, cota); los títulos dicen lo que la sección hace por el lector.
 - **Don't** aplicar `.grad` a ningún texto fuera de la segunda cláusula del `h1`.
 - **Don't** dibujar la mascota con CSS/SVG ni usar iconos de glifo decorativos; los únicos SVG son las flechas de CTA, la ruta de servicios y el logo de WhatsApp dentro del botón.
@@ -339,7 +339,7 @@ Las demás poses de la hoja (frente, espalda, 135/225/315, arriba, lado-izquierd
 
 ## Revisión del 17 de septiembre de 2026 (pase creativo)
 
-- **Cohete del hero**: ahora sale del fotograma 2,2 s del video (`assets/mascot/hero-rocket.png`, 646×455, alfa real, visor relleno). Pose diagonal a 34°; `DOCK_ROT -56` lo pone vertical en la regla; `MARKER_W 44`.
+- **Cohete del hero**: ahora sale del fotograma 2,2 s del video (`assets/mascot/hero-rocket@2x.webp`, 1292×910, alfa real, visor relleno). Pose diagonal a 34°; `DOCK_ROT -56` lo pone vertical en la regla; `MARKER_W 44`.
 - **Altímetro**: vuelve como detalle del cohete, nunca como titular. `.alt-tag` (11px, tabular) viaja sobre el marcador de la regla y muestra `progreso × 10.000 m`; en escritorio la regla lleva escala fija (`.alt-scale`: 0, 2.500, 5.000, 7.500, 10.000) a la derecha de los ticks.
 - **Cielo**: `<canvas class="sky">` fijo detrás de todo; estrellas de 0,5 a 1,6 px, alfa .18 a .68, 30 % azuladas (#9FB4FF), que descienden con el scroll a distinta velocidad (paralaje de ascenso). Se redibuja solo cuando cambia el scroll.
 - **Estela**: se dibuja al entrar en pantalla (`clip-path` de derecha a izquierda, 900 ms) y la cabeza aparece 500 ms después.
@@ -410,3 +410,48 @@ Reglas para no romperlo:
 - Ninguna luz supera `.42` de alfa y ninguna cubre el centro del texto; el titular del hero debe seguir siendo lo más blanco de la pantalla.
 - `inset:0` en lugar de `100vw`: las secciones ya son de ancho completo y así no se suma el ancho de la barra de scroll.
 - Toques de color a nivel de componente: filas de dolores con divisiones `rgba(143,168,255,.22)`, peldaños del proceso con un lavado superior `rgba(143,168,255,.09)` en escritorio, y el pie abre con una hairline `--energy` al 40 %.
+
+## Revisión del 2 de octubre de 2026 (luz que viaja, aire comprimido y assets 2×)
+
+Tres encargos: más creatividad visual, recuperar los números laterales del cohete sin meterlos en los párrafos, apretar el aire entre bloques y subir la calidad de render de las imágenes.
+
+**Luz que viaja.** La energía de la marca deja de ser un relleno estático y se mueve, sin añadir un solo color nuevo.
+
+- **Barrido (`.sheen`)**: una banda blanca al 72 % cruza el texto con `background-clip: text`, montada como primera capa sobre el degradado base (`--sheen-base`: `--energy` en `.grad`, `--metal` en `.metal`). `background-size: 230% 100%`, de `-70%` a `170%`, ciclo de 7 s con `--ease-out`. Solo tres piezas lo llevan: las dos cláusulas del `h1` (desfasadas 1,5 s y 2,1 s para que la luz cruce la frase en diagonal) y "Hablemos." del cierre. Las cifras de Resultados llevan el mismo montaje pero con la banda parada fuera de cuadro; se dispara una sola vez (1,4 s) con la clase `.counting` mientras el número cuenta.
+- **Estelas con líneas de velocidad**: cada `.estela` suma dos `<i>` paralelos al trazo principal (1px, lavanda al 34–62 %, desplazados ±7px en celular y ±9px en escritorio), que se dibujan con el mismo `clip-path` escalonado 110 ms y 190 ms después del trazo. La subida gana intensidad sección a sección: el trazo principal va de `.84` en "lo que cambia" a `1` en proceso y cierre.
+- **Marca de dolores que se traza**: el guion `--energy` de cada señal entra con `scaleX(0 → 1)` desde la izquierda, 620 ms, encadenado al `--i` de su fila.
+- **Tachado que se dibuja**: en el libro Hoy → Con Kairo el `text-decoration-color` del "hoy" va de transparente a su gris en 700 ms. Se anima el color, no una pseudo-línea, para que siga funcionando cuando el texto hace dos líneas.
+
+Todo lo anterior se apaga con `prefers-reduced-motion` y en `?shot=1`.
+
+**Altímetro recuperado.** Los números laterales vuelven a leerse durante toda la subida, y en ningún párrafo:
+
+- `.alt-tag` ahora aparece desde `p > .5` (antes `p > .92`, es decir casi nunca) y se mantiene hasta que el cohete se desacopla hacia el cierre. Va centrado sobre la regla, 42 px por encima del marcador, con `text-shadow` sobre el fondo para separarlo del cielo.
+- La escala fija de escritorio reacciona: la marca más cercana a la altitud actual recibe `.near` y sube a `--ink` al 100 %. Las otras cuatro se quedan en `--silver-2` al 80 %.
+
+**Aire comprimido.** Se recortó el espacio vertical entre bloques entre un 25 % y un 35 %, sin tocar el tamaño de la tipografía ni las rejillas:
+
+| | antes | ahora |
+|---|---|---|
+| `.estela` (celular / escritorio) | 58 / 104 px | 40 / 68 px |
+| `.cota`, `.plan` padding inferior | 52 / 92 px | 38 / 62 px |
+| `.cota-head`, `.plan-head` margen inferior | 22 / 36–40 px | 15 / 24–26 px |
+| `.senal` padding | 15 / 18 px | 12 / 14 px |
+| `.libro-row` padding | 14 / 18 px | 11 / 14 px |
+| `.stop` padding | 16 / 24 px | 13 / 19 px |
+| `.log` padding | 16–18 / 22–24 px | 13–15 / 17–19 px |
+| escalera del proceso (`margin-top`) | 132 / 88 / 44 / 0 | 108 / 72 / 36 / 0 |
+| `.orbita` padding inferior | 72 / 110 px | 54 / 78 px |
+
+**Calidad de imagen.** El video de origen (1920×1080) no da un cohete más grande que el PNG que ya existía: el recorte estaba hecho del fotograma de mayor tamaño, así que no hay píxeles nuevos que recuperar. La mejora viene del pipeline:
+
+- Todas las mascotas pasan a **WebP a 2×** (escalado bicubic, calidad 95). Bicubic y no lanczos porque el lanczos mete ringing en los bordes del casco y la llama. El peso se mantiene o baja: el cohete del hero va de 121 KB en PNG a 84 KB en WebP con cuatro veces los píxeles. El logo pasa a WebP **sin pérdida**: 200 KB → 129 KB, mismos píxeles.
+- Los PNG siguen en el repo como fuente; el HTML ya no los referencia.
+- `will-change: transform` sale de `.rocket-inner` y queda solo en `.rocket`. Anidar dos capas compuestas obligaba a rasterizar dos veces y el cohete perdía nitidez justo cuando se encoge hacia la regla.
+- El `preload` del cohete apunta al WebP con `fetchpriority="high"`, y la etiqueta lleva `decoding="sync"` para que no parpadee en la entrada.
+
+Reglas para no romperlo:
+
+- `.sheen` no se reparte: tres piezas de texto y las cifras de Resultados. Es un acento de jerarquía, no un efecto de superficie.
+- Cualquier mascota nueva entra como WebP a 2× de su tamaño de render, nunca por debajo; si se escala con `transform`, una sola capa compuesta.
+- Los metros del altímetro no salen de la regla. Si un número de altitud aparece en un titular, un párrafo o una ficha, está mal.

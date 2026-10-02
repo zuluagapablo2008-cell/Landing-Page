@@ -127,31 +127,39 @@
       { "name": "route-progress", "value": "t = (scrollY - (route.top - vh*.62)) / route.h; offset-distance t*100%; stroke-dashoffset len*(1-t)", "purpose": "Cohete pequeño y trazo de energía por la ruta de servicios." },
       { "name": "sticky-cta", "value": "transform 260ms var(--ease-out); translate3d(0,110%,0) → none con .on", "purpose": "CTA fija aparece cuando el CTA del hero sale y el cierre no está al 20%." },
       { "name": "link-hover", "value": "color 150ms ease, text-decoration-color 150ms ease; svg transform 200ms var(--ease-out) translateY(2px)", "purpose": "Enlaces de nav y .link-more." },
-      { "name": "reduced-motion", "value": "anula rise, rail-in, hover-float, intro; .reveal visible; sticky sin transición; scroll-behavior auto", "purpose": "prefers-reduced-motion: reduce." },
-      { "name": "shot-mode", "value": "?shot=1 → html.shot: sin entradas, sin flote, reveals visibles, sticky oculta, intro saltada. ?full=1 → html.full: hero sin min-height", "purpose": "Modo captura para revisión." }
+      { "name": "sheen", "value": "background-position -70% → 170% sobre background-clip:text, 7s var(--ease-out) infinite; capa 1 banda blanca .72, capa 2 el degradado base (--sheen-base)", "purpose": "Luz que recorre las dos cláusulas del h1 (desfase 1,5s / 2,1s) y 'Hablemos.'; one-shot de 1,4s en las cifras de Resultados con .counting." },
+      { "name": "estela-trails", "value": "dos <i> paralelos al trazo, clip-path inset(0 0 0 100%) → 0, 900ms con retardo 110ms y 190ms", "purpose": "Líneas de velocidad detrás de cada estela." },
+      { "name": "senal-mark", "value": "scaleX(0 → 1) desde la izquierda, 620ms, retardo calc(var(--i)*60ms + 180ms)", "purpose": "El guion de energía de cada dolor se traza al entrar." },
+      { "name": "libro-strike", "value": "text-decoration-color transparent → rgba(174,180,207,.45), 700ms, retardo calc(var(--i)*60ms + 260ms)", "purpose": "El tachado del 'hoy' se dibuja; se anima el color para que sobreviva al salto de línea." },
+      { "name": "reduced-motion", "value": "anula rise, rail-in, hover-float, intro, sheen, counting, trails, marca de dolores y tachado; .reveal visible; sticky sin transición; scroll-behavior auto", "purpose": "prefers-reduced-motion: reduce." },
+      { "name": "shot-mode", "value": "?shot=1 → html.shot: sin entradas, sin flote, sin sheen, reveals visibles, trazos completos, sticky oculta, intro saltada. ?full=1 → html.full: hero sin min-height", "purpose": "Modo captura para revisión." }
     ],
     "breakpoints": [
       { "name": "desktop", "value": "900px" }
     ],
     "assets": {
       "mascot": {
-        "format": "PNG RGBA cutouts in assets/mascot/; never CSS/SVG illustration",
+        "format": "WebP RGBA a 2x del tamaño de render (escalado bicubic, q95) en assets/mascot/; los PNG quedan como fuente y el HTML ya no los referencia. Nunca ilustración CSS/SVG.",
         "used": [
-          { "file": "hero-45.png", "size": "360x486", "where": "hero + rail marker (single fixed element, preloaded); 168px mobile / 320px desktop" },
-          { "file": "lado-derecho.png", "size": "402x196", "where": "cohete de la ruta de servicios; 40px / 72px, offset-rotate auto" },
-          { "file": "celebrando.png", "size": "220x354", "where": "cierre; 184px / min(420px,100%), rompe el marco" }
+          { "file": "hero-rocket@2x.webp", "size": "1292x910", "where": "hero + marcador de la regla (un solo elemento fijo, preload con fetchpriority alto); 330px celular / 420px escritorio, baja a 44px acoplado" },
+          { "file": "acelerando@2x.webp", "size": "732x244", "where": "cohete de la ruta de servicios; 58px / 104px, offset-rotate auto" },
+          { "file": "pensativo@2x.webp", "size": "472x740", "where": "cabecera de dolores; 92px / 150px" },
+          { "file": "ascendiendo@2x.webp", "size": "552x660", "where": "cabecera de lo que cambia; 92px / 150px" },
+          { "file": "celebrando@2x.webp", "size": "420x580", "where": "cabecera de resultados; 92px / 150px" },
+          { "file": "despegue@2x.webp", "size": "400x644", "where": "cabecera de cómo trabajamos; 92px / 150px" },
+          { "file": "reposo@2x.webp", "size": "300x660", "where": "pie, 46px" }
         ],
-        "unused": ["frente", "espalda", "135-derecha", "225-izquierda", "315-izquierda", "arriba", "lado-izquierdo", "feliz", "sorprendido", "apuntando", "descansando", "veloz", "pensativo", "confiado"]
+        "unused": ["frente", "espalda", "45-derecha", "135-derecha", "225-izquierda", "315-izquierda", "arriba", "lado-izquierdo", "lado-derecho", "feliz", "sorprendido", "apuntando", "descansando", "veloz", "confiado"]
       },
       "logo": {
-        "file": "assets/logo.png",
-        "size": "640x262",
-        "where": "nav 30px alto; pie 26px alto. Su trazo azul→violeta es la fuente de la estela."
+        "file": "assets/logo.webp",
+        "size": "978x401",
+        "where": "WebP sin pérdida (200KB PNG → 129KB). Nav 46px alto / 56px en escritorio; pie 34px. Su trazo azul→violeta es la fuente de la estela."
       }
     },
     "openItems": [
       "Archivo se carga desde Google Fonts (fonts.googleapis.com, wdth 100 a 400/500/700/900 y wdth 125 a 800/900); pendiente self-host.",
-      "Número de WhatsApp es marcador (+57 300 000 0000 / wa.me/573000000000), marcado con REEMPLAZAR en código y '(número de ejemplo)' en el pie.",
+      "El código lleva el número +57 305 312 8087 (wa.me/573053128087) en los CTA y en el pie, sin marca de ejemplo; pendiente de que el cliente lo confirme como definitivo.",
       "Cifras de resultados son de ejemplo, marcadas con comentario EJEMPLO en código y con el chip .ejemplo en pantalla."
     ]
   },
