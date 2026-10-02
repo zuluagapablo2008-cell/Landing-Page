@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kairo Escala</title>
+<meta name="description" content="Kairo Escala: automatización de procesos, funnels y diseño web, soluciones con IA, marketing digital, publicidad paga, video, tiendas virtuales y contenido para empresas que quieren escalar sin límites. Agenda una llamada estratégica.">
+<meta name="theme-color" content="#07080F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_LA">
+<meta property="og:site_name" content="Kairo Escala">
+<meta property="og:title" content="Impulsa tu negocio, escala sin límites.">
+<meta property="og:description" content="Un solo equipo para automatizar, vender, pautar y producir. Agenda una llamada estratégica de 30 minutos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,700;100,900;125,800;125,900&display=swap">
+<link rel="preload" as="image" href="/assets/mascot/hero-rocket.png">
+<script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+
+<style>
+/* =====================================================================
+   KAIRO ESCALA. Mundo: noche azul-negro, una sola energía azul→violeta,
+   Archivo en dos anchos. La página es una escalada.
+   ===================================================================== */
+:root{
+  --ground:#07080F;
+  --ink:#F3F4FB;
+  --ink-2:#AEB4CF;
+  --ink-3:#7A819F;
+  --line:rgba(150,162,225,.16);
+  --line-strong:rgba(150,162,225,.34);
+  --blue:#2B82FF;
+  --violet:#6F2BF5;
+  --energy:linear-gradient(100deg,#2B82FF 0%,#6F2BF5 100%);
+  --energy-v:linear-gradient(180deg,#6F2BF5 0%,#2B82FF 100%);
+  /* plateado del logotipo */
+  --silver:#E9DFD8;
+  --silver-2:#C9BFB8;
+  --metal:linear-gradient(180deg,#F7F1ED 0%,#E3D8D1 45%,#BDB2AB 100%);
+  --metal-line:linear-gradient(90deg,transparent 0%,#D9CFC8 30%,#F3ECE7 50%,#D9CFC8 70%,transparent 100%);
+  --glow:0 14px 30px -16px rgba(14,22,70,.95);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --rail-w:22px;
+  --rail-x:12px;
+  --gutter:20px;
+  --content-l:56px;      /* espacio para la regla en celular */
+  --nav-h:72px;
+  --sticky-h:76px;
+  --rocket-w:250px;
+  --maxw:1120px;
+  color-scheme:dark;
+}
+@media (min-width:900px){
+  :root{ --rail-x:28px; --rail-w:28px; --content-l:104px; --gutter:40px; --rocket-w:420px; --sticky-h:0px; --nav-h:80px; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; background:var(--ground)}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--display); font-stretch:100%; font-weight:400;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:#6F2BF5; color:#fff}
+h1,h2,h3,p,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0; list-style:none}
+img{max-width:100%; display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid #8FA8FF; outline-offset:4px; border-radius:6px}
+.skip{position:absolute; left:-999px; top:8px; background:var(--ink); color:var(--ground); padding:8px 12px; z-index:100}
+.skip:focus{left:8px}
+
+.wrap{width:100%; max-width:var(--maxw); margin-inline:auto; padding-left:var(--content-l); padding-right:var(--gutter)}
+
+/* ---------- voces tipográficas ---------- */
+.d-wide{font-stretch:125%; font-weight:900; letter-spacing:-.02em; line-height:.92; text-wrap:balance}
+.d-tight{font-stretch:100%; font-weight:900; letter-spacing:-.035em; line-height:.98; text-wrap:balance}
+.num{font-variant-numeric:tabular-nums}
+.lead{color:var(--ink-2); font-size:1.05rem; max-width:34ch}
+.small{font-size:.875rem; color:var(--ink-3)}
+
+/* ---------- botones ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  min-height:52px; padding:0 24px; border-radius:999px;
+  font-weight:700; font-size:1rem; letter-spacing:-.005em; text-decoration:none;
+  color:#fff; background:var(--energy); box-shadow:var(--glow);
+  border:0; white-space:nowrap;
+  transition:transform 160ms var(--ease-out), box-shadow 200ms ease;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{flex:none}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-1px); box-shadow:0 18px 34px -16px rgba(14,22,70,1)}
+}
+
+/* ---------- cielo: estrellas que descienden al subir ---------- */
+.sky{position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:.9}
+main, .nav, .foot{position:relative; z-index:1}
+
+/* ---------- regla de altitud (fija) ---------- */
+.alt{
+  position:fixed; left:var(--rail-x); top:calc(var(--nav-h) + 10px);
+  bottom:calc(var(--sticky-h) + 18px);
+  width:var(--rail-w); z-index:40; pointer-events:none;
+}
+.alt-rail{
+  position:absolute; left:0; right:0; top:6px; bottom:0;
+  border-left:1px solid rgba(233,223,216,.30);
+  background:
+    repeating-linear-gradient(180deg, rgba(233,223,216,.14) 0 1px, transparent 1px 10px) left top / 7px 100% no-repeat,
+    repeating-linear-gradient(180deg, rgba(233,223,216,.30) 0 1px, transparent 1px 50px) left top / 13px 100% no-repeat;
+  transform-origin:bottom; 
+}
+.alt-tag{position:fixed; left:0; top:0; z-index:42; pointer-events:none; font-size:11px; font-weight:700; letter-spacing:.02em; color:var(--ink-2); font-variant-numeric:tabular-nums; white-space:nowrap; transform:translate(-50%,0); opacity:0; transition:opacity 220ms ease}
+.alt-tag.on{opacity:1}
+.alt-scale{position:absolute; left:calc(100% + 6px); font-size:9px; font-weight:600; letter-spacing:.02em; color:var(--silver-2); opacity:.8; font-variant-numeric:tabular-nums; transform:translateY(-50%); white-space:nowrap; display:none}
+@media (min-width:900px){ .alt-scale{display:block} }
+.alt-fill{
+  position:absolute; left:-1px; bottom:0; width:3px; height:0%;
+  background:var(--energy-v); border-radius:2px;
+}
+.js .alt{opacity:0; transition:opacity 480ms ease}
+.js .alt.on{opacity:1}
+.js .alt.on .alt-rail{animation:rail-in 900ms var(--ease-out) both}
+.shot .alt{opacity:1}
+@keyframes rail-in{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+/* ---------- cohete (un solo objeto, fijo, lo mueve JS) ---------- */
+.rocket{
+  position:fixed; left:0; top:0; width:var(--rocket-w); z-index:41;
+  pointer-events:none; will-change:transform;
+}
+.rocket-inner{display:block; width:100%; height:auto; will-change:transform; position:relative; z-index:1}
+.rocket::before{content:""; position:absolute; left:6%; top:52%; width:46%; height:46%; border-radius:50%; background:radial-gradient(closest-side, rgba(91,84,255,.55), rgba(123,59,255,.18) 55%, transparent 75%); filter:blur(6px); pointer-events:none}
+.js .rocket::before{animation:flame-glow 1.3s ease-in-out infinite alternate}
+@keyframes flame-glow{from{opacity:.55; transform:scale(.92)}to{opacity:.95; transform:scale(1.06)}}
+.js .rocket-inner{animation:hover-float 5.6s ease-in-out 1.7s infinite}
+@keyframes hover-float{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg)}
+  50%{transform:translate3d(0,-9px,0) rotate(-2deg)}
+}
+.rocket-slot{width:var(--rocket-w); aspect-ratio:646/455; flex:none}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky; top:0; z-index:50; height:var(--nav-h);
+  background:linear-gradient(180deg, rgba(7,8,15,.94), rgba(7,8,15,.72));
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+}
+/* borde inferior metálico, como el trazo bajo "ESCALA" en el logo */
+.nav::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--metal-line); opacity:.55; pointer-events:none}
+/* estela de progreso: el mismo dato del altímetro, visto en la barra */
+.nav-trail{position:absolute; left:0; bottom:0; height:2px; width:100%; background:var(--energy); transform:scaleX(var(--p,0)); transform-origin:left center; pointer-events:none; z-index:1}
+.nav-trail::after{content:""; position:absolute; right:-1px; top:-3px; width:8px; height:8px; border-radius:50%; background:var(--silver); box-shadow:0 0 0 3px rgba(43,130,255,.35), 0 0 12px rgba(43,130,255,.6)}
+.nav-in{display:flex; align-items:center; height:100%; gap:24px}
+.brand{display:flex; align-items:center; text-decoration:none}
+.brand img{height:46px; width:auto}
+@media (min-width:900px){ .brand img{height:56px} }
+.nav-links{display:none; margin-left:auto; gap:28px}
+.nav-links a{position:relative; text-decoration:none; color:var(--silver-2); font-weight:500; font-size:.95rem; padding:6px 0; transition:color 150ms ease}
+.nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:2px; border-radius:2px; background:var(--energy); transform:scaleX(0); transform-origin:left center; transition:transform 300ms var(--ease-out)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.is-active{color:var(--ink)}
+.nav-links a.is-active::after{transform:scaleX(1)}
+.nav .btn{display:none; min-height:42px; padding:0 18px; font-size:.9rem; box-shadow:inset 0 0 0 1px rgba(233,223,216,.28), var(--glow)}
+@media (min-width:900px){ .nav-links{display:flex} .nav .btn{display:inline-flex} }
+
+/* ---------- hero ---------- */
+.hero{position:relative; padding-top:34px; padding-bottom:36px; min-height:calc(100dvh - var(--nav-h)); display:flex; align-items:stretch}
+.hero-in{display:grid; grid-template-rows:auto minmax(0,1fr) auto auto; gap:14px; width:100%}
+.hero-copy{display:contents}
+.hero h1{font-size:clamp(2.5rem,11vw,4.9rem)}
+.grad{background:var(--energy); -webkit-background-clip:text; background-clip:text; color:transparent}
+.metal{background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero-row{display:flex; flex-direction:column; align-items:stretch; justify-content:space-between; gap:12px; min-height:0}
+.hero-row .rocket-slot{order:-1; align-self:flex-end; width:min(330px, calc(100% + 34px)); margin-right:-20px; margin-top:-6px}
+.hero-row .lead{flex:0 0 auto}
+.hero-actions{display:grid; gap:16px; justify-items:start; padding-top:8px}
+.hero-actions .btn{width:100%}
+/* franja de autoridad: cuatro datos, números plateados como el logo */
+.cred{display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; padding-top:18px; margin-top:6px; position:relative}
+.cred::before{content:""; position:absolute; left:0; right:0; top:0; height:1px; background:var(--metal-line); opacity:.55}
+.cred li{display:flex; align-items:center; gap:10px; min-width:0}
+.cred b{flex:none; font-stretch:125%; font-weight:900; font-size:1.7rem; line-height:1; letter-spacing:-.03em}
+.cred .cred-ico{display:inline-flex; width:28px; height:28px; align-items:center; justify-content:center; color:var(--silver)}
+.cred .cred-ico svg{display:block}
+.cred span{font-size:.86rem; line-height:1.25; color:var(--ink-2); text-wrap:pretty}
+.cred strong{color:var(--ink); font-weight:700}
+.link-more{display:inline-flex; align-items:center; gap:8px; white-space:nowrap; color:var(--ink-2); font-weight:600; text-decoration:underline; text-underline-offset:5px; text-decoration-color:var(--line-strong); text-decoration-thickness:1px; transition:color 150ms ease, text-decoration-color 150ms ease; padding:4px 0}
+.link-more:hover{color:var(--ink); text-decoration-color:#8FA8FF}
+.link-more svg{transition:transform 200ms var(--ease-out)}
+.link-more:hover svg{transform:translateY(2px)}
+@media (min-width:900px){
+  .hero{padding-top:40px; padding-bottom:64px; align-items:center}
+  .hero-in{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); grid-template-rows:auto auto auto auto; align-items:center; column-gap:48px; row-gap:28px}
+  .hero-copy, .hero-row{display:contents}
+  .hero h1, .hero .lead, .hero-actions{grid-column:1}
+  .hero h1{align-self:end}
+  .hero .lead{font-size:1.15rem; max-width:40ch}
+  .hero-actions{display:flex; flex-wrap:wrap; justify-content:flex-start; align-items:center; gap:22px; align-self:start; padding-top:6px}
+  .hero-actions .btn{width:auto; min-height:56px; padding:0 28px; font-size:1.05rem}
+  .cred{grid-column:1; grid-template-columns:repeat(2,auto); justify-content:start; gap:14px 0; padding-top:20px; margin-top:0; align-self:start}
+  .cred li:nth-child(odd){padding-right:26px; margin-right:26px; border-right:1px solid rgba(233,223,216,.22)}
+  .cred b{font-size:1.9rem}
+  .cred span{font-size:.92rem; max-width:24ch}
+  .rocket-slot{--rocket-w:420px; width:var(--rocket-w); order:0; margin:0; grid-column:2; grid-row:1 / span 4; justify-self:center; align-self:center}
+}
+/* modo captura: sin entradas, para revisar el render en reposo */
+.shot .rise, .shot .alt-rail, .shot .rocket-inner{animation:none !important}
+.shot .reveal{opacity:1 !important; transform:none !important; transition:none !important}
+.full .hero{min-height:0}
+.shot .sticky{display:none}
+/* entrada orquestada (solo con JS y sin reduced-motion) */
+.js .rise{animation:rise 800ms var(--ease-out) both}
+.js .rise.r1{animation-delay:280ms}
+.js .rise.r2{animation-delay:380ms}
+.js .rise.r3{animation-delay:520ms}
+.js .rise.r4{animation-delay:680ms}
+.js .rise.r5{animation-delay:820ms}
+@keyframes rise{from{opacity:0; transform:translate3d(0,22px,0)}to{opacity:1; transform:none}}
+
+/* ---------- secciones "cota" ---------- */
+.cota{position:relative; padding-top:0; padding-bottom:52px}
+.cota-head{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 14px; align-items:start; margin-bottom:22px; max-width:62ch}
+.cota-head > h2{grid-column:1 / -1}
+.cota-head > .lead{grid-column:1}
+.head-mascot{grid-column:2; grid-row:2; width:92px; height:auto; align-self:start; margin-top:-16px; pointer-events:none; user-select:none}
+@media (min-width:900px){ .cota-head > h2{grid-column:1} .head-mascot{grid-row:1 / span 2; width:150px; margin-top:-12px} }
+.cota h2{font-size:clamp(1.7rem,6.8vw,2.8rem)}
+.cota-head .lead{margin-top:2px}
+/* estela: el separador de secciones, tomado del trazo del logo */
+.estela{position:relative; height:58px; margin-bottom:4px}
+.estela::before{content:""; position:absolute; left:-12px; right:-6px; top:50%; height:2px; transform:rotate(-1.6deg); transform-origin:right center; transition:clip-path 900ms var(--ease-out); border-radius:2px; background:linear-gradient(90deg, rgba(59,107,255,0) 0%, rgba(59,107,255,.55) 45%, #7B3BFF 100%)}
+.estela::after{content:""; position:absolute; right:-6px; top:50%; width:10px; height:10px; margin-top:-4px; border-radius:50%; background:var(--silver); box-shadow:0 0 0 4px rgba(43,130,255,.30); transition:opacity 400ms ease 500ms, transform 500ms var(--ease-out) 500ms}
+.js .estela:not(.in)::before{clip-path:inset(0 0 0 100%)}
+.js .estela:not(.in)::after{opacity:0; transform:scale(.4)}
+@media (min-width:900px){
+  .cota{padding-top:0; padding-bottom:92px}
+  .cota-head{margin-bottom:36px}
+  .estela{height:104px; margin-bottom:8px}
+  .estela::before{left:-40px; right:0; transform:rotate(-1.1deg)}
+  .estela::after{right:0}
+}
+
+/* escala de revelado al hacer scroll */
+.js .reveal{opacity:0; transform:translate3d(0,14px,0); transition:opacity 620ms var(--ease-out), transform 620ms var(--ease-out); transition-delay:calc(var(--i,0) * 60ms)}
+.js .reveal.in{opacity:1; transform:none}
+
+/* --- dolores --- */
+.senales-grid{display:grid; gap:0}
+.senal{
+  display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:start;
+  padding:15px 0; border-top:1px solid var(--line);
+  font-size:clamp(1.2rem,5.3vw,1.7rem); font-weight:700; letter-spacing:-.02em; line-height:1.3; text-wrap:pretty;
+}
+.senal:last-child{border-bottom:1px solid var(--line)}
+.senal b{display:block; width:22px; height:2px; margin-top:.62em; background:var(--energy); border-radius:2px}
+.senal span{color:var(--ink)}
+.senal em{display:block; font-style:normal; font-weight:400; font-size:.92rem; line-height:1.4; color:var(--ink-3); margin-top:3px; letter-spacing:0}
+.mascot{height:auto; pointer-events:none; user-select:none}
+@media (min-width:900px){
+  .senales-wrap{max-width:760px}
+  .senal{grid-template-columns:auto minmax(0,1fr); padding:18px 0}
+}
+
+/* --- libro Hoy → Con Kairo --- */
+.libro{display:grid; border-top:1px solid var(--line)}
+.libro-row{display:grid; gap:4px 14px; padding:14px 0; border-bottom:1px solid var(--line); grid-template-columns:82px minmax(0,1fr); align-items:start}
+.libro-k{font-size:.92rem; font-weight:500; color:var(--ink-3); grid-row:1 / span 2; padding-top:3px; line-height:1.3}
+.libro-hoy, .libro-alt{grid-column:2}
+.libro-hoy{color:var(--ink-3); text-decoration:line-through; text-decoration-color:rgba(174,180,207,.45); text-decoration-thickness:1px; font-size:1rem}
+.libro-alt{color:var(--ink); font-weight:700; font-size:1.12rem; letter-spacing:-.015em; line-height:1.34; display:flex; gap:10px; align-items:flex-start}
+.libro-alt i{flex:none; width:16px; height:16px; margin-top:4px; background:var(--energy); border-radius:50%; position:relative}
+.libro-alt i::after{content:""; position:absolute; left:5px; top:4px; width:4px; height:7px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg)}
+@media (min-width:900px){
+  .libro-row{grid-template-columns:150px minmax(0,1fr) minmax(0,1.2fr); gap:36px; align-items:start; padding:18px 0}
+  .libro-k{grid-row:auto; font-size:.95rem}
+  .libro-hoy{grid-column:2}
+  .libro-alt{grid-column:3}
+  .libro-hoy{font-size:1.05rem; padding-top:2px}
+  .libro-alt{font-size:1.25rem}
+}
+
+/* --- ruta de servicios --- */
+.route{position:relative; padding-block:8px 24px}
+.route-svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none}
+.route-path{fill:none; stroke:var(--line-strong); stroke-width:1.5; stroke-dasharray:4 7}
+.route-draw{fill:none; stroke:url(#energyStroke); stroke-width:2.5; stroke-linecap:round}
+.route-rocket{
+  position:absolute; left:0; top:0; width:58px; height:auto; z-index:2; pointer-events:none;
+  offset-rotate:auto; offset-distance:0%;
+  filter:drop-shadow(0 8px 10px rgba(4,6,20,.8));
+}
+.stops{display:grid; gap:0; position:relative; z-index:1}
+.stop{
+  display:grid; grid-template-columns:28px minmax(0,1fr); column-gap:22px; align-items:start;
+  padding:16px 0;
+}
+.stop-dot{
+  width:28px; height:28px; border-radius:50%; background:var(--ground);
+  border:1.5px solid rgba(233,223,216,.35); position:relative; margin-top:2px;
+}
+.stop-dot::after{content:""; position:absolute; inset:8px; border-radius:50%; background:var(--energy); opacity:.9; transition:transform 260ms var(--ease-out)}
+.stop-dot{transition:border-color 260ms ease, box-shadow 260ms ease}
+.stop h3, .stop p{transition:color 300ms ease, opacity 300ms ease}
+.route.has-lit .stop:not(.lit) h3{opacity:.7}
+.route.has-lit .stop:not(.lit) p{opacity:.72}
+.stop.lit .stop-dot{border-color:#8FA8FF; box-shadow:0 0 0 5px rgba(111,43,245,.22)}
+.stop.lit .stop-dot::after{transform:scale(1.25)}
+.stop-body{display:grid; gap:4px}
+.stop h3{font-size:clamp(1.25rem,5.6vw,1.75rem); font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.05}
+.stop p{color:var(--ink-2); font-size:.98rem; max-width:34ch; text-wrap:pretty}
+@media (min-width:900px){
+  .route{padding-block:16px 40px}
+  .stop{grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr); column-gap:40px; padding:24px 0}
+  .stop .stop-dot{grid-column:2; width:36px; height:36px}
+  .stop .stop-dot::after{inset:11px}
+  .stop:nth-child(odd) .stop-body{grid-column:3; text-align:left}
+  .stop:nth-child(even) .stop-body{grid-column:1; text-align:right}
+  .stop:nth-child(even){grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr)}
+  .stop p{max-width:40ch}
+  .route-rocket{width:104px}
+}
+
+/* --- resultados --- */
+.cta-band{display:grid; gap:14px; padding:22px 0 4px; align-items:center}
+.cta-band p{font-size:1.08rem; font-weight:600; color:var(--ink); letter-spacing:-.01em; max-width:34ch; text-wrap:pretty}
+.cta-band .btn{display:none; justify-self:start} /* en celular ya está el CTA fijo abajo */
+@media (min-width:900px){ .cta-band{grid-template-columns:minmax(0,1fr) auto; gap:32px; padding:28px 0 0} .cta-band p{max-width:40ch} .cta-band .btn{display:inline-flex} }
+.ejemplo{
+  display:inline-flex; align-items:center; gap:8px; margin-top:6px;
+  font-size:.78rem; font-weight:600; color:#C7B4FF; letter-spacing:.01em;
+  padding:6px 10px; border:1px dashed rgba(199,180,255,.45); border-radius:999px;
+}
+.logs{display:grid; gap:0; border-top:1px solid var(--line)}
+.log{display:grid; gap:6px; padding:16px 0 18px; border-bottom:1px solid var(--line)}
+.log h3{font-size:1.2rem; font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.1}
+.log-what{color:var(--ink-2); font-size:.98rem; max-width:46ch; text-wrap:pretty}
+.log-n{color:var(--ink-2); font-size:1rem; line-height:1.3; margin-top:4px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.log-n b{font-size:clamp(2.2rem,9vw,3.2rem); font-stretch:125%; font-weight:900; letter-spacing:-.03em; line-height:1; white-space:nowrap; background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
+@media (min-width:900px){
+  .log{grid-template-columns:200px minmax(0,1fr) 300px; column-gap:40px; align-items:start; padding:22px 0 24px}
+  .log h3{padding-top:6px}
+  .log-n{margin-top:0; justify-self:end; text-align:right; flex-direction:column; align-items:flex-end; gap:6px}
+}
+
+/* --- cómo trabajamos · escalera --- */
+.plan{padding-top:0; padding-bottom:52px}
+.plan-head{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 14px; align-items:start; margin-bottom:22px; max-width:62ch}
+.plan-head > h2{grid-column:1 / -1}
+.plan-head > .lead{grid-column:1}
+@media (min-width:900px){ .plan-head > h2{grid-column:1} }
+.plan h2{font-size:clamp(1.7rem,7vw,2.8rem)}
+.steps{display:grid; gap:0; border-left:1px solid var(--line-strong); margin-left:6px; position:relative}
+.steps::before{content:""; position:absolute; left:-2px; top:0; width:3px; height:var(--fill,0%); background:var(--energy-v); border-radius:2px; pointer-events:none}
+.step{position:relative; padding:0 0 22px 26px}
+.step::before{
+  content:""; position:absolute; left:-6px; top:8px; width:11px; height:11px; border-radius:50%;
+  background:var(--ground); border:2px solid rgba(233,223,216,.55);
+}
+.step::before{transition:background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease}
+.step.done::before{background:var(--energy); border-color:transparent; box-shadow:0 0 0 4px rgba(111,43,245,.22)}
+.step::after{content:""; position:absolute; left:0; right:0; top:-1px; height:2px; background:var(--energy); transform:scaleX(0); transform-origin:left center; transition:transform 600ms var(--ease-out); display:none}
+.step.done::after{transform:scaleX(1)}
+.step h3{color:var(--ink); transition:opacity 200ms ease}
+.step.done h3{background:var(--energy); -webkit-background-clip:text; background-clip:text; color:transparent}
+.step:last-child{padding-bottom:0}
+.step-t{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap}
+.step h3{font-size:1.25rem; font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.1}
+.step-d{font-size:.85rem; color:var(--ink-3); font-variant-numeric:tabular-nums; white-space:nowrap}
+.step p{color:var(--ink-2); margin-top:5px; max-width:40ch; text-wrap:pretty}
+@media (min-width:900px){
+  .plan{padding-top:0; padding-bottom:92px}
+  .plan-head{margin-bottom:40px}
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr)); border-left:0; margin-left:0; align-items:stretch; gap:0}
+  .step{padding:26px 28px 0 0; border-top:1px solid var(--line-strong)}
+  .step + .step{border-left:1px solid var(--line-strong); padding-left:24px}
+  .step::before{left:-6px; top:-6px}
+  .step:first-child::before{left:0}
+  .steps::before{display:none}
+  .step::after{display:block}
+  .step + .step::after{left:-1px}
+  /* escalera: cada etapa un peldaño más arriba; los bordes dibujan los escalones */
+  .step:nth-child(1){margin-top:132px}
+  .step:nth-child(2){margin-top:88px}
+  .step:nth-child(3){margin-top:44px}
+  .step:nth-child(4){margin-top:0}
+  .step p{max-width:none}
+}
+
+/* --- cierre --- */
+.orbita{position:relative; overflow:hidden; padding-top:0; padding-bottom:72px}
+.orbita::before{
+  content:""; position:absolute; inset:auto -20% -40% -20%; height:70%;
+  background:radial-gradient(60% 60% at 50% 100%, rgba(43,130,255,.28), rgba(111,43,245,.10) 45%, transparent 75%);
+  pointer-events:none;
+}
+.orbita-in{position:relative; display:grid; gap:18px}
+.orbita-estela{grid-column:1 / -1; margin-bottom:0; order:-2}
+.orbita-word{font-size:clamp(2.6rem,11vw,5.8rem); line-height:.9; padding-bottom:.06em; color:var(--ink)}
+.orbita h2{font-size:clamp(1.5rem,6.2vw,2.4rem); font-stretch:100%; font-weight:700; letter-spacing:-.025em; line-height:1.15; max-width:22ch; margin-bottom:2px}
+.orbita .lead{max-width:38ch}
+.orbita-actions{display:grid; gap:12px; margin-top:6px; min-width:0}
+.orbita-actions .btn{width:100%; padding:0 18px; font-size:.95rem; min-width:0}
+.orbita-note{display:grid; gap:4px; color:var(--ink-3); font-size:.9rem}
+.orbita-note b{color:var(--ink-2); font-weight:600}
+.rocket-slot-end{order:-1; width:min(320px, calc(100% + 30px)); justify-self:end; margin-right:-16px; margin-top:-10px; margin-bottom:-6px}
+@media (min-width:900px){
+  .orbita{padding-top:0; padding-bottom:110px}
+  .orbita-in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); align-items:center; gap:40px}
+  .orbita-estela{margin-bottom:-40px}
+  .orbita-copy{display:grid; gap:24px}
+  .orbita-actions{grid-auto-flow:column; justify-content:start; align-items:center; gap:18px}
+  .orbita-actions .btn{width:auto; padding:0 24px; font-size:1rem}
+  .rocket-slot-end{order:0; width:min(440px,100%); justify-self:end; margin:0 -20px 0 0}
+}
+
+/* ---------- pie ---------- */
+.foot{border-top:1px solid var(--line); padding-block:36px calc(28px + var(--sticky-h))}
+.foot-in{display:grid; gap:28px}
+.foot img:not(.mascot){height:34px; width:auto}
+.foot-cols{display:grid; gap:24px}
+.foot h3{font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--ink-3); margin-bottom:10px}
+.foot li{font-size:.95rem; color:var(--ink-2); margin-bottom:8px}
+.foot li a{text-decoration:none}
+.foot li a:hover{color:var(--ink)}
+.foot-base{display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between; align-items:center; color:var(--ink-3); font-size:.85rem; padding-top:20px; border-top:0; position:relative}
+.foot-base::before{content:""; position:absolute; left:0; right:0; top:0; height:1px; background:var(--metal-line); opacity:.6}
+.foot-mascot{position:absolute; right:4px; top:-100px; width:46px; height:auto; pointer-events:none}
+@media (min-width:900px){
+  .foot-in{grid-template-columns:1.2fr 2fr; gap:48px}
+  .foot-cols{grid-template-columns:1.5fr 1fr}
+  .foot-services{column-count:2; column-gap:28px}
+  .foot-services li{break-inside:avoid}
+  .foot-base{grid-column:1 / -1}
+}
+
+/* ---------- CTA fija en celular ---------- */
+.sticky{
+  position:fixed; left:0; right:0; bottom:0; z-index:45;
+  padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg, rgba(7,8,15,0), rgba(7,8,15,.92) 30%, rgba(7,8,15,.98));
+  transform:translate3d(0,110%,0); transition:transform 260ms var(--ease-out);
+}
+.sticky.on{transform:none}
+.sticky .btn{width:100%}
+@media (min-width:900px){ .sticky{display:none} }
+
+/* ---------- movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js .rise, .js .alt-rail, .js .rocket-inner{animation:none}
+  .js .reveal{opacity:1; transform:none; transition:none}
+  .sticky{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#hoy">Saltar al contenido</a>
+
+<!-- Regla de altitud: fija al borde, la llena el scroll -->
+<div class="alt" aria-hidden="true">
+  <div class="alt-rail" id="altRail"><div class="alt-fill" id="altFill"></div></div>
+</div>
+<div class="alt-tag num" id="altTag" aria-hidden="true">0 m</div>
+
+<!-- El cohete: un solo objeto para la intro, el hero y la regla -->
+<canvas class="sky" id="sky" aria-hidden="true"></canvas>
+<div class="rocket" id="rocket" aria-hidden="true">
+  <img class="rocket-inner" id="rocketImg" src="/assets/mascot/hero-rocket.png" width="646" height="455" alt="">
+</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#hoy" aria-label="Kairo Escala, inicio"><img src="/assets/logo.png" width="978" height="401" alt="Kairo Escala"></a>
+    <nav class="nav-links" aria-label="Secciones">
+      <a href="#resultados">Resultados</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Cómo trabajamos</a>
+    </nav>
+    <a class="btn" data-cta href="#contacto">Agenda tu llamada estratégica</a>
+  </div>
+  <span class="nav-trail" id="navTrail" aria-hidden="true"></span>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hoy">
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <h1 class="d-tight rise r1"><span class="metal">Impulsa tu negocio,</span> <span class="grad">escala sin límites.</span></h1>
+        <div class="hero-row">
+          <p class="lead rise r2">Automatización, marketing, IA y ventas en un solo equipo que te devuelve el tiempo.</p>
+          <div class="rocket-slot" id="rocketSlot"></div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn rise r3" data-cta data-hero-cta href="#contacto">
+            Agenda tu llamada estratégica
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="link-more rise r4" href="#dolores">Mira si esto te está pasando <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <ul class="cred rise r5" aria-label="Por qué confiar en Kairo Escala">
+          <li><b class="metal num">3</b><span>años en negocios digitales</span></li>
+          <li><b class="metal num">4</b><span>empresas de experiencia</span></li>
+          <li><b class="cred-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.3 1.9 3-.2.8 2.9 2.5 1.7-1.2 2.7 1.2 2.7-2.5 1.7-.8 2.9-3-.2L12 21l-2.3-1.9-3 .2-.8-2.9-2.5-1.7 1.2-2.7-1.2-2.7 2.5-1.7.8-2.9 3 .2z" fill="currentColor" opacity=".18"/><path d="M8.5 12.2l2.3 2.3 4.7-4.8" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></b><span>Certificados en <strong>Meta Ads</strong></span></li>
+          <li><b class="cred-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.9"/><circle cx="16.5" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.9"/><path d="M3.5 18.5c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6M15 15.2c2.4.1 4.3 1.3 5 3.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></b><span>Un <strong>equipo</strong> completo, no un freelancer</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOLORES ============ -->
+  <section class="cota" id="dolores">
+    <div class="wrap">
+      <div class="estela" aria-hidden="true"></div>
+      <div class="cota-head">
+        <h2 class="d-wide reveal">Si reconoces dos de estas, <span class="grad">la llamada vale la pena.</span></h2>
+        <p class="lead reveal" style="--i:1">Lo que más nos cuentan los dueños de empresa.</p>
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/pensativo.png" width="236" height="370" alt="" loading="lazy">
+      </div>
+      <div class="senales-wrap">
+        <ol class="senales-grid">
+          <li class="senal reveal" style="--i:0"><b></b><span>Sientes que te estás quedando atrás en lo digital y no sabes por dónde empezar.<em>Cada mes que pasa, ponerse al día cuesta más.</em></span></li>
+          <li class="senal reveal" style="--i:1"><b></b><span>Trabajas más horas que nunca y el negocio sigue dependiendo de ti para todo.<em>Si te desconectas una semana, se frena.</em></span></li>
+          <li class="senal reveal" style="--i:2"><b></b><span>Tu operación depende de que alguien se acuerde.<em>Todo vive en la cabeza de una persona.</em></span></li>
+          <li class="senal reveal" style="--i:3"><b></b><span>Tu página web se ve de hace tres años. Porque es de hace tres años.<em>Es lo primero que revisa un cliente.</em></span></li>
+          <li class="senal reveal" style="--i:4"><b></b><span>Inviertes en publicidad y no sabes qué volvió.<em>Sabes cuánto gastaste, no cuánto entró.</em></span></li>
+        </ol>
+        <p class="lead reveal" style="margin-top:18px; max-width:52ch">Nada de esto se arregla solo. Se arregla en treinta minutos de conversación.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LO QUE CAMBIA ============ -->
+  <section class="cota" id="cambio">
+    <div class="wrap">
+      <div class="estela" aria-hidden="true"></div>
+      <div class="cota-head">
+        <h2 class="d-wide reveal">Lo que cambia <span class="grad">con Kairo Escala</span></h2>
+        <p class="lead reveal" style="--i:1">Cuatro cosas que dejan de ser tu problema.</p>
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/ascendiendo.png?v=5" width="276" height="330" alt="" loading="lazy">
+      </div>
+      <div class="libro">
+        <div class="libro-row reveal" style="--i:0">
+          <div class="libro-k">Tu tiempo</div>
+          <div class="libro-hoy">Apagas incendios todos los días.</div>
+          <div class="libro-alt"><i></i>Procesos que corren solos.</div>
+        </div>
+        <div class="libro-row reveal" style="--i:1">
+          <div class="libro-k">Tu diseño</div>
+          <div class="libro-hoy">Una web que da pena mandar.</div>
+          <div class="libro-alt"><i></i>Una marca del tamaño de tu empresa.</div>
+        </div>
+        <div class="libro-row reveal" style="--i:2">
+          <div class="libro-k">Tu presencia</div>
+          <div class="libro-hoy">Publicas cuando te acuerdas.</div>
+          <div class="libro-alt"><i></i>Contenido y pauta con calendario y reporte.</div>
+        </div>
+        <div class="libro-row reveal" style="--i:3">
+          <div class="libro-k">Tu claridad</div>
+          <div class="libro-hoy">Reportes que nadie lee.</div>
+          <div class="libro-alt"><i></i>Un tablero en tu celular con lo que importa.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTADOS ============ -->
+  <section class="cota" id="resultados">
+    <div class="wrap">
+      <div class="estela" aria-hidden="true"></div>
+      <div class="cota-head">
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/celebrando.png?v=4" width="210" height="290" alt="" loading="lazy">
+        <h2 class="d-wide reveal">Resultados <span class="grad">que se miden</span></h2>
+        <p class="lead reveal" style="--i:1">Así se ven los números después de tres años trabajando con empresas como la tuya.
+          <!-- EJEMPLO: reemplazar por casos reales del cliente -->
+          <span class="ejemplo">Cifras de ejemplo hasta cargar los casos reales</span>
+        </p>
+      </div>
+      <div class="logs">
+        <article class="log reveal" style="--i:0">
+          <h3>Distribuidora industrial</h3>
+          <p class="log-what">Automatización y web. Las cotizaciones salen del catálogo y el seguimiento es automático.</p>
+          <p class="log-n num"><b>4 h</b><span>para cotizar, antes tardaban 3 días</span></p>
+        </article>
+        <article class="log reveal" style="--i:1">
+          <h3>Clínica con cuatro sedes</h3>
+          <p class="log-what">Pauta y video. Campañas por sede con agenda conectada a WhatsApp.</p>
+          <p class="log-n num"><b>+62 %</b><span>citas agendadas en 90 días</span></p>
+        </article>
+        <article class="log reveal" style="--i:2">
+          <h3>Operador logístico</h3>
+          <p class="log-what">App interna. Reemplazó tres hojas de cálculo y un grupo de WhatsApp de 40 personas.</p>
+          <p class="log-n num"><b>12 h</b><span>recuperadas cada semana por administración</span></p>
+        </article>
+      </div>
+      <div class="cta-band reveal">
+        <p>¿Quieres números así en tu empresa? Empieza por una llamada de treinta minutos.</p>
+        <a class="btn" data-cta data-hero-cta href="#contacto">Agenda tu llamada estratégica</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS ============ -->
+  <section class="cota" id="servicios">
+    <div class="wrap">
+      <div class="estela" aria-hidden="true"></div>
+      <div class="cota-head">
+        <h2 class="d-wide reveal">Todo lo que tu negocio necesita, <span class="grad">en un solo equipo</span></h2>
+        <p class="lead reveal" style="--i:1">Ocho servicios, un solo responsable. Contratas lo que necesites.</p>
+      </div>
+
+      <div class="route" id="route">
+        <svg class="route-svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="energyStroke" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2B82FF"/><stop offset="1" stop-color="#6F2BF5"/>
+            </linearGradient>
+          </defs>
+          <path class="route-path" id="routePath" d=""/>
+          <path class="route-draw" id="routeDraw" d=""/>
+        </svg>
+        <img class="route-rocket" id="routeRocket" src="/assets/mascot/acelerando.png?v=4" width="366" height="122" alt="" aria-hidden="true">
+
+        <ol class="stops">
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3>Automatización <span class="grad">de procesos</span></h3><p>Las tareas repetitivas se hacen solas y tu equipo se dedica a lo importante.</p></div></li>
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3><span class="grad">Funnels de venta</span> y diseños web</h3><p>Páginas y embudos hechos para convertir visitas en clientes.</p></div></li>
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3>Soluciones <span class="grad">con IA</span></h3><p>Asistentes y automatizaciones con IA aplicadas a tu operación real.</p></div></li>
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3>Marketing <span class="grad">digital</span></h3><p>Estrategia, contenido y métricas en un plan que sí se ejecuta.</p></div></li>
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3><span class="grad">Publicidad paga</span> en redes sociales</h3><p>Campañas en Facebook, Instagram y TikTok con reporte de lo que volvió.</p></div></li>
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3>Edición <span class="grad">de videos</span></h3><p>Reels, anuncios y piezas corporativas listas cada semana.</p></div></li>
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3><span class="grad">Tiendas</span> virtuales</h3><p>Tu catálogo vendiendo las 24 horas, con pagos y envíos conectados.</p></div></li>
+          <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3>Creación <span class="grad">de contenido</span></h3><p>Ideas, guiones y piezas para redes que suenan a tu marca.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO TRABAJAMOS ============ -->
+  <section class="plan" id="proceso">
+    <div class="wrap">
+      <div class="estela" aria-hidden="true"></div>
+      <div class="plan-head">
+        <h2 class="d-wide reveal">Cómo <span class="grad">trabajamos</span></h2>
+        <p class="lead reveal" style="--i:1">Cuatro etapas. Sabes qué se entrega y cuánto cuesta antes de empezar.</p>
+        <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/despegue.png?v=4" width="200" height="322" alt="" loading="lazy">
+      </div>
+      <ol class="steps" id="steps">
+        <li class="step reveal" style="--i:0">
+          <div class="step-t"><h3>Llamada estratégica</h3><span class="step-d num">30 min</span></div>
+          <p>Revisamos tu operación. Sales con tres acciones concretas, trabajemos juntos o no.</p>
+        </li>
+        <li class="step reveal" style="--i:1">
+          <div class="step-t"><h3>Propuesta con precio cerrado</h3><span class="step-d num">5 días</span></div>
+          <p>Alcance, tiempos y precio por escrito.</p>
+        </li>
+        <li class="step reveal" style="--i:2">
+          <div class="step-t"><h3>Construcción y lanzamiento</h3><span class="step-d num">2 a 8 semanas</span></div>
+          <p>Entregas semanales que ves funcionando, no informes.</p>
+        </li>
+        <li class="step reveal" style="--i:3">
+          <div class="step-t"><h3>Operación y crecimiento</h3><span class="step-d num">mes a mes</span></div>
+          <p>Optimizamos, reportamos y abrimos la siguiente etapa.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section class="orbita" id="contacto">
+    <div class="wrap orbita-in">
+      <div class="estela orbita-estela" aria-hidden="true"></div>
+      <div class="orbita-copy">
+        <div class="orbita-word d-wide reveal"><span class="grad">Hablemos.</span></div>
+        <h2 class="reveal" style="--i:1">Treinta minutos con el equipo para saber cuánto puede crecer tu negocio.</h2>
+        <p class="lead reveal" style="--i:2">Cuéntanos cómo opera tu empresa. Te decimos por dónde empezar y cuánto costaría.</p>
+        <div class="orbita-actions reveal" style="--i:3">
+          <a class="btn" data-cta href="https://wa.me/573053128087?text=Hola%2C%20equipo%20de%20Kairo%20Escala.%20Quiero%20agendar%20mi%20llamada%20estrat%C3%A9gica." target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24s8.24 3.7 8.24 8.24-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.55.12.17 1.74 2.65 4.21 3.72.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+            Agenda tu llamada estratégica
+          </a>
+        </div>
+        <div class="orbita-note reveal" style="--i:4">
+          <b>Sin compromiso, sin presentación de ventas y con el equipo que ejecuta.</b>
+          <span>Te respondemos el mismo día hábil por WhatsApp.</span>
+        </div>
+      </div>
+      <div class="rocket-slot rocket-slot-end" id="rocketSlotEnd" aria-hidden="true"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <img src="/assets/logo.png" width="978" height="401" alt="Kairo Escala" loading="lazy">
+      <p class="small" style="margin-top:14px; max-width:32ch">Equipo de servicios digitales con tres años escalando empresas.</p>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <h3>Servicios</h3>
+        <ul class="foot-services">
+          <li><a href="#servicios">Automatización de procesos</a></li>
+          <li><a href="#servicios">Funnels de venta y diseños web</a></li>
+          <li><a href="#servicios">Soluciones con IA</a></li>
+          <li><a href="#servicios">Marketing digital</a></li>
+          <li><a href="#servicios">Publicidad paga en redes sociales</a></li>
+          <li><a href="#servicios">Edición de videos</a></li>
+          <li><a href="#servicios">Tiendas virtuales</a></li>
+          <li><a href="#servicios">Creación de contenido</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contacto</h3>
+        <ul>
+          <li>WhatsApp +57 305 312 8087</li>
+          <li>hola@kairoescala.com</li>
+          <li>Lunes a viernes, 8:00 a 18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <img class="mascot foot-mascot" src="/assets/mascot/reposo.png?v=4" width="150" height="330" alt="" loading="lazy">
+      <span>© 2026 Kairo Escala</span>
+      <span>Hecho por el mismo equipo que lo opera</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <a class="btn" data-cta tabindex="-1" href="https://wa.me/573053128087?text=Hola%2C%20equipo%20de%20Kairo%20Escala.%20Quiero%20agendar%20mi%20llamada%20estrat%C3%A9gica." target="_blank" rel="noopener">Agenda tu llamada estratégica</a>
+</div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const easeInOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  /* ---------- CTA: WhatsApp para todos los botones con data-cta ---------- */
+  const WA = 'https://wa.me/573053128087?text=' + encodeURIComponent('Hola, equipo de Kairo Escala. Quiero agendar mi llamada estratégica.');
+  $$('[data-cta]').forEach(a => { if (!a.hasAttribute('data-hero-cta') && a.getAttribute('href').startsWith('#')) return; a.href = WA; a.target = '_blank'; a.rel = 'noopener'; });
+
+  /* ---------- medidas ---------- */
+  const rocket = $('#rocket'), rocketImg = $('#rocketImg'), slot = $('#rocketSlot'), slotEnd = $('#rocketSlotEnd'), closeSec = $('#contacto');
+  const stepsEl = $('#steps'), stepItems = $$('.step');
+  const rail = $('#altRail'), fill = $('#altFill'), tag = $('#altTag'), altEl = $('.alt'), navTrail = $('#navTrail');
+  const hero = $('#hoy');
+  const fmt = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const ALT_MAX = 10000;
+  /* escala de la regla (solo escritorio por CSS) */
+  [0, .25, .5, .75, 1].forEach(f => { const e = document.createElement('span'); e.className = 'alt-scale num'; e.style.top = ((1 - f) * 100) + '%'; e.textContent = f ? fmt(f * ALT_MAX) : '0'; rail.appendChild(e); });
+  const ASPECT = 455 / 646;
+  const MARKER_W = 44;           /* ancho del cohete cuando viaja por la regla */
+  const DOCK_ROT = -56;          /* grados para poner vertical la pose del video (34°) */
+  const shot = /[?&]shot=1/.test(location.search);
+  if (shot) document.documentElement.classList.add('shot');
+  if (/[?&]full=1/.test(location.search)) document.documentElement.classList.add('full');
+  let M = {};
+  function measure(){
+    const vh = innerHeight, sy = scrollY;
+    const s = slot.getBoundingClientRect();
+    const r = rail.getBoundingClientRect();
+    M = {
+      vh, docH: document.documentElement.scrollHeight,
+      slot: { cx: s.left + s.width / 2, cy: s.top + sy + s.height / 2, w: s.width },
+      rail: { cx: r.left + r.width / 2, top: r.top, h: r.height },
+      dock: Math.max(240, hero.offsetHeight * .85),
+      end: (() => { const e = slotEnd.getBoundingClientRect(); return { cx: e.left + e.width / 2, cy: e.top + sy + e.height / 2, w: e.width }; })(),
+      closeTop: closeSec.getBoundingClientRect().top + sy,
+      steps: (() => { const b = stepsEl.getBoundingClientRect(); return { top: b.top + sy, h: b.height, items: stepItems.map(el => el.getBoundingClientRect().top + sy) }; })()
+    };
+    rocket.style.width = M.slot.w + 'px';
+  }
+
+  /* ---------- un solo frame de scroll ---------- */
+  let ticking = false;
+  function frame(){
+    ticking = false;
+    const sy = scrollY;
+    const total = clamp(sy / Math.max(1, M.docH - M.vh), 0, 1);
+
+    /* regla */
+    fill.style.height = (total * 100).toFixed(2) + '%';
+    navTrail.style.setProperty('--p', total.toFixed(4));
+    skyFrame(sy);
+
+    /* cohete: del hero a la regla */
+    const p = easeInOut(clamp(sy / M.dock, 0, 1));
+    const w = M.slot.w, h = w * ASPECT;
+    const heroX = M.slot.cx, heroY = M.slot.cy - sy;
+    const railX = M.rail.cx, railY = M.rail.top + M.rail.h * (1 - total) - h * .08;
+    let cx = lerp(heroX, railX, p), cy = lerp(heroY, railY, p);
+    let sc = lerp(1, MARKER_W / w, p), rot = lerp(0, DOCK_ROT, p);
+    /* al final se desacopla de la regla y vuela a la sección de cierre */
+    const p2 = easeInOut(clamp((M.vh * .92 - (M.closeTop - sy)) / (M.vh * .6), 0, 1));
+    if (p2 > 0) { cx = lerp(cx, M.end.cx, p2); cy = lerp(cy, M.end.cy - sy, p2); sc = lerp(sc, M.end.w / w, p2); rot = lerp(rot, 0, p2); }
+    rocket.style.transform = `translate3d(${(cx - w / 2).toFixed(1)}px, ${(cy - h / 2).toFixed(1)}px, 0) rotate(${rot.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+    /* altímetro junto al cohete: aparece cuando ya está en la regla */
+    /* la regla solo existe cuando el cohete baja hacia ella */
+    if (p > .3) altEl.classList.add('on'); else if (p < .06) altEl.classList.remove('on');
+    tag.classList.toggle('on', p > .92 && p2 < .05);
+    tag.textContent = fmt(total * ALT_MAX) + ' m';
+    const ty = clamp(cy - 30, M.rail.top + 6, M.rail.top + M.rail.h - 14);
+    tag.style.transform = `translate(${railX.toFixed(1)}px, ${ty.toFixed(1)}px) translateX(-50%)`;
+
+    /* ruta de servicios */
+    routeFrame();
+
+    /* cómo trabajamos: la línea se llena y cada círculo se enciende al pasar */
+    const sp = sy + M.vh * .62;
+    stepsEl.style.setProperty('--fill', (clamp((sp - M.steps.top) / Math.max(1, M.steps.h), 0, 1) * 100).toFixed(2) + '%');
+    const stair = innerWidth >= 900, prog = clamp((sp - M.steps.top) / Math.max(1, M.steps.h), 0, 1);
+    stepItems.forEach((el, i) => el.classList.toggle('done', stair ? prog >= (i + .5) / stepItems.length : sp >= M.steps.items[i] + 6));
+  }
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
+
+  /* ---------- nav: el enlace de la sección visible se enciende ---------- */
+  (() => {
+    const links = $$('.nav-links a'); if (!links.length || !('IntersectionObserver' in window)) return;
+    const byId = {}; links.forEach(a => byId[a.getAttribute('href').slice(1)] = a);
+    const order = ['dolores','cambio','resultados','servicios','proceso','contacto'];
+    const owner = { dolores:null, cambio:null, resultados:'resultados', servicios:'servicios', proceso:'proceso', contacto:'proceso' };
+    const vis = new Map();
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => vis.set(e.target.id, e.isIntersecting));
+      let cur = null; order.forEach(id => { if (vis.get(id)) cur = owner[id]; });
+      links.forEach(a => a.classList.toggle('is-active', cur && byId[cur] === a));
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    order.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+  })();
+
+  /* ---------- ruta de servicios: curva entre paradas + cohete pequeño ---------- */
+  const route = $('#route'), svg = $('.route-svg'), pathBg = $('#routePath'), pathDraw = $('#routeDraw');
+  const rr = $('#routeRocket'), dots = $$('.stop-dot'), stops = $$('.stop');
+  let pathLen = 0, R = {};
+  function buildRoute(){
+    const rb = route.getBoundingClientRect();
+    const pts = dots.map(d => { const b = d.getBoundingClientRect(); return { x: b.left - rb.left + b.width / 2, y: b.top - rb.top + b.height / 2 }; });
+    const aligned = pts.every(p => Math.abs(p.x - pts[0].x) < 2);
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      const a = pts[i - 1], b = pts[i], my = (a.y + b.y) / 2;
+      if (aligned) { const k = (i % 2 ? 1 : -1) * (innerWidth >= 900 ? 58 : 9); d += ` C ${a.x + k} ${a.y + (b.y - a.y) * .35} ${b.x + k} ${b.y - (b.y - a.y) * .35} ${b.x} ${b.y}`; }
+      else d += ` C ${a.x} ${my} ${b.x} ${my} ${b.x} ${b.y}`;
+    }
+    svg.setAttribute('viewBox', `0 0 ${rb.width} ${rb.height}`);
+    pathBg.setAttribute('d', d); pathDraw.setAttribute('d', d);
+    pathLen = pathDraw.getTotalLength();
+    pathDraw.style.strokeDasharray = pathLen; pathDraw.style.strokeDashoffset = pathLen;
+    rr.style.offsetPath = `path("${d}")`;
+    R = { top: rb.top + scrollY, h: rb.height };
+  }
+  function routeFrame(){
+    if (!pathLen) return;
+    const start = R.top - M.vh * .62, end = R.top + R.h - M.vh * .62;
+    const t = clamp((scrollY - start) / Math.max(1, end - start), 0, 1);
+    rr.style.offsetDistance = (t * 100).toFixed(2) + '%';
+    pathDraw.style.strokeDashoffset = (pathLen * (1 - t)).toFixed(1);
+    /* la parada más cercana al cohete se enciende */
+    const li = Math.round(t * (stops.length - 1)); const active = (t > 0.02 && t < 0.995) || (t >= 0.995);
+    route.classList.toggle('has-lit', active);
+    stops.forEach((el, i) => el.classList.toggle('lit', active && i === li));
+  }
+
+  /* ---------- intro: el cohete asciende y frena en su sitio ---------- */
+  function intro(){
+    if (reduce || shot) return;
+    const w = M.slot.w, h = w * ASPECT;
+    const fromX = -(M.slot.cx + w), fromY = M.vh * .9;
+    rocketImg.animate([
+      { transform: `translate3d(${fromX}px, ${fromY}px, 0) rotate(6deg)`, opacity: .0, offset: 0 },
+      { opacity: 1, offset: .12 },
+      { transform: `translate3d(${fromX * .18}px, ${fromY * .16}px, 0) rotate(2deg)`, offset: .62 },
+      { transform: 'translate3d(0, -6px, 0) rotate(-1deg)', offset: .9 },
+      { transform: 'translate3d(0, 0, 0) rotate(0deg)', opacity: 1, offset: 1 }
+    ], { duration: 1650, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
+  }
+
+  /* ---------- revelado por scroll ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+  $$('.reveal, .estela').forEach(el => io.observe(el));
+
+  /* ---------- cifras que cuentan al aparecer ---------- */
+  const countIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; countIO.unobserve(e.target);
+    const el = e.target, m = el.textContent.match(/^(\D*)(\d+)(.*)$/); if (!m || reduce || shot) return;
+    const target = +m[2], t0 = performance.now(), dur = 900;
+    const step = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(target * (1 - Math.pow(1 - k, 3))); el.textContent = m[1] + v + m[3]; if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }), { threshold: .6 });
+  $$('.log-n b').forEach(el => countIO.observe(el));
+
+  /* ---------- cielo: estrellas con paralaje de ascenso ---------- */
+  const sky = $('#sky'), sctx = sky.getContext('2d'); let stars = [], skyW = 0, skyH = 0, dpr = 1, lastSky = -1;
+  function skySetup(){
+    dpr = Math.min(2, devicePixelRatio || 1); skyW = innerWidth; skyH = innerHeight;
+    sky.width = skyW * dpr; sky.height = skyH * dpr; sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(skyW * skyH / 14000);
+    stars = Array.from({ length: n }, () => ({ x: Math.random() * skyW, y: Math.random() * skyH * 3, r: .5 + Math.random() * 1.1, a: .18 + Math.random() * .5, d: .25 + Math.random() * .55, b: Math.random() < .3 }));
+    lastSky = -1; skyFrame(scrollY);
+  }
+  function skyFrame(sy){
+    if (!stars.length) return; const key = Math.round(sy / 2); if (key === lastSky) return; lastSky = key;
+    sctx.clearRect(0, 0, skyW, skyH);
+    for (const st of stars) {
+      const y = ((st.y + sy * st.d) % (skyH * 3 + 40)) - 20; if (y < -4 || y > skyH + 4) continue;
+      sctx.globalAlpha = st.a; sctx.fillStyle = st.b ? '#9FB4FF' : '#E8ECFA';
+      sctx.beginPath(); sctx.arc(st.x, y, st.r, 0, Math.PI * 2); sctx.fill();
+    }
+    sctx.globalAlpha = 1;
+  }
+  skySetup(); addEventListener('resize', skySetup);
+
+  /* ---------- CTA fija en celular: aparece cuando el CTA del hero sale, se esconde en el cierre ---------- */
+  const sticky = $('#sticky'); let heroOut = false, orbitaIn = false;
+  const upd = () => sticky.classList.toggle('on', heroOut && !orbitaIn);
+  new IntersectionObserver(es => es.forEach(e => { heroOut = !e.isIntersecting && e.boundingClientRect.top < 0; upd(); }), { threshold: 0 }).observe($('[data-hero-cta]'));
+  new IntersectionObserver(es => es.forEach(e => { orbitaIn = e.isIntersecting; upd(); }), { threshold: .2 }).observe($('#contacto'));
+
+  /* ---------- arranque ---------- */
+  function init(){ measure(); buildRoute(); frame(); }
+  init(); intro();
+  addEventListener('scroll', onScroll, { passive: true });
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(init, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(init);
+  addEventListener('load', init);
+})();
+</script>
+</body>
+</html>

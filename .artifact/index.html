@@ -1,0 +1,1028 @@
+<title>Kairo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   KAIRO — tokens
+   Diseño noche-primero. :root define la paleta oscura completa;
+   los bloques de abajo la reemplazan para tema claro.
+   ============================================================ */
+:root{
+  /* superficie */
+  --ink:#04060D;
+  --surface:#0A0F1E;
+  --surface-2:#111A2E;
+  --line:#1E2A44;
+  /* texto */
+  --text:#E8ECF6;
+  --text-dim:#97A2BD;
+  --text-faint:#6B7793;
+  /* marca */
+  --blue:#3B7BFF;
+  --blue-soft:#8FB6FF;
+  --blue-wash:rgba(59,123,255,.12);
+  --flame:#FF8A3D;
+  --flame-wash:rgba(255,138,61,.14);
+  /* sombra */
+  --shadow:0 18px 40px -24px rgba(0,0,0,.9);
+  --shadow-lift:0 24px 60px -28px rgba(4,10,30,.95);
+
+  /* banda nocturna: idéntica en ambos temas */
+  --night:#04060D;
+  --night-2:#0B1223;
+  --night-line:#1B2740;
+  --night-text:#E8ECF6;
+  --night-dim:#94A0BC;
+
+  --maxw:1120px;
+  --radius:14px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ink:#EDF1F9;
+    --surface:#FFFFFF;
+    --surface-2:#F5F8FD;
+    --line:#D8E0F0;
+    --text:#0A1123;
+    --text-dim:#55617D;
+    --text-faint:#7C88A3;
+    --blue:#1D4FD8;
+    --blue-soft:#2F6BFF;
+    --blue-wash:rgba(29,79,216,.08);
+    --flame:#D9601B;
+    --flame-wash:rgba(217,96,27,.10);
+    --shadow:0 14px 34px -22px rgba(12,24,56,.45);
+    --shadow-lift:0 26px 60px -32px rgba(12,24,56,.42);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --ink:#EDF1F9;
+  --surface:#FFFFFF;
+  --surface-2:#F5F8FD;
+  --line:#D8E0F0;
+  --text:#0A1123;
+  --text-dim:#55617D;
+  --text-faint:#7C88A3;
+  --blue:#1D4FD8;
+  --blue-soft:#2F6BFF;
+  --blue-wash:rgba(29,79,216,.08);
+  --flame:#D9601B;
+  --flame-wash:rgba(217,96,27,.10);
+  --shadow:0 14px 34px -22px rgba(12,24,56,.45);
+  --shadow-lift:0 26px 60px -32px rgba(12,24,56,.42);
+  color-scheme:light;
+}
+
+/* ============================================================
+   base
+   ============================================================ */
+*{box-sizing:border-box}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  font-weight:800;
+  line-height:1.06;
+  letter-spacing:-.022em;
+  text-wrap:balance;
+  margin:0;
+}
+p{margin:0}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+img,svg{max-width:100%}
+:focus-visible{outline:2px solid var(--blue-soft);outline-offset:3px;border-radius:6px}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+
+.mono{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;
+  font-weight:500;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+/* ============================================================
+   nav
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(4,6,13,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--night-line);
+}
+.nav-in{
+  display:flex;align-items:center;gap:28px;
+  height:64px;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--night-text)}
+.brand-mark{
+  width:32px;height:32px;flex:none;
+  display:grid;place-items:center;
+  border-radius:9px;
+  background:linear-gradient(150deg,#2C63E8,#0B1223 90%);
+  box-shadow:inset 0 0 0 1px rgba(143,182,255,.35);
+}
+.brand-name{
+  font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  font-weight:800;font-size:20px;letter-spacing:-.03em;
+}
+.brand-name span{color:var(--blue-soft)}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{
+  color:var(--night-dim);text-decoration:none;font-size:14.5px;font-weight:500;
+  transition:color .18s ease;
+}
+.nav-links a:hover{color:var(--night-text)}
+.nav-cta{
+  margin-left:6px;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:999px;
+  background:#3B7BFF;color:#fff;text-decoration:none;
+  font-size:14px;font-weight:600;
+  box-shadow:0 8px 22px -12px rgba(59,123,255,.9);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 14px 26px -12px rgba(59,123,255,.95)}
+@media (max-width:860px){.nav-links{display:none}}
+
+/* ============================================================
+   banda nocturna (hero + cierre + footer)
+   ============================================================ */
+.night{
+  background:
+    radial-gradient(900px 460px at 78% -8%, rgba(59,123,255,.20), transparent 62%),
+    radial-gradient(560px 300px at 8% 105%, rgba(255,138,61,.09), transparent 70%),
+    var(--night);
+  color:var(--night-text);
+  position:relative;
+  overflow:hidden;
+}
+.night::before{
+  /* campo de estrellas fijo, sin animación */
+  content:"";position:absolute;inset:0;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 22%, rgba(232,236,246,.55), transparent),
+    radial-gradient(1.2px 1.2px at 27% 68%, rgba(232,236,246,.35), transparent),
+    radial-gradient(1.6px 1.6px at 46% 14%, rgba(143,182,255,.5), transparent),
+    radial-gradient(1.1px 1.1px at 63% 46%, rgba(232,236,246,.3), transparent),
+    radial-gradient(1.5px 1.5px at 84% 26%, rgba(232,236,246,.45), transparent),
+    radial-gradient(1.2px 1.2px at 92% 72%, rgba(143,182,255,.4), transparent),
+    radial-gradient(1.1px 1.1px at 70% 88%, rgba(232,236,246,.28), transparent);
+  pointer-events:none;
+}
+.night > *{position:relative;z-index:1}
+
+/* ============================================================
+   hero
+   ============================================================ */
+.hero-in{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  gap:56px;align-items:center;
+  padding-block:74px 60px;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  color:var(--blue-soft);
+  padding:6px 13px 6px 9px;border-radius:999px;
+  background:rgba(59,123,255,.10);
+  box-shadow:inset 0 0 0 1px rgba(59,123,255,.28);
+}
+.eyebrow b{
+  width:6px;height:6px;border-radius:50%;background:var(--flame);
+  box-shadow:0 0 0 3px rgba(255,138,61,.22);
+}
+.hero h1{
+  font-size:clamp(2.5rem,5.4vw,4rem);
+  margin-top:22px;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--blue-soft);
+}
+.hero-sub{
+  margin-top:20px;
+  max-width:52ch;
+  font-size:1.075rem;
+  color:var(--night-dim);
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 22px;border-radius:11px;
+  text-decoration:none;font-weight:600;font-size:15px;
+  border:1px solid transparent;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease;
+}
+.btn-primary{
+  background:linear-gradient(180deg,#4C87FF,#2C63E8);
+  color:#fff;
+  box-shadow:0 16px 34px -18px rgba(59,123,255,.95);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 40px -18px rgba(59,123,255,1)}
+.btn-primary .rk{transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.btn-primary:hover .rk{transform:translate(2px,-3px) rotate(8deg)}
+.btn-ghost{
+  color:var(--night-text);
+  border-color:rgba(143,182,255,.32);
+  background:rgba(143,182,255,.05);
+}
+.btn-ghost:hover{background:rgba(143,182,255,.12);border-color:rgba(143,182,255,.55)}
+
+/* ---- consola del cohete ---- */
+.console{
+  position:relative;
+  border-radius:20px;
+  padding:20px 20px 16px;
+  background:linear-gradient(165deg,rgba(28,44,80,.62),rgba(8,13,26,.86));
+  box-shadow:inset 0 0 0 1px rgba(143,182,255,.16),0 40px 80px -40px rgba(0,0,0,.9);
+}
+.console-bar{
+  display:flex;align-items:center;gap:8px;
+  color:var(--night-dim);
+  padding-bottom:12px;border-bottom:1px solid rgba(143,182,255,.14);
+}
+.console-bar .dot{width:8px;height:8px;border-radius:50%;background:rgba(143,182,255,.28)}
+.console-bar .dot.live{background:#3ED598;box-shadow:0 0 0 3px rgba(62,213,152,.16)}
+.console-bar .grow{margin-left:auto}
+.stage{position:relative;display:grid;place-items:center;padding:14px 0 6px}
+.stage-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(143,182,255,.07) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(143,182,255,.07) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:radial-gradient(circle at 50% 55%,#000 30%,transparent 78%);
+  border-radius:12px;
+}
+.rocket{width:min(258px,64%);height:auto;display:block;position:relative}
+.telemetry{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;
+}
+.tele{
+  border-radius:10px;padding:10px 12px;
+  background:rgba(143,182,255,.06);
+  box-shadow:inset 0 0 0 1px rgba(143,182,255,.13);
+}
+.tele dt{color:var(--night-dim);font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+.tele dd{margin:3px 0 0;font-weight:600;font-size:15px;font-variant-numeric:tabular-nums}
+
+/* ---- compromisos ---- */
+.pledges{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--night-line);
+}
+.pledge{padding:22px 26px 26px;border-left:1px solid var(--night-line)}
+.pledge:first-child{border-left:0;padding-left:0}
+.pledge .mono{color:var(--blue-soft)}
+.pledge p{margin-top:7px;color:var(--night-dim);font-size:14.5px}
+@media (max-width:900px){
+  .pledges{grid-template-columns:repeat(2,1fr)}
+  .pledge:nth-child(3){border-left:0;padding-left:0}
+  .pledge:nth-child(3),.pledge:nth-child(4){border-top:1px solid var(--night-line)}
+}
+@media (max-width:520px){
+  .pledges{grid-template-columns:1fr}
+  .pledge{border-left:0;padding-left:0;border-top:1px solid var(--night-line)}
+  .pledge:first-child{border-top:0}
+}
+
+/* ============================================================
+   secciones claras
+   ============================================================ */
+.section{padding-block:88px}
+.section-head{max-width:62ch}
+.section-head .mono{color:var(--blue);display:block;margin-bottom:14px}
+.section-head h2{font-size:clamp(1.9rem,3.5vw,2.6rem)}
+.section-head p{margin-top:16px;color:var(--text-dim);font-size:1.03rem}
+
+/* ---- servicios ---- */
+.family{margin-top:52px}
+.family-head{
+  display:flex;align-items:baseline;gap:14px;
+  padding-bottom:14px;margin-bottom:24px;
+  border-bottom:1px solid var(--line);
+}
+.family-head h3{font-size:1.32rem}
+.family-head p{color:var(--text-faint);font-size:14.5px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px 22px 22px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.card:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:var(--shadow-lift)}
+.card-top{display:flex;align-items:center;gap:10px}
+.code{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+  letter-spacing:.1em;
+  padding:4px 8px;border-radius:6px;
+  background:var(--blue-wash);color:var(--blue);
+}
+.card h4{font-size:1.16rem;letter-spacing:-.015em}
+.card > p{color:var(--text-dim);font-size:14.8px}
+.card ul{display:flex;flex-direction:column;gap:7px;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line)}
+.card li{
+  display:flex;gap:9px;align-items:flex-start;
+  font-size:14px;color:var(--text-dim);
+}
+.card li::before{
+  content:"";flex:none;width:5px;height:5px;margin-top:8px;border-radius:50%;
+  background:var(--flame);
+}
+@media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.cards{grid-template-columns:1fr}}
+
+/* ---- fases (secuencia real) ---- */
+.phases{
+  margin-top:48px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);
+  overflow:hidden;
+}
+.phase{padding:26px 22px 28px;border-left:1px solid var(--line);position:relative}
+.phase:first-child{border-left:0}
+.phase::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),rgba(59,123,255,0));
+  opacity:.55;
+}
+.phase:last-child::after{background:linear-gradient(90deg,var(--flame),rgba(255,138,61,0))}
+.phase-n{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+  color:var(--blue);letter-spacing:.1em;
+}
+.phase h4{margin-top:12px;font-size:1.12rem}
+.phase p{margin-top:9px;color:var(--text-dim);font-size:14.3px}
+.phase .when{
+  margin-top:16px;display:inline-block;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;
+  color:var(--text-faint);
+  padding:4px 8px;border-radius:6px;background:var(--surface-2);
+}
+@media (max-width:900px){
+  .phases{grid-template-columns:repeat(2,1fr)}
+  .phase:nth-child(3){border-left:0}
+  .phase:nth-child(3),.phase:nth-child(4){border-top:1px solid var(--line)}
+}
+@media (max-width:560px){
+  .phases{grid-template-columns:1fr}
+  .phase{border-left:0;border-top:1px solid var(--line)}
+  .phase:first-child{border-top:0}
+}
+
+/* ---- ejemplos ---- */
+.band{background:var(--surface-2);border-block:1px solid var(--line)}
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.work{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px 22px;display:flex;flex-direction:column;gap:16px;
+}
+.tag{
+  align-self:flex-start;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--flame);background:var(--flame-wash);
+  padding:4px 9px;border-radius:999px;
+}
+.work h4{font-size:1.1rem}
+.work dl{display:flex;flex-direction:column;gap:12px;margin:0}
+.work dt{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-faint);
+}
+.work dd{margin:3px 0 0;font-size:14.3px;color:var(--text-dim)}
+.work .out{
+  margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+  font-weight:600;font-size:14.6px;color:var(--text);
+}
+.work .out span{color:var(--blue)}
+.note{margin-top:22px;color:var(--text-faint);font-size:13.4px}
+@media (max-width:900px){.works{grid-template-columns:1fr}}
+
+/* ---- planes ---- */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;align-items:start}
+.plan{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 24px;display:flex;flex-direction:column;gap:14px;
+}
+.plan-featured{
+  border-color:var(--blue);
+  box-shadow:0 0 0 1px var(--blue),var(--shadow-lift);
+}
+.plan-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.plan h4{font-size:1.24rem}
+.pill{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:#fff;background:var(--blue);padding:4px 9px;border-radius:999px;
+}
+.plan > p{color:var(--text-dim);font-size:14.6px}
+.plan ul{display:flex;flex-direction:column;gap:9px;padding-top:6px}
+.plan li{display:flex;gap:10px;font-size:14.3px;color:var(--text-dim)}
+.plan li svg{flex:none;margin-top:3px;color:var(--blue)}
+.plan .price{
+  margin-top:8px;padding-top:16px;border-top:1px dashed var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;
+  color:var(--text-faint);text-transform:uppercase;
+}
+.plan .btn{margin-top:6px;justify-content:center}
+.btn-solid{background:var(--blue);color:#fff}
+.btn-solid:hover{transform:translateY(-2px)}
+.btn-line{border-color:var(--line);color:var(--text);background:transparent}
+.btn-line:hover{border-color:var(--blue);color:var(--blue)}
+@media (max-width:900px){.plans{grid-template-columns:1fr}}
+
+/* ---- faq ---- */
+.faq{margin-top:40px;display:grid;gap:0;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;
+  display:flex;align-items:center;gap:16px;
+  padding:20px 4px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.05rem;
+  letter-spacing:-.01em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";margin-left:auto;
+  font-family:"IBM Plex Mono",monospace;font-size:19px;font-weight:400;color:var(--blue);
+  transition:transform .2s ease;
+}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{padding:0 4px 22px;color:var(--text-dim);font-size:15px;max-width:70ch}
+
+/* ---- cierre ---- */
+.close-in{
+  padding-block:80px;
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:48px;align-items:center;
+}
+.close-in h2{font-size:clamp(1.9rem,3.9vw,2.8rem)}
+.close-in > div > p{margin-top:18px;color:var(--night-dim);max-width:48ch;font-size:1.03rem}
+.contact{
+  border-radius:16px;padding:24px;
+  background:rgba(143,182,255,.06);
+  box-shadow:inset 0 0 0 1px rgba(143,182,255,.16);
+  display:flex;flex-direction:column;gap:16px;
+}
+.contact .row{display:flex;flex-direction:column;gap:3px}
+.contact .row .mono{color:var(--blue-soft)}
+.contact .row b{font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+.contact a{text-decoration:none}
+.contact a:hover b{color:var(--blue-soft)}
+@media (max-width:860px){.close-in{grid-template-columns:1fr;padding-block:64px}}
+
+/* ---- footer ---- */
+.foot{border-top:1px solid var(--night-line)}
+.foot-in{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;
+  padding-block:44px 28px;
+}
+.foot p{color:var(--night-dim);font-size:14.3px;margin-top:14px;max-width:38ch}
+.foot h5{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--night-dim);margin:0 0 14px;font-weight:500;
+}
+.foot ul{display:flex;flex-direction:column;gap:9px}
+.foot li{font-size:14.3px;color:var(--night-dim)}
+.foot li a{text-decoration:none}
+.foot li a:hover{color:var(--night-text)}
+.foot-base{
+  border-top:1px solid var(--night-line);
+  padding-block:20px 30px;
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  color:var(--night-dim);
+}
+@media (max-width:760px){.foot-in{grid-template-columns:1fr 1fr}.foot-in > div:first-child{grid-column:1/-1}}
+
+@media (max-width:960px){
+  .hero-in{grid-template-columns:1fr;gap:42px;padding-block:56px 48px}
+  .section{padding-block:68px}
+}
+
+/* ============================================================
+   movimiento — la página descansa visible; esto solo la matiza
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference){
+  .rocket{animation:hover-float 6.5s ease-in-out infinite}
+  @keyframes hover-float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-11px)}
+  }
+  .flame-outer{transform-origin:120px 226px;animation:burn .42s steps(2,end) infinite alternate}
+  .flame-inner{transform-origin:120px 226px;animation:burn-in .3s steps(2,end) infinite alternate}
+  @keyframes burn{from{transform:scaleY(.9) scaleX(1.04)}to{transform:scaleY(1.1) scaleX(.94)}}
+  @keyframes burn-in{from{transform:scaleY(1.08)}to{transform:scaleY(.88)}}
+  .spark{animation:twinkle 3.4s ease-in-out infinite}
+  .spark-2{animation-delay:1.1s}
+  .spark-3{animation-delay:2.2s}
+  @keyframes twinkle{0%,100%{opacity:.25}50%{opacity:.9}}
+}
+</style>
+
+<!-- ==========================================================
+     NAV
+     ========================================================== -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2c3.1 3 4.6 6.4 4.6 10.2v3.1H7.4v-3.1C7.4 8.4 8.9 5 12 2Z" fill="#EAF0FF"/>
+          <path d="M12 2c1.8 1.7 3 3.6 3.7 5.6H8.3C9 5.6 10.2 3.7 12 2Z" fill="#3B7BFF"/>
+          <circle cx="12" cy="10.4" r="2.1" fill="#0B1223"/>
+          <path d="M7.4 12.6 5 16.4l2.4-.6V12.6ZM16.6 12.6 19 16.4l-2.4-.6V12.6Z" fill="#3B7BFF"/>
+          <path d="M10.3 15.3h3.4l-1.7 4.9-1.7-4.9Z" fill="#FF8A3D"/>
+        </svg>
+      </span>
+      <span class="brand-name">Kairo<span>.</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#ejemplos">Ejemplos</a>
+      <a href="#planes">Planes</a>
+    </nav>
+    <a class="nav-cta" href="#contacto">Hablemos</a>
+  </div>
+</header>
+
+<!-- ==========================================================
+     HERO
+     ========================================================== -->
+<section class="night" id="top">
+  <div class="wrap hero-in hero">
+    <div>
+      <span class="eyebrow mono"><b></b>Software, IA y operación · en español</span>
+      <h1>Un solo equipo para <em>todo lo digital</em> de tu negocio.</h1>
+      <p class="hero-sub">
+        Kairo diseña, programa y opera. Tu página web, tus automatizaciones con
+        inteligencia artificial, tu hosting, tus reuniones, tus finanzas y tus recursos:
+        un mismo equipo, un mismo contacto, una sola cuenta de cobro.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contacto">
+          Agenda un diagnóstico gratis
+          <svg class="rk" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 19 19 5M19 5h-8M19 5v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="btn btn-ghost" href="#servicios">Ver todo lo que hacemos</a>
+      </div>
+    </div>
+
+    <!-- consola con la mascota -->
+    <div class="console">
+      <div class="console-bar mono">
+        <span class="dot live"></span><span class="dot"></span><span class="dot"></span>
+        <span class="grow">KAIRO · CONTROL</span>
+      </div>
+
+      <div class="stage">
+        <div class="stage-grid" aria-hidden="true"></div>
+        <svg class="rocket" viewBox="0 0 240 320" role="img" aria-label="Cohete Kairo, la mascota de la marca, despegando">
+          <!-- trayectoria -->
+          <path d="M18 300C48 232 44 150 120 96" fill="none" stroke="#8FB6FF" stroke-opacity=".35"
+                stroke-width="2" stroke-linecap="round" stroke-dasharray="5 9"/>
+          <!-- destellos -->
+          <g fill="#8FB6FF">
+            <circle class="spark" cx="206" cy="70" r="3"/>
+            <circle class="spark spark-2" cx="38" cy="104" r="2.4"/>
+            <circle class="spark spark-3" cx="196" cy="188" r="2.2"/>
+          </g>
+          <!-- aletas -->
+          <path d="M72 152C50 168 40 192 38 218l34-13V152Z" fill="#2C63E8"/>
+          <path d="M168 152c22 16 32 40 34 66l-34-13V152Z" fill="#2C63E8"/>
+          <!-- cuerpo -->
+          <path d="M120 22c30 34 48 84 48 132v51H72v-51c0-48 18-98 48-132Z" fill="#EAF0FF"/>
+          <!-- cono -->
+          <path d="M120 22c17 19 29 41 36 65H84c7-24 19-46 36-65Z" fill="#3B7BFF"/>
+          <!-- visor -->
+          <circle cx="120" cy="126" r="31" fill="#0B1223"/>
+          <circle cx="120" cy="126" r="31" fill="none" stroke="#3B7BFF" stroke-width="4"/>
+          <circle cx="110" cy="120" r="5.4" fill="#EAF0FF"/>
+          <circle cx="131" cy="120" r="5.4" fill="#EAF0FF"/>
+          <path d="M110 137c6 6 14 6 20 0" stroke="#EAF0FF" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+          <!-- banda -->
+          <rect x="72" y="176" width="96" height="15" fill="#2C63E8"/>
+          <rect x="72" y="176" width="96" height="4" fill="#8FB6FF" fill-opacity=".55"/>
+          <!-- tobera -->
+          <path d="M84 205h72l-9 21H93l-9-21Z" fill="#8FB6FF"/>
+          <!-- llama -->
+          <path class="flame-outer" d="M97 226c0 34 10 56 23 68 13-12 23-34 23-68H97Z" fill="#FF8A3D"/>
+          <path class="flame-inner" d="M109 226c0 22 5 37 11 45 6-8 11-23 11-45h-22Z" fill="#FFD08A"/>
+        </svg>
+      </div>
+
+      <dl class="telemetry">
+        <div class="tele"><dt>Servicios</dt><dd>6 áreas</dd></div>
+        <div class="tele"><dt>Primera entrega</dt><dd>7 días</dd></div>
+        <div class="tele"><dt>Soporte</dt><dd>&lt; 24 h</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="pledges">
+      <div class="pledge">
+        <span class="mono">Precio cerrado</span>
+        <p>Cotizamos por proyecto, no por hora. Sabes cuánto cuesta antes de empezar.</p>
+      </div>
+      <div class="pledge">
+        <span class="mono">Entregas semanales</span>
+        <p>Cada semana ves algo funcionando, no un informe de avance.</p>
+      </div>
+      <div class="pledge">
+        <span class="mono">Todo es tuyo</span>
+        <p>Código, dominios, cuentas y accesos quedan a nombre de tu empresa.</p>
+      </div>
+      <div class="pledge">
+        <span class="mono">Sin tecnicismos</span>
+        <p>Te explicamos en español claro qué hicimos y para qué sirve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     SERVICIOS
+     ========================================================== -->
+<section class="section" id="servicios">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Qué hacemos</span>
+      <h2>Construimos lo que te falta y operamos lo que ya no quieres cargar.</h2>
+      <p>
+        Seis áreas de trabajo. Puedes contratar una sola o dejarnos todo el frente
+        digital y administrativo. Si ya tienes proveedor en alguna, nos integramos sin pelear.
+      </p>
+    </div>
+
+    <div class="family">
+      <div class="family-head">
+        <h3>Construimos</h3>
+        <p>Lo que se diseña, se programa y se pone en línea.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-top"><span class="code">WEB</span></div>
+          <h4>Páginas web y tiendas</h4>
+          <p>Sitios rápidos, que se ven bien en celular y que sí aparecen en Google. Diseño propio, nada de plantillas recicladas.</p>
+          <ul>
+            <li>Landing pages y sitios corporativos</li>
+            <li>Tiendas en línea con pagos y envíos</li>
+            <li>Textos, fotos y SEO técnico incluidos</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><span class="code">IA</span></div>
+          <h4>Inteligencia artificial aplicada</h4>
+          <p>IA que hace trabajo real: responde clientes, lee documentos y llena lo que hoy alguien llena a mano.</p>
+          <ul>
+            <li>Asistentes por WhatsApp y web</li>
+            <li>Lectura de facturas, contratos y PDF</li>
+            <li>Automatización de tareas repetitivas</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><span class="code">APP</span></div>
+          <h4>Software a la medida</h4>
+          <p>Cuando el Excel ya no da. Sistemas internos hechos para tu forma de trabajar, no al revés.</p>
+          <ul>
+            <li>Paneles de control y reportes</li>
+            <li>Apps internas para tu equipo</li>
+            <li>Integraciones entre programas que ya usas</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="family">
+      <div class="family-head">
+        <h3>Operamos</h3>
+        <p>Lo que hay que sostener todos los meses.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-top"><span class="code">INF</span></div>
+          <h4>Hosting e infraestructura</h4>
+          <p>Tu sitio arriba, tu correo funcionando y tus datos respaldados. Si algo se cae, lo vemos antes que tú.</p>
+          <ul>
+            <li>Dominios, hosting y correo corporativo</li>
+            <li>Certificados, respaldos y monitoreo</li>
+            <li>Reporte mensual de estado</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><span class="code">FIN</span></div>
+          <h4>Finanzas y facturación</h4>
+          <p>Orden en los números sin que tengas que aprender contabilidad. Sabes cuánto entra, cuánto sale y qué sigue.</p>
+          <ul>
+            <li>Facturación y cobro a clientes</li>
+            <li>Control de gastos y proveedores</li>
+            <li>Informe mensual con conclusiones</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><span class="code">OPS</span></div>
+          <h4>Reuniones y recursos</h4>
+          <p>Coordinamos la agenda, dejamos acta de cada reunión y hacemos seguimiento a lo que quedó pendiente.</p>
+          <ul>
+            <li>Agenda, convocatoria y actas automáticas</li>
+            <li>Seguimiento de tareas y responsables</li>
+            <li>Inventario de equipos, licencias y accesos</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     PROCESO
+     ========================================================== -->
+<section class="section band" id="proceso">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Cómo trabajamos</span>
+      <h2>Cuatro fases. Sabes en cuál estamos todo el tiempo.</h2>
+      <p>
+        Ningún proyecto empieza sin un plan escrito y aprobado por ti. Ese documento
+        dice qué se entrega, cuándo y cuánto cuesta.
+      </p>
+    </div>
+
+    <ol class="phases">
+      <li class="phase">
+        <span class="phase-n">FASE 01</span>
+        <h4>Diagnóstico</h4>
+        <p>Conversamos sobre tu negocio y revisamos lo que ya tienes. Salimos con una lista clara de lo que sobra, lo que falta y lo que urge.</p>
+        <span class="when">30 min · sin costo</span>
+      </li>
+      <li class="phase">
+        <span class="phase-n">FASE 02</span>
+        <h4>Plan de vuelo</h4>
+        <p>Te entregamos alcance, cronograma y precio cerrado. Si algo no cabe en el presupuesto, te decimos qué dejar para después.</p>
+        <span class="when">2 a 3 días</span>
+      </li>
+      <li class="phase">
+        <span class="phase-n">FASE 03</span>
+        <h4>Construcción</h4>
+        <p>Trabajamos por entregas semanales, con un enlace donde ves el avance real. Ajustamos sobre lo que ya funciona.</p>
+        <span class="when">2 a 8 semanas</span>
+      </li>
+      <li class="phase">
+        <span class="phase-n">FASE 04</span>
+        <h4>Órbita</h4>
+        <p>Quedamos operando: soporte, mejoras y un informe mensual de qué pasó y qué proponemos para el mes siguiente.</p>
+        <span class="when">Mes a mes</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ==========================================================
+     EJEMPLOS
+     ========================================================== -->
+<section class="section" id="ejemplos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Lo que se puede lograr</span>
+      <h2>Tres ejemplos del tipo de trabajo que hacemos.</h2>
+      <p>Casos armados para mostrar el alcance típico de un proyecto Kairo: qué llega, qué construimos y qué cambia después.</p>
+    </div>
+
+    <div class="works">
+      <article class="work">
+        <span class="tag">Comercio</span>
+        <h4>De catálogo en WhatsApp a tienda propia</h4>
+        <dl>
+          <div><dt>Reto</dt><dd>Vendían por chat, sin inventario y con pedidos perdidos entre conversaciones.</dd></div>
+          <div><dt>Entregamos</dt><dd>Tienda en línea con pagos, inventario conectado y un asistente que responde precios y estado del pedido.</dd></div>
+        </dl>
+        <p class="out"><span>Resultado:</span> pedidos que entran solos, con registro y sin depender de quién conteste el celular.</p>
+      </article>
+
+      <article class="work">
+        <span class="tag">Servicios profesionales</span>
+        <h4>Una oficina que dejó de perder horas en papeleo</h4>
+        <dl>
+          <div><dt>Reto</dt><dd>Cada propuesta, factura y acta se escribía a mano y nadie sabía qué estaba cobrado.</dd></div>
+          <div><dt>Entregamos</dt><dd>Panel de clientes, facturación automática, actas de reunión generadas con IA y alertas de cobro.</dd></div>
+        </dl>
+        <p class="out"><span>Resultado:</span> media jornada semanal recuperada y cartera visible en una sola pantalla.</p>
+      </article>
+
+      <article class="work">
+        <span class="tag">Empresa en crecimiento</span>
+        <h4>Cinco proveedores reemplazados por un equipo</h4>
+        <dl>
+          <div><dt>Reto</dt><dd>Web con uno, hosting con otro, contabilidad aparte: nadie respondía cuando algo fallaba.</dd></div>
+          <div><dt>Entregamos</dt><dd>Migración completa a Kairo, sitio nuevo, infraestructura monitoreada y un informe mensual único.</dd></div>
+        </dl>
+        <p class="out"><span>Resultado:</span> un solo contacto, una sola factura y respuesta el mismo día.</p>
+      </article>
+    </div>
+
+    <p class="note">Ejemplos representativos preparados para esta presentación. Con gusto te mostramos trabajos reales y referencias en la primera reunión.</p>
+  </div>
+</section>
+
+<!-- ==========================================================
+     PLANES
+     ========================================================== -->
+<section class="section band" id="planes">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Planes</span>
+      <h2>Empieza por donde te duele. Se crece cuando tenga sentido.</h2>
+      <p>Todos incluyen diagnóstico inicial, precio cerrado y propiedad total de lo que construimos.</p>
+    </div>
+
+    <div class="plans">
+      <article class="plan">
+        <div class="plan-head"><h4>Despegue</h4></div>
+        <p>Para negocios que necesitan existir bien en internet, ya.</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Sitio web o landing a medida</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Dominio, hosting y correo</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Textos, imágenes y SEO base</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Un mes de ajustes incluidos</li>
+        </ul>
+        <p class="price">Proyecto · precio cerrado</p>
+        <a class="btn btn-line" href="#contacto">Cotizar</a>
+      </article>
+
+      <article class="plan plan-featured">
+        <div class="plan-head"><h4>Órbita</h4><span class="pill">El más pedido</span></div>
+        <p>Para quienes ya venden y quieren automatizar y ordenar la operación.</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo de Despegue</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Asistente de IA para clientes</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Facturación y control de gastos</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Monitoreo, respaldos y soporte &lt; 24 h</li>
+        </ul>
+        <p class="price">Mensual · según alcance</p>
+        <a class="btn btn-solid" href="#contacto">Hablemos</a>
+      </article>
+
+      <article class="plan">
+        <div class="plan-head"><h4>Constelación</h4></div>
+        <p>Kairo como tu área de tecnología y administración completa.</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo de Órbita</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Software interno a la medida</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestión de reuniones, actas y tareas</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Inventario de equipos y licencias</li>
+        </ul>
+        <p class="price">Retainer · cupos limitados</p>
+        <a class="btn btn-line" href="#contacto">Agendar reunión</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     FAQ
+     ========================================================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Preguntas frecuentes</span>
+      <h2>Lo que casi siempre nos preguntan.</h2>
+    </div>
+
+    <div class="faq">
+      <details open>
+        <summary>¿Tengo que contratar todos los servicios?</summary>
+        <p>No. La mayoría empieza con una sola cosa —normalmente la página web o una automatización— y va sumando cuando ve resultados. Nunca vas a pagar por un área que no estés usando.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto se demora un proyecto?</summary>
+        <p>Una landing sale en una o dos semanas. Una tienda o un sistema interno, entre cuatro y ocho, dependiendo de cuánta información haya que migrar. La fecha queda escrita en el plan de vuelo antes de empezar.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si algo se daña un domingo?</summary>
+        <p>Los servicios que operamos están monitoreados: si el sitio o el correo se cae, nos llega la alerta y empezamos a resolver sin que tengas que reportarlo. Para lo demás, respondemos en menos de 24 horas hábiles.</p>
+      </details>
+      <details>
+        <summary>¿El código y las cuentas quedan a mi nombre?</summary>
+        <p>Sí, siempre. Dominios, servidores, repositorios y accesos se registran a nombre de tu empresa desde el primer día. Si algún día te vas, te llevas todo funcionando.</p>
+      </details>
+      <details>
+        <summary>¿Trabajan con negocios pequeños?</summary>
+        <p>Es a quienes mejor les servimos. El plan Despegue existe justamente para negocios que no tienen equipo técnico ni presupuesto para una agencia grande.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     CIERRE + CONTACTO
+     ========================================================== -->
+<section class="night" id="contacto">
+  <div class="wrap close-in">
+    <div>
+      <span class="eyebrow mono"><b></b>Siguiente paso</span>
+      <h2 style="margin-top:22px">Media hora, sin compromiso, y sales con un plan.</h2>
+      <p>
+        Cuéntanos qué te está frenando. Te decimos qué se puede resolver ya,
+        qué conviene dejar para después y cuánto costaría. Si no somos el equipo
+        indicado, también te lo decimos.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:hola@kairo.com?subject=Quiero%20agendar%20un%20diagn%C3%B3stico">
+          Escribir a Kairo
+          <svg class="rk" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 19 19 5M19 5h-8M19 5v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- REEMPLAZAR: correo, teléfono y horario reales de Kairo -->
+    <div class="contact">
+      <div class="row">
+        <span class="mono">Correo</span>
+        <a href="mailto:hola@kairo.com"><b>hola@kairo.com</b></a>
+      </div>
+      <div class="row">
+        <span class="mono">WhatsApp</span>
+        <b>+57 300 000 0000</b>
+      </div>
+      <div class="row">
+        <span class="mono">Atención</span>
+        <b>Lunes a viernes, 8:00 a 18:00</b>
+      </div>
+      <div class="row">
+        <span class="mono">Cobertura</span>
+        <b>Remoto en toda Latinoamérica</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="wrap">
+      <div class="foot-in">
+        <div>
+          <a class="brand" href="#top">
+            <span class="brand-mark" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2c3.1 3 4.6 6.4 4.6 10.2v3.1H7.4v-3.1C7.4 8.4 8.9 5 12 2Z" fill="#EAF0FF"/>
+                <path d="M12 2c1.8 1.7 3 3.6 3.7 5.6H8.3C9 5.6 10.2 3.7 12 2Z" fill="#3B7BFF"/>
+                <circle cx="12" cy="10.4" r="2.1" fill="#0B1223"/>
+                <path d="M7.4 12.6 5 16.4l2.4-.6V12.6ZM16.6 12.6 19 16.4l-2.4-.6V12.6Z" fill="#3B7BFF"/>
+                <path d="M10.3 15.3h3.4l-1.7 4.9-1.7-4.9Z" fill="#FF8A3D"/>
+              </svg>
+            </span>
+            <span class="brand-name">Kairo<span>.</span></span>
+          </a>
+          <p>Programación, inteligencia artificial y operación para negocios que quieren dejar de improvisar.</p>
+        </div>
+        <div>
+          <h5>Servicios</h5>
+          <ul>
+            <li><a href="#servicios">Páginas web y tiendas</a></li>
+            <li><a href="#servicios">Inteligencia artificial</a></li>
+            <li><a href="#servicios">Software a la medida</a></li>
+            <li><a href="#servicios">Hosting e infraestructura</a></li>
+            <li><a href="#servicios">Finanzas y facturación</a></li>
+            <li><a href="#servicios">Reuniones y recursos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Kairo</h5>
+          <ul>
+            <li><a href="#proceso">Cómo trabajamos</a></li>
+            <li><a href="#ejemplos">Ejemplos</a></li>
+            <li><a href="#planes">Planes</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-base mono">
+        <span>© 2026 Kairo</span>
+        <span>Hecho con cohetes, café y código</span>
+      </div>
+    </div>
+  </div>
+</section>
