@@ -403,27 +403,47 @@
         "where": "WebP sin pérdida (200KB PNG → 129KB). Nav 46px alto / 56px en escritorio; pie 34px. Su trazo azul→violeta es la fuente de la estela."
       },
       "casos": {
-        "format": "WebP q95 a 2x en assets/casos/, escalado con lanczos (mejor que bicubic para capturas con texto); se muestran dentro de .tel a 200-284px",
+        "format": "WebP q90 a 640px de ancho en assets/casos/, desde originales de iPhone cuando los hay; se muestran dentro de .tel a 112-284px",
         "used": [
           {
-            "file": "creo-perfil.webp",
-            "size": "592x1280",
-            "where": "Fundacion CREO, .tels-1"
+            "file": "creo-antes.webp",
+            "size": "640x1386",
+            "where": "Fundacion CREO, antes (.tels-2)"
+          },
+          {
+            "file": "creo-hoy.webp",
+            "size": "640x1386",
+            "where": "Fundacion CREO, hoy (.tels-2)"
           },
           {
             "file": "tradicional-inicio.webp",
             "size": "474x1024",
-            "where": "El Tradicional, baraja .tels-3 (1 de 3); publicada con el resto de apps difuminado por privacidad"
+            "where": "El Tradicional, baraja; con el resto de apps difuminado por privacidad"
           },
           {
             "file": "tradicional-app.webp",
             "size": "474x1024",
-            "where": "El Tradicional, baraja .tels-3 (2 de 3)"
+            "where": "El Tradicional, baraja"
           },
           {
             "file": "tradicional-panel.webp",
             "size": "474x1024",
-            "where": "El Tradicional, baraja .tels-3 (3 de 3)"
+            "where": "El Tradicional, baraja"
+          },
+          {
+            "file": "tictac-inicio.webp",
+            "size": "640x1386",
+            "where": "Tic Tac Shop, baraja"
+          },
+          {
+            "file": "tictac-productos.webp",
+            "size": "640x1386",
+            "where": "Tic Tac Shop, baraja"
+          },
+          {
+            "file": "tictac-producto.webp",
+            "size": "640x1386",
+            "where": "Tic Tac Shop, baraja"
           }
         ]
       }
@@ -431,9 +451,10 @@
     "openItems": [
       "Archivo se carga desde Google Fonts (fonts.googleapis.com, wdth 100 a 400/500/700/900 y wdth 125 a 800/900); pendiente self-host.",
       "El código lleva el número +57 305 312 8087 (wa.me/573053128087) en los CTA y en el pie, sin marca de ejemplo; pendiente de que el cliente lo confirme como definitivo.",
-      "Resultados muestra dos casos reales. Falta: las cifras de ahorro de El Tradicional (empleados y horas), que hoy van como lista de logros sin numero. Quedan dos fichas comentadas para las empresas 3 y 4.",
-      "Las capturas de casos siguen viniendo del chat (296x640 y 237x512) y se publican a 2x. Con los originales del iPhone a resolucion completa ganarian nitidez real.",
-      "El formulario no guarda nada: sin backend, las respuestas viajan en el mensaje de WhatsApp. Pendiente decidir si se conecta un servicio de formularios o una funcion serverless para dejar registro."
+      "El formulario no guarda nada: sin backend, las respuestas viajan en el mensaje de WhatsApp. Pendiente decidir si se conecta un servicio de formularios o una funcion serverless para dejar registro.",
+      "Resultados muestra tres casos reales (Fundacion CREO, El Tradicional, Tic Tac Shop). Falta: las cifras de ahorro de El Tradicional, que hoy van como lista sin numero. Queda una ficha comentada de molde.",
+      "Las capturas de El Tradicional siguen siendo las comprimidas del chat (237x512). Las de CREO y Tic Tac ya vienen de originales de iPhone a 3x. Pedir las de El Tradicional en resolucion completa.",
+      "Las capturas de Tic Tac Shop incluyen la barra del navegador y el dominio myshopify.com. Pendiente decidir si se recortan."
     ]
   },
   "components": [

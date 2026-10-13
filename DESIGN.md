@@ -497,3 +497,23 @@ Reglas para no romperlo:
 - Ningún `[data-cta]` vuelve a apuntar a WhatsApp. El salto a WhatsApp es solo el envío del formulario.
 - Si algún día hay backend, el formulario debe seguir funcionando sin él: la ruta de WhatsApp es el plan de respaldo, no un apaño temporal.
 - Las capturas de caso se publican a 2x y sin reflejo encima. Si una trae datos personales que no son del caso, se difumina antes de publicarla.
+
+## Revisión del 13 de octubre de 2026 (formulario aparte, antes y después, tercer caso)
+
+**El formulario sale de la landing.** Vivía incrustado en el cierre y recargaba la página. Ahora es `formulario.html`, una página propia que se sirve en `/formulario` y que todos los CTA abren en otra pestaña. La landing recupera su cierre corto: palabra, frase, botón y nota.
+
+La página del formulario no hereda la hoja de estilos de la landing: lleva la suya, con los mismos tokens pero sin cohete, sin regla, sin estelas ni cielo. Solo necesita cabecera, formulario y pie, y así carga ligera. Tiene `noindex` porque no es una página para buscarse, sino para llegar desde la landing, y abre con tres pasos numerados (responde / agendamos / sales con acciones) para que se vea dónde termina esto.
+
+**Antes y después (`.tels-2`).** Variante nueva de la baraja: dos capturas en paralelo con `figcaption` ("Antes", "Hoy", la segunda en `--ink` para marcar cuál es la de ahora). A diferencia de `.tels-3`, esta **no hace scroll**: una comparación que obliga a deslizar no es comparación, así que los celulares se encogen con la ventana (`clamp(112px, 31vw, 150px)` en celular) y las dos caben siempre, hasta en 320px.
+
+**La cifra de CREO** pasa a ser el salto: `+5.121`, con los dos extremos en la línea de apoyo ("de 4.673 a 9.794"). Los dos números están en las dos capturas, así que todo el dato es verificable mirando la ficha.
+
+**Tercer caso: Tic Tac Shop.** Relojería artesanal, digitalizada con tienda virtual. Tres pantallas en baraja (portada, catálogo, ficha de producto) y los logros en lista.
+
+**Capturas.** Las de CREO y Tic Tac ya vienen de originales de iPhone a 3x y se publican a 640px de ancho, que es más del doble del tamaño de render más grande. Las de El Tradicional siguen siendo las comprimidas del chat.
+
+Reglas para no romperlo:
+
+- El formulario vive en `formulario.html`. Si cambia un campo, cambia ahí; la landing ya no tiene copia.
+- `.tels-2` nunca lleva scroll: si no caben las dos capturas, se encogen.
+- Las capturas de caso se publican a 640px de ancho. Con original de iPhone, se baja a 640; sin él, se sube a 2x y se anota que falta el original.

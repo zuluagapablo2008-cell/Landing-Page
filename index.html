@@ -366,6 +366,15 @@ main, .nav, .foot{position:relative; z-index:1}
 .tels-3 .tel:nth-child(1){--t:-4deg; --d:0}
 .tels-3 .tel:nth-child(2){--t:0deg;  --d:1}
 .tels-3 .tel:nth-child(3){--t:4deg;  --d:2}
+/* antes y después: las dos se ven de un vistazo, nunca una detrás de la otra,
+   así que esta variante no hace scroll y se encoge con la ventana */
+.tels-2{overflow:visible; gap:10px; padding-block:9px 32px}
+.tels-2 .tel{--tel-w:clamp(112px, 31vw, 150px)}
+.tels-2 .tel:nth-child(1){--t:-3deg; --d:0}
+.tels-2 .tel:nth-child(2){--t:3deg;  --d:1}
+.tel figcaption{position:absolute; left:0; right:0; top:calc(100% + 10px); text-align:center;
+  font-size:.8rem; font-weight:600; color:var(--ink-3)}
+.tels-2 .tel:nth-child(2) figcaption{color:var(--ink)}
 /* entran girando desde más inclinado y luego flotan despacio */
 .js .caso.reveal:not(.in) .tel{transform:translate3d(0,24px,0) rotate(calc(var(--t,0deg) * 3.2)) scale(.96)}
 .js .caso.in .tel{animation:tel-float 6.8s ease-in-out infinite; animation-delay:calc(var(--d,0) * 760ms + 400ms)}
@@ -384,6 +393,7 @@ main, .nav, .foot{position:relative; z-index:1}
      desbordaba de la ficha entre 900 y 1150px y la tercera pantalla se cortaba */
   .tel{--tel-w:clamp(150px, 15vw, 224px)}
   .tels-1 .tel{--tel-w:clamp(190px, 19vw, 284px)}
+  .tels-2 .tel{--tel-w:clamp(140px, 14vw, 196px)}
   /* en escritorio las tres pantallas se montan como una baraja */
   .tels{overflow:visible; gap:0; padding-inline:6px}
   .tels-3 .tel + .tel{margin-left:calc(var(--tel-w) * -.24)}
@@ -461,58 +471,6 @@ main, .nav, .foot{position:relative; z-index:1}
   .orbita-actions{grid-auto-flow:column; justify-content:start; align-items:center; gap:18px}
   .orbita-actions .btn{width:auto; padding:0 24px; font-size:1rem}
   .rocket-slot-end{order:0; width:min(440px,100%); justify-self:end; margin:0 -20px 0 0}
-}
-
-/* ---------- formulario de contacto ----------
-   El CTA de toda la página termina aquí. Primero contamos de la empresa,
-   y la llamada se agenda al final, cuando ya sabemos de qué se habla. */
-.form{display:grid; gap:18px; margin-top:22px}
-.campos{display:grid; gap:14px}
-.campo{display:grid; gap:6px; min-width:0}
-.campo label, .grupo-t{font-size:.86rem; font-weight:600; color:var(--ink-2)}
-.req{color:#8FA8FF}
-.campo input, .campo select, .campo textarea{
-  width:100%; min-width:0; font-family:inherit; font-size:1rem; color:var(--ink);
-  background:rgba(10,13,32,.72); border:1px solid rgba(143,168,255,.26); border-radius:12px;
-  padding:12px 14px; min-height:50px; appearance:none;
-  transition:border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
-}
-.campo textarea{min-height:94px; resize:vertical; line-height:1.45}
-.campo input::placeholder, .campo textarea::placeholder{color:var(--ink-3)}
-.campo input:focus, .campo select:focus, .campo textarea:focus{
-  outline:none; border-color:#8FA8FF; background:rgba(14,18,44,.92);
-  box-shadow:0 0 0 3px rgba(43,130,255,.22);
-}
-.campo [aria-invalid="true"]{border-color:#FF8FA6}
-.campo select option{background:#0B0D18; color:var(--ink)}
-/* la flecha se dibuja, para no depender del control nativo */
-.campo.sel{position:relative}
-.campo.sel::after{content:""; position:absolute; right:17px; bottom:20px; width:8px; height:8px;
-  border-right:2px solid var(--ink-2); border-bottom:2px solid var(--ink-2);
-  transform:rotate(45deg); pointer-events:none}
-
-/* servicios: casillas que se encienden con la energía de la marca */
-.chips{display:flex; flex-wrap:wrap; gap:8px}
-.chip{position:relative; display:block}
-.chip input{position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer}
-.chip span{display:block; padding:9px 14px; border-radius:999px; font-size:.9rem; font-weight:500;
-  color:var(--ink-2); border:1px solid rgba(143,168,255,.26); background:rgba(10,13,32,.6);
-  transition:color 180ms ease, border-color 180ms ease, background 180ms ease}
-.chip input:checked + span{color:#fff; font-weight:600; border-color:transparent; background:var(--energy)}
-.chip input:focus-visible + span{outline:2px solid #8FA8FF; outline-offset:3px}
-
-.form-error{font-size:.9rem; color:#FFB4C0; margin:0}
-.form-pie{display:grid; gap:12px; justify-items:start}
-.form-pie .btn{width:100%}
-.form-nota{font-size:.85rem; color:var(--ink-3); max-width:54ch; margin:0}
-.form-ok{font-size:.95rem; color:var(--ink); margin:0}
-.form-ok a{color:#9FB4FF; font-weight:600}
-@media (min-width:900px){
-  .form{margin-top:30px}
-  .campos{grid-template-columns:1fr 1fr; gap:16px 22px}
-  .campo.ancho{grid-column:1 / -1}
-  .form-pie{grid-auto-flow:column; justify-content:start; align-items:center; gap:22px}
-  .form-pie .btn{width:auto}
 }
 
 /* ---------- pie ---------- */
@@ -761,7 +719,7 @@ main, .nav, .foot{position:relative; z-index:1}
       <a href="#resultados">Resultados</a>
       <a href="#proceso">Cómo trabajamos</a>
     </nav>
-    <a class="btn" data-cta href="#contacto">Cuéntanos de tu negocio</a>
+    <a class="btn" data-cta href="/formulario" target="_blank" rel="noopener">Cuéntanos de tu negocio</a>
   </div>
   <span class="nav-trail" id="navTrail" aria-hidden="true"></span>
 </header>
@@ -777,7 +735,7 @@ main, .nav, .foot{position:relative; z-index:1}
           <div class="rocket-slot" id="rocketSlot"></div>
         </div>
         <div class="hero-actions">
-          <a class="btn rise r3" data-cta data-hero-cta href="#contacto">
+          <a class="btn rise r3" data-cta data-hero-cta href="/formulario" target="_blank" rel="noopener">
             Cuéntanos de tu negocio
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -894,15 +852,20 @@ main, .nav, .foot{position:relative; z-index:1}
       <div class="casos">
 
         <article class="caso reveal">
-          <div class="tels tels-1">
+          <div class="tels tels-2">
             <figure class="tel">
-              <img src="/assets/casos/creo-perfil.webp" width="592" height="1280" alt="Perfil de Instagram de Fundación CREO con 9.794 seguidores y 309 publicaciones" loading="lazy">
+              <img src="/assets/casos/creo-antes.webp" width="640" height="1386" alt="Perfil de Instagram de Fundación CREO antes de la campaña: 4.673 seguidores y 242 publicaciones" loading="lazy">
+              <figcaption>Antes</figcaption>
+            </figure>
+            <figure class="tel">
+              <img src="/assets/casos/creo-hoy.webp" width="640" height="1386" alt="Perfil de Instagram de Fundación CREO hoy: 9.794 seguidores y 309 publicaciones" loading="lazy">
+              <figcaption>Hoy</figcaption>
             </figure>
           </div>
           <div class="caso-txt">
             <h3>Fundación CREO</h3>
             <p class="caso-que">Campaña de marketing y publicidad para una organización sin ánimo de lucro: contenido, pauta y una comunidad que crece sola.</p>
-            <p class="caso-n num"><b>9.794</b><span>seguidores en Instagram, desde los 4.673 que tenían cuando empezamos</span></p>
+            <p class="caso-n num"><b>+5.121</b><span>seguidores en Instagram: de 4.673 a 9.794</span></p>
           </div>
         </article>
 
@@ -929,40 +892,48 @@ main, .nav, .foot{position:relative; z-index:1}
           </div>
         </article>
 
+        <article class="caso reveal">
+          <div class="tels tels-3">
+            <figure class="tel">
+              <img src="/assets/casos/tictac-inicio.webp" width="640" height="1386" alt="Portada de la tienda Tic Tac Shop: relojes artesanales en madera hechos a mano en Colombia" loading="lazy">
+            </figure>
+            <figure class="tel">
+              <img src="/assets/casos/tictac-productos.webp" width="640" height="1386" alt="Relojes destacados de Tic Tac Shop, cada uno con su precio y su descuento" loading="lazy">
+            </figure>
+            <figure class="tel">
+              <img src="/assets/casos/tictac-producto.webp" width="640" height="1386" alt="Ficha del Reloj tala sol en Tic Tac Shop: garantía, precio, botón de compra y fechas de entrega" loading="lazy">
+            </figure>
+          </div>
+          <div class="caso-txt">
+            <h3>Tic Tac Shop</h3>
+            <p class="caso-que">Relojería artesanal en madera. Digitalizamos el negocio con una tienda virtual propia, con el diseño al nivel de lo que venden.</p>
+            <ul class="caso-lista">
+              <li>El catálogo vende las 24 horas, sin que nadie atienda el chat</li>
+              <li>Cada reloj con su ficha: fotos, precio, garantía y fecha de entrega</li>
+              <li>Pago contra entrega y envío a toda Colombia</li>
+            </ul>
+          </div>
+        </article>
+
         <!-- ================================================================
-             ESPACIO RESERVADO PARA DOS EMPRESAS MÁS.
-             Están listas para entrar: descomenta el bloque, cambia el nombre,
-             el texto y las capturas, y pon los .webp en /assets/casos/.
-             Las pantallas van a 2x de su tamaño de render y en WebP.
-             Usa .tels-1 para una sola captura o .tels-3 para tres.
+             ESPACIO RESERVADO PARA LA SIGUIENTE EMPRESA.
+             Lista para entrar: descomenta el bloque, cambia el nombre, el texto
+             y las capturas, y pon los .webp en /assets/casos/ a 640px de ancho.
+             Usa .tels-1 para una captura, .tels-2 para un antes y después
+             (lleva figcaption) o .tels-3 para tres pantallas en baraja.
+             El resultado va como cifra grande (.caso-n) o como lista (.caso-lista),
+             segun lo que este confirmado; nunca se inventa un numero.
 
         <article class="caso reveal">
           <div class="tels tels-1">
             <figure class="tel">
-              <img src="/assets/casos/EMPRESA-3.webp" width="296" height="640" alt="DESCRIBIR LA CAPTURA" loading="lazy">
+              <img src="/assets/casos/EMPRESA.webp" width="640" height="1386" alt="DESCRIBIR LA CAPTURA" loading="lazy">
             </figure>
           </div>
           <div class="caso-txt">
-            <h3>Empresa 3</h3>
+            <h3>Nombre de la empresa</h3>
             <p class="caso-que">Qué se hizo, en una frase.</p>
             <p class="caso-n num"><b>000</b><span>qué mide esa cifra</span></p>
-          </div>
-        </article>
-
-        <article class="caso reveal">
-          <div class="tels tels-3">
-            <figure class="tel"><img src="/assets/casos/EMPRESA-4-a.webp" width="237" height="512" alt="DESCRIBIR LA CAPTURA" loading="lazy"></figure>
-            <figure class="tel"><img src="/assets/casos/EMPRESA-4-b.webp" width="237" height="512" alt="DESCRIBIR LA CAPTURA" loading="lazy"></figure>
-            <figure class="tel"><img src="/assets/casos/EMPRESA-4-c.webp" width="237" height="512" alt="DESCRIBIR LA CAPTURA" loading="lazy"></figure>
-          </div>
-          <div class="caso-txt">
-            <h3>Empresa 4</h3>
-            <p class="caso-que">Qué se hizo, en una frase.</p>
-            <ul class="caso-lista">
-              <li>Primer resultado</li>
-              <li>Segundo resultado</li>
-              <li>Tercer resultado</li>
-            </ul>
           </div>
         </article>
 
@@ -971,7 +942,7 @@ main, .nav, .foot{position:relative; z-index:1}
       </div>
       <div class="cta-band reveal">
         <p>¿Quieres resultados así en tu empresa? Empieza por contarnos cómo opera.</p>
-        <a class="btn" data-cta href="#contacto">Cuéntanos de tu negocio</a>
+        <a class="btn" data-cta href="/formulario" target="_blank" rel="noopener">Cuéntanos de tu negocio</a>
       </div>
     </div>
   </section>
@@ -1014,107 +985,20 @@ main, .nav, .foot{position:relative; z-index:1}
         <div class="orbita-word d-wide reveal"><span class="grad sheen">Hablemos.</span></div>
         <h2 class="reveal" style="--i:1">Cuéntanos de tu empresa y te decimos por dónde empezar.</h2>
         <p class="lead reveal" style="--i:2">Dos minutos de preguntas. Así llegamos a la llamada sabiendo de qué hablamos, y tú sales con algo concreto.</p>
-        <div class="orbita-note reveal" style="--i:3">
+        <div class="orbita-actions reveal" style="--i:3">
+          <a class="btn" data-cta href="/formulario" target="_blank" rel="noopener">
+            Cuéntanos de tu negocio
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="orbita-note reveal" style="--i:4">
           <b>Sin compromiso, sin presentación de ventas y con el equipo que ejecuta.</b>
-          <span>Te respondemos el mismo día hábil por WhatsApp.</span>
+          <span>Son dos minutos de preguntas y al final agendamos la llamada.</span>
         </div>
       </div>
       <div class="rocket-slot rocket-slot-end" id="rocketSlotEnd" aria-hidden="true"></div>
     </div>
 
-    <div class="wrap">
-      <form class="form reveal" id="form" novalidate>
-        <div class="campos">
-          <div class="campo">
-            <label for="f-nombre">Tu nombre <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-nombre" name="nombre" type="text" autocomplete="name" required placeholder="Nombre y apellido">
-          </div>
-          <div class="campo">
-            <label for="f-empresa">Empresa <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-empresa" name="empresa" type="text" autocomplete="organization" required placeholder="Cómo se llama">
-          </div>
-          <div class="campo ancho">
-            <label for="f-giro">¿A qué se dedica? <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-giro" name="giro" type="text" required placeholder="Ej.: restaurante de comida típica con dos sedes">
-          </div>
-          <div class="campo">
-            <label for="f-web">Sitio web o Instagram</label>
-            <input id="f-web" name="web" type="text" inputmode="url" placeholder="@tumarca o tumarca.com">
-          </div>
-          <div class="campo sel">
-            <label for="f-equipo">Tamaño del equipo</label>
-            <select id="f-equipo" name="equipo">
-              <option value="">Selecciona</option>
-              <option>Solo yo</option>
-              <option>2 a 10 personas</option>
-              <option>11 a 50 personas</option>
-              <option>51 a 200 personas</option>
-              <option>Más de 200 personas</option>
-            </select>
-          </div>
-          <div class="campo ancho">
-            <span class="grupo-t" id="lbl-servicios">¿Qué te interesa? Marca todo lo que aplique</span>
-            <div class="chips" role="group" aria-labelledby="lbl-servicios">
-              <label class="chip"><input type="checkbox" name="servicio" value="Automatización de procesos"><span>Automatización de procesos</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Funnels de venta y diseño web"><span>Funnels y diseño web</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Soluciones con IA"><span>Soluciones con IA</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Marketing digital"><span>Marketing digital</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Publicidad paga en redes"><span>Publicidad paga</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Edición de videos"><span>Edición de videos</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Tienda virtual"><span>Tienda virtual</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Creación de contenido"><span>Creación de contenido</span></label>
-              <label class="chip"><input type="checkbox" name="servicio" value="Todavía no lo tiene claro"><span>Aún no lo sé</span></label>
-            </div>
-          </div>
-          <div class="campo ancho">
-            <label for="f-dolor">¿Cuál es hoy tu mayor dolor de cabeza? <span class="req" aria-hidden="true">*</span></label>
-            <textarea id="f-dolor" name="dolor" required placeholder="Lo que más tiempo te quita, lo que se te cae, o lo que no logras medir."></textarea>
-          </div>
-          <div class="campo sel">
-            <label for="f-inversion">¿Cuánto puedes invertir al mes? <span class="req" aria-hidden="true">*</span></label>
-            <select id="f-inversion" name="inversion" required>
-              <option value="">Selecciona un rango</option>
-              <option>Menos de $1.000.000 COP</option>
-              <option>Entre $1.000.000 y $3.000.000 COP</option>
-              <option>Entre $3.000.000 y $7.000.000 COP</option>
-              <option>Entre $7.000.000 y $15.000.000 COP</option>
-              <option>Más de $15.000.000 COP</option>
-              <option>Todavía no lo sé</option>
-            </select>
-          </div>
-          <div class="campo sel">
-            <label for="f-cuando">¿Cuándo quieres empezar?</label>
-            <select id="f-cuando" name="cuando">
-              <option value="">Selecciona</option>
-              <option>Lo antes posible</option>
-              <option>Este mes</option>
-              <option>En dos o tres meses</option>
-              <option>Estoy explorando</option>
-            </select>
-          </div>
-          <div class="campo">
-            <label for="f-whatsapp">WhatsApp <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+57 300 000 0000">
-          </div>
-          <div class="campo">
-            <label for="f-correo">Correo</label>
-            <input id="f-correo" name="correo" type="email" autocomplete="email" placeholder="tu@empresa.com">
-          </div>
-        </div>
-
-        <p class="form-error" id="formError" role="alert" hidden></p>
-
-        <div class="form-pie">
-          <button class="btn" type="submit">
-            Enviar y agendar la llamada
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <p class="form-nota">Al enviar se abre WhatsApp con tus respuestas ya escritas. Ahí cerramos la hora de la llamada.</p>
-        </div>
-
-        <p class="form-ok" id="formOk" hidden>Listo, tus respuestas están preparadas. <a id="formLink" href="#" target="_blank" rel="noopener">Ábrelas en WhatsApp</a> para terminar de agendar.</p>
-      </form>
-    </div>
   </section>
 </main>
 
@@ -1156,7 +1040,7 @@ main, .nav, .foot{position:relative; z-index:1}
 </footer>
 
 <div class="sticky" id="sticky" aria-hidden="true">
-  <a class="btn" data-cta tabindex="-1" href="#contacto">Cuéntanos de tu negocio</a>
+  <a class="btn" data-cta tabindex="-1" href="/formulario" target="_blank" rel="noopener">Cuéntanos de tu negocio</a>
 </div>
 
 <script>
@@ -1168,68 +1052,6 @@ main, .nav, .foot{position:relative; z-index:1}
   const lerp = (a, b, t) => a + (b - a) * t;
   const easeInOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  /* ---------- formulario: recoge el contexto y lo entrega por WhatsApp ----------
-     El sitio es estático y no tiene servidor, así que las respuestas no se
-     guardan en ninguna parte: viajan dentro del mensaje de WhatsApp. */
-  const WA_NUM = '573053128087';
-  (() => {
-    const form = $('#form'); if (!form) return;
-    const err = $('#formError'), ok = $('#formOk'), link = $('#formLink');
-    const OBLIGATORIOS = [
-      ['nombre', 'tu nombre'], ['empresa', 'el nombre de la empresa'], ['giro', 'a qué se dedica'],
-      ['dolor', 'tu mayor dolor de cabeza'], ['inversion', 'cuánto puedes invertir'], ['whatsapp', 'tu WhatsApp']
-    ];
-    const val = n => (form.elements[n] && form.elements[n].value || '').trim();
-
-    form.addEventListener('submit', ev => {
-      ev.preventDefault();
-      const faltan = [];
-      OBLIGATORIOS.forEach(([n, etiqueta]) => {
-        const el = form.elements[n];
-        if (!el.value.trim()) { faltan.push(etiqueta); el.setAttribute('aria-invalid', 'true'); }
-        else el.removeAttribute('aria-invalid');
-      });
-      if (faltan.length) {
-        err.textContent = faltan.length === 1
-          ? 'Nos falta ' + faltan[0] + '.'
-          : 'Nos falta ' + faltan.slice(0, -1).join(', ') + ' y ' + faltan[faltan.length - 1] + '.';
-        err.hidden = false; ok.hidden = true;
-        const primero = form.querySelector('[aria-invalid="true"]');
-        if (primero) { primero.focus(); primero.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' }); }
-        return;
-      }
-      err.hidden = true;
-
-      const servicios = $$('[name="servicio"]:checked', form).map(c => c.value);
-      const lineas = [
-        'Hola, equipo de Kairo Escala. Quiero agendar la llamada.',
-        '',
-        'Nombre: ' + val('nombre'),
-        'Empresa: ' + val('empresa'),
-        'A qué se dedica: ' + val('giro'),
-        val('web') && 'Web o Instagram: ' + val('web'),
-        val('equipo') && 'Tamaño del equipo: ' + val('equipo'),
-        servicios.length && 'Le interesa: ' + servicios.join(', '),
-        'Mayor dolor de cabeza: ' + val('dolor'),
-        'Puede invertir al mes: ' + val('inversion'),
-        val('cuando') && 'Quiere empezar: ' + val('cuando'),
-        'WhatsApp: ' + val('whatsapp'),
-        val('correo') && 'Correo: ' + val('correo')
-      ].filter(Boolean);
-
-      const url = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(lineas.join('\n'));
-      link.href = url;
-      ok.hidden = false;
-      /* si el navegador bloquea la ventana nueva, queda el enlace visible */
-      const w = open(url, '_blank', 'noopener');
-      if (!w) link.focus();
-    });
-
-    /* al corregir un campo marcado, se limpia la marca */
-    form.addEventListener('input', e => {
-      if (e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid');
-    });
-  })();
 
   /* ---------- medidas ---------- */
   const rocket = $('#rocket'), rocketImg = $('#rocketImg'), slot = $('#rocketSlot'), slotEnd = $('#rocketSlotEnd'), closeSec = $('#contacto');

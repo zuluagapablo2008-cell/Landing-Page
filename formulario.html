@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuéntanos de tu negocio · Kairo Escala</title>
+<meta name="description" content="Cuéntanos cómo opera tu empresa y te decimos por dónde empezar. Al final del formulario agendamos la llamada.">
+<meta name="theme-color" content="#07080F">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,700;100,900;125,800;125,900&display=swap">
+<script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+
+<style>
+/* =====================================================================
+   KAIRO ESCALA · formulario. Misma noche y misma energía que la landing,
+   pero sin cohete ni regla: aquí la única tarea es responder.
+   ===================================================================== */
+:root{
+  --ground:#07080F;
+  --ink:#F3F4FB;
+  --ink-2:#AEB4CF;
+  --ink-3:#7A819F;
+  --energy:linear-gradient(100deg,#2B82FF 0%,#6F2BF5 100%);
+  --metal:linear-gradient(180deg,#FFFFFF 0%,#EAF0FF 45%,#B4C1E8 100%);
+  --metal-line:linear-gradient(90deg,transparent 0%,#8FA8FF 22%,#FFFFFF 50%,#8FA8FF 78%,transparent 100%);
+  --glow:0 14px 30px -16px rgba(14,22,70,.95);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --gutter:20px;
+  --maxw:860px;
+  color-scheme:dark;
+}
+@media (min-width:900px){ :root{ --gutter:40px } }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; background:var(--ground)}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--display); font-stretch:100%; font-weight:400;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:#6F2BF5; color:#fff}
+h1,h2,p,ul,ol{margin:0}
+ul,ol{padding:0; list-style:none}
+img{max-width:100%; display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid #8FA8FF; outline-offset:4px; border-radius:6px}
+.skip{position:absolute; left:-999px; top:8px; background:var(--ink); color:var(--ground); padding:8px 12px; z-index:100}
+.skip:focus{left:8px}
+.wrap{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter)}
+.d-wide{font-stretch:125%; font-weight:900; letter-spacing:-.02em; line-height:.95; text-wrap:balance}
+.grad{background:var(--energy); -webkit-background-clip:text; background-clip:text; color:transparent}
+.metal{background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
+.lead{color:var(--ink-2); font-size:1.05rem; max-width:52ch}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  min-height:52px; padding:0 24px; border-radius:999px;
+  font-weight:700; font-size:1rem; letter-spacing:-.005em; text-decoration:none;
+  color:#fff; background:var(--energy); box-shadow:var(--glow);
+  border:0; white-space:nowrap; font-family:inherit; cursor:pointer;
+  transition:transform 160ms var(--ease-out), box-shadow 200ms ease;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{flex:none}
+@media (hover:hover) and (pointer:fine){ .btn:hover{transform:translateY(-1px); box-shadow:0 18px 34px -16px rgba(14,22,70,1)} }
+
+/* una sola luz, detrás de la cabecera */
+body::before{
+  content:""; position:fixed; inset:0 0 auto 0; height:70vh; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(60% 50% at 78% 0%, rgba(111,43,245,.26), transparent 68%),
+    radial-gradient(54% 44% at 8% 6%, rgba(43,130,255,.20), transparent 66%);
+}
+.nav, main, .foot{position:relative; z-index:1}
+
+.nav{height:72px; display:flex; align-items:center; position:relative}
+.nav::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--metal-line); opacity:.55}
+.nav-in{display:flex; align-items:center; justify-content:space-between; gap:20px; width:100%}
+.nav img{height:44px; width:auto}
+.volver{display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--ink-2); font-size:.92rem; font-weight:500}
+.volver:hover{color:var(--ink)}
+@media (min-width:900px){ .nav{height:80px} .nav img{height:52px} }
+
+.cabeza{padding-block:34px 4px}
+.cabeza h1{font-size:clamp(2rem,8vw,3.1rem); margin-bottom:12px}
+.cabeza .lead{margin-bottom:6px}
+.pasos{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:16px; color:var(--ink-3); font-size:.88rem}
+.pasos li{display:flex; align-items:center; gap:8px}
+.pasos b{display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:50%;
+  background:var(--energy); color:#fff; font-size:.72rem; font-weight:800; flex:none}
+.pasos li.hoy{color:var(--ink)}
+@media (min-width:900px){ .cabeza{padding-block:48px 8px} }
+
+/* ---------- formulario ---------- */
+.form{display:grid; gap:18px; padding-block:22px 44px}
+.campos{display:grid; gap:14px}
+.campo{display:grid; gap:6px; min-width:0}
+.campo label, .grupo-t{font-size:.86rem; font-weight:600; color:var(--ink-2)}
+.req{color:#8FA8FF}
+.campo input, .campo select, .campo textarea{
+  width:100%; min-width:0; font-family:inherit; font-size:1rem; color:var(--ink);
+  background:rgba(10,13,32,.72); border:1px solid rgba(143,168,255,.26); border-radius:12px;
+  padding:12px 14px; min-height:50px; appearance:none;
+  transition:border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.campo textarea{min-height:94px; resize:vertical; line-height:1.45}
+.campo input::placeholder, .campo textarea::placeholder{color:var(--ink-3)}
+.campo input:focus, .campo select:focus, .campo textarea:focus{
+  outline:none; border-color:#8FA8FF; background:rgba(14,18,44,.92);
+  box-shadow:0 0 0 3px rgba(43,130,255,.22);
+}
+.campo [aria-invalid="true"]{border-color:#FF8FA6}
+.campo select option{background:#0B0D18; color:var(--ink)}
+.campo.sel{position:relative}
+.campo.sel::after{content:""; position:absolute; right:17px; bottom:20px; width:8px; height:8px;
+  border-right:2px solid var(--ink-2); border-bottom:2px solid var(--ink-2);
+  transform:rotate(45deg); pointer-events:none}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{position:relative; display:block}
+.chip input{position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer}
+.chip span{display:block; padding:9px 14px; border-radius:999px; font-size:.9rem; font-weight:500;
+  color:var(--ink-2); border:1px solid rgba(143,168,255,.26); background:rgba(10,13,32,.6);
+  transition:color 180ms ease, border-color 180ms ease, background 180ms ease}
+.chip input:checked + span{color:#fff; font-weight:600; border-color:transparent; background:var(--energy)}
+.chip input:focus-visible + span{outline:2px solid #8FA8FF; outline-offset:3px}
+
+.form-error{font-size:.9rem; color:#FFB4C0; margin:0}
+.form-pie{display:grid; gap:12px; justify-items:start}
+.form-pie .btn{width:100%}
+.form-nota{font-size:.85rem; color:var(--ink-3); max-width:54ch; margin:0}
+.form-ok{font-size:.95rem; color:var(--ink); margin:0}
+.form-ok a{color:#9FB4FF; font-weight:600}
+@media (min-width:900px){
+  .campos{grid-template-columns:1fr 1fr; gap:16px 22px}
+  .campo.ancho{grid-column:1 / -1}
+  .form-pie{grid-auto-flow:column; justify-content:start; align-items:center; gap:22px}
+  .form-pie .btn{width:auto}
+}
+
+.foot{border-top:1px solid rgba(150,162,225,.16); padding-block:22px 30px; color:var(--ink-3); font-size:.85rem}
+.foot-in{display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--ink-2)}
+
+@media (prefers-reduced-motion: reduce){ .btn{transition:none} }
+</style>
+</head>
+<body>
+<a class="skip" href="#form">Saltar al formulario</a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="/" aria-label="Kairo Escala, inicio"><img src="/assets/logo.webp" width="978" height="401" alt="Kairo Escala"></a>
+    <a class="volver" href="/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Volver a la página
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap cabeza">
+    <h1 class="d-wide"><span class="metal">Cuéntanos</span> <span class="grad">de tu negocio.</span></h1>
+    <p class="lead">Dos minutos de preguntas. Con esto llegamos a la llamada sabiendo de qué hablamos, y tú sales con algo concreto.</p>
+    <ol class="pasos">
+      <li class="hoy"><b>1</b> Responde esto</li>
+      <li><b>2</b> Agendamos la llamada</li>
+      <li><b>3</b> Sales con tres acciones</li>
+    </ol>
+  </div>
+
+  <div class="wrap">
+        <form class="form" id="form" novalidate>
+          <div class="campos">
+            <div class="campo">
+              <label for="f-nombre">Tu nombre <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-nombre" name="nombre" type="text" autocomplete="name" required placeholder="Nombre y apellido">
+            </div>
+            <div class="campo">
+              <label for="f-empresa">Empresa <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-empresa" name="empresa" type="text" autocomplete="organization" required placeholder="Cómo se llama">
+            </div>
+            <div class="campo ancho">
+              <label for="f-giro">¿A qué se dedica? <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-giro" name="giro" type="text" required placeholder="Ej.: restaurante de comida típica con dos sedes">
+            </div>
+            <div class="campo">
+              <label for="f-web">Sitio web o Instagram</label>
+              <input id="f-web" name="web" type="text" inputmode="url" placeholder="@tumarca o tumarca.com">
+            </div>
+            <div class="campo sel">
+              <label for="f-equipo">Tamaño del equipo</label>
+              <select id="f-equipo" name="equipo">
+                <option value="">Selecciona</option>
+                <option>Solo yo</option>
+                <option>2 a 10 personas</option>
+                <option>11 a 50 personas</option>
+                <option>51 a 200 personas</option>
+                <option>Más de 200 personas</option>
+              </select>
+            </div>
+            <div class="campo ancho">
+              <span class="grupo-t" id="lbl-servicios">¿Qué te interesa? Marca todo lo que aplique</span>
+              <div class="chips" role="group" aria-labelledby="lbl-servicios">
+                <label class="chip"><input type="checkbox" name="servicio" value="Automatización de procesos"><span>Automatización de procesos</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Funnels de venta y diseño web"><span>Funnels y diseño web</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Soluciones con IA"><span>Soluciones con IA</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Marketing digital"><span>Marketing digital</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Publicidad paga en redes"><span>Publicidad paga</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Edición de videos"><span>Edición de videos</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Tienda virtual"><span>Tienda virtual</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Creación de contenido"><span>Creación de contenido</span></label>
+                <label class="chip"><input type="checkbox" name="servicio" value="Todavía no lo tiene claro"><span>Aún no lo sé</span></label>
+              </div>
+            </div>
+            <div class="campo ancho">
+              <label for="f-dolor">¿Cuál es hoy tu mayor dolor de cabeza? <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="f-dolor" name="dolor" required placeholder="Lo que más tiempo te quita, lo que se te cae, o lo que no logras medir."></textarea>
+            </div>
+            <div class="campo sel">
+              <label for="f-inversion">¿Cuánto puedes invertir al mes? <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-inversion" name="inversion" required>
+                <option value="">Selecciona un rango</option>
+                <option>Menos de $1.000.000 COP</option>
+                <option>Entre $1.000.000 y $3.000.000 COP</option>
+                <option>Entre $3.000.000 y $7.000.000 COP</option>
+                <option>Entre $7.000.000 y $15.000.000 COP</option>
+                <option>Más de $15.000.000 COP</option>
+                <option>Todavía no lo sé</option>
+              </select>
+            </div>
+            <div class="campo sel">
+              <label for="f-cuando">¿Cuándo quieres empezar?</label>
+              <select id="f-cuando" name="cuando">
+                <option value="">Selecciona</option>
+                <option>Lo antes posible</option>
+                <option>Este mes</option>
+                <option>En dos o tres meses</option>
+                <option>Estoy explorando</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="f-whatsapp">WhatsApp <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+57 300 000 0000">
+            </div>
+            <div class="campo">
+              <label for="f-correo">Correo</label>
+              <input id="f-correo" name="correo" type="email" autocomplete="email" placeholder="tu@empresa.com">
+            </div>
+          </div>
+
+          <p class="form-error" id="formError" role="alert" hidden></p>
+
+          <div class="form-pie">
+            <button class="btn" type="submit">
+              Enviar y agendar la llamada
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="form-nota">Al enviar se abre WhatsApp con tus respuestas ya escritas. Ahí cerramos la hora de la llamada.</p>
+          </div>
+
+          <p class="form-ok" id="formOk" hidden>Listo, tus respuestas están preparadas. <a id="formLink" href="#" target="_blank" rel="noopener">Ábrelas en WhatsApp</a> para terminar de agendar.</p>
+        </form>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>© 2026 Kairo Escala</span>
+    <span>WhatsApp +57 305 312 8087 · <a href="/">kairoescala</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const WA_NUM = '573053128087';
+
+  const form = $('#form'); if (!form) return;
+  const err = $('#formError'), ok = $('#formOk'), link = $('#formLink');
+  const OBLIGATORIOS = [
+    ['nombre', 'tu nombre'], ['empresa', 'el nombre de la empresa'], ['giro', 'a qué se dedica'],
+    ['dolor', 'tu mayor dolor de cabeza'], ['inversion', 'cuánto puedes invertir'], ['whatsapp', 'tu WhatsApp']
+  ];
+  const val = n => (form.elements[n] && form.elements[n].value || '').trim();
+
+  form.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const faltan = [];
+    OBLIGATORIOS.forEach(([n, etiqueta]) => {
+      const el = form.elements[n];
+      if (!el.value.trim()) { faltan.push(etiqueta); el.setAttribute('aria-invalid', 'true'); }
+      else el.removeAttribute('aria-invalid');
+    });
+    if (faltan.length) {
+      err.textContent = faltan.length === 1
+        ? 'Nos falta ' + faltan[0] + '.'
+        : 'Nos falta ' + faltan.slice(0, -1).join(', ') + ' y ' + faltan[faltan.length - 1] + '.';
+      err.hidden = false; ok.hidden = true;
+      const primero = form.querySelector('[aria-invalid="true"]');
+      if (primero) { primero.focus(); primero.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' }); }
+      return;
+    }
+    err.hidden = true;
+
+    const servicios = $$('[name="servicio"]:checked', form).map(c => c.value);
+    const lineas = [
+      'Hola, equipo de Kairo Escala. Quiero agendar la llamada.',
+      '',
+      'Nombre: ' + val('nombre'),
+      'Empresa: ' + val('empresa'),
+      'A qué se dedica: ' + val('giro'),
+      val('web') && 'Web o Instagram: ' + val('web'),
+      val('equipo') && 'Tamaño del equipo: ' + val('equipo'),
+      servicios.length && 'Le interesa: ' + servicios.join(', '),
+      'Mayor dolor de cabeza: ' + val('dolor'),
+      'Puede invertir al mes: ' + val('inversion'),
+      val('cuando') && 'Quiere empezar: ' + val('cuando'),
+      'WhatsApp: ' + val('whatsapp'),
+      val('correo') && 'Correo: ' + val('correo')
+    ].filter(Boolean);
+
+    const url = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(lineas.join('\n'));
+    link.href = url;
+    ok.hidden = false;
+    const w = open(url, '_blank', 'noopener');
+    if (!w) link.focus();
+  });
+
+  form.addEventListener('input', e => {
+    if (e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid');
+  });
+})();
+</script>
+</body>
+</html>
