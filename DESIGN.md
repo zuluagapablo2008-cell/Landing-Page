@@ -477,3 +477,23 @@ Reglas para no romperlo:
 - Las capturas entran en WebP dentro de `/assets/casos/`, al tamaño nativo del pantallazo; si el original es de un iPhone a resolución completa, mejor, porque el marco las muestra a ~190px y agradece la densidad.
 - Las dos fichas comentadas al final de la sección son el molde para las empresas 3 y 4: se descomentan y se rellenan, no se reinventan.
 - `.tel` no lleva `overflow:hidden` en la ficha que lo contiene: las esquinas giradas y el flotado necesitan salirse un poco.
+
+## Revisión del 13 de octubre de 2026 (formulario como CTA, capturas legibles)
+
+**El CTA deja de ser la llamada y pasa a ser el formulario.** Todos los botones de la página (`[data-cta]`: nav, hero, banda de resultados y CTA fija de celular) dicen ahora "Cuéntanos de tu negocio" y llevan a `#contacto`. La llamada no desaparece: se agenda al final del formulario, cuando ya sabemos de qué se va a hablar. Se retiró el bloque de JavaScript que reescribía esos botones hacia WhatsApp; el único salto a WhatsApp es el envío del formulario.
+
+**El formulario (`.form`).** Once campos en una rejilla de dos columnas en escritorio y una en celular, con `.campo.ancho` para los que ocupan todo: nombre, empresa, a qué se dedica, web o Instagram, tamaño del equipo, qué le interesa (casillas), dolor principal, cuánto puede invertir al mes, cuándo quiere empezar, WhatsApp y correo. Seis son obligatorios. Los controles usan superficie `rgba(10,13,32,.72)`, borde hairline azulado y foco en `#8FA8FF` con halo de energía; la flecha del `select` se dibuja con un pseudo-elemento para no depender del control nativo. Las casillas de servicio son `.chip`: píldoras que al marcarse se llenan con el degradado de la marca. El `input` real queda transparente sobre la píldora, así que el objetivo táctil es toda la ficha.
+
+**Qué pasa al enviar.** El sitio es estático y no tiene servidor: las respuestas **no se guardan en ninguna parte**. Se validan en el navegador, se arman como texto y se abren en WhatsApp con todo escrito. Si el navegador bloquea la ventana nueva, queda visible un enlace (`.form-ok`) para abrirla a mano, porque dentro de un visor de artefactos `window.open` puede devolver null. Para que las respuestas queden registradas haría falta un servicio de formularios o una función serverless; hoy no los hay.
+
+**Capturas legibles.** Las pantallas de los casos crecen (`--tel-w` de 240px en celular y hasta 284px en escritorio para una sola; 200px y hasta 224px para las de la baraja) y los assets pasan a 2x con `lanczos`, que para capturas con texto va mejor que `bicubic`. Se retiró el reflejo diagonal que iba sobre el vidrio (`.tel::after`): lavaba la imagen y hacía ver las capturas como semitransparentes. El marco metálico es ahora lo único que decora.
+
+**Redacción de la captura de la pantalla de inicio.** La foto del teléfono mostraba todas las apps personales del dueño. Se publica difuminada (`boxblur`, saturación al 45%) salvo los dos iconos de El Tradicional, que van nítidos y un 27% más grandes. Es redacción por privacidad, no manipulación de la prueba: no se cambia ningún dato, solo se oculta lo que no viene al caso.
+
+**La cifra de partida de CREO** (4.673 seguidores) va escrita en el texto del resultado, confirmada por el cliente, y no dentro de una captura fabricada. La regla sigue en pie: una captura que se presenta como prueba de un cliente no se retoca nunca.
+
+Reglas para no romperlo:
+
+- Ningún `[data-cta]` vuelve a apuntar a WhatsApp. El salto a WhatsApp es solo el envío del formulario.
+- Si algún día hay backend, el formulario debe seguir funcionando sin él: la ruta de WhatsApp es el plan de respaldo, no un apaño temporal.
+- Las capturas de caso se publican a 2x y sin reflejo encima. Si una trae datos personales que no son del caso, se difumina antes de publicarla.
