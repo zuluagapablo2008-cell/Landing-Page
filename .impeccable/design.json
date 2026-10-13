@@ -8,67 +8,166 @@
         "role": "neutral",
         "displayName": "Noche",
         "canonical": "#07080F",
-        "tonalRamp": ["oklch(15% 0.02 275)", "oklch(25% 0.025 275)", "oklch(37% 0.03 275)", "oklch(49% 0.03 275)", "oklch(61% 0.03 275)", "oklch(73% 0.025 275)", "oklch(85% 0.02 275)", "oklch(95% 0.01 275)"]
+        "tonalRamp": [
+          "oklch(15% 0.02 275)",
+          "oklch(25% 0.025 275)",
+          "oklch(37% 0.03 275)",
+          "oklch(49% 0.03 275)",
+          "oklch(61% 0.03 275)",
+          "oklch(73% 0.025 275)",
+          "oklch(85% 0.02 275)",
+          "oklch(95% 0.01 275)"
+        ]
       },
       "ink": {
         "role": "neutral",
         "displayName": "Tinta",
         "canonical": "#F3F4FB",
-        "tonalRamp": ["oklch(15% 0.01 275)", "oklch(25% 0.012 275)", "oklch(37% 0.014 275)", "oklch(49% 0.014 275)", "oklch(61% 0.014 275)", "oklch(73% 0.012 275)", "oklch(85% 0.01 275)", "oklch(96% 0.008 275)"]
+        "tonalRamp": [
+          "oklch(15% 0.01 275)",
+          "oklch(25% 0.012 275)",
+          "oklch(37% 0.014 275)",
+          "oklch(49% 0.014 275)",
+          "oklch(61% 0.014 275)",
+          "oklch(73% 0.012 275)",
+          "oklch(85% 0.01 275)",
+          "oklch(96% 0.008 275)"
+        ]
       },
       "ink-2": {
         "role": "neutral",
         "displayName": "Tinta 2",
         "canonical": "#AEB4CF",
-        "tonalRamp": ["oklch(15% 0.02 275)", "oklch(25% 0.03 275)", "oklch(37% 0.035 275)", "oklch(49% 0.04 275)", "oklch(61% 0.04 275)", "oklch(76% 0.035 275)", "oklch(85% 0.03 275)", "oklch(95% 0.015 275)"]
+        "tonalRamp": [
+          "oklch(15% 0.02 275)",
+          "oklch(25% 0.03 275)",
+          "oklch(37% 0.035 275)",
+          "oklch(49% 0.04 275)",
+          "oklch(61% 0.04 275)",
+          "oklch(76% 0.035 275)",
+          "oklch(85% 0.03 275)",
+          "oklch(95% 0.015 275)"
+        ]
       },
       "ink-3": {
         "role": "neutral",
         "displayName": "Tinta 3",
         "canonical": "#7A819F",
-        "tonalRamp": ["oklch(15% 0.02 275)", "oklch(25% 0.03 275)", "oklch(37% 0.04 275)", "oklch(49% 0.045 275)", "oklch(59% 0.045 275)", "oklch(73% 0.04 275)", "oklch(85% 0.03 275)", "oklch(95% 0.015 275)"]
+        "tonalRamp": [
+          "oklch(15% 0.02 275)",
+          "oklch(25% 0.03 275)",
+          "oklch(37% 0.04 275)",
+          "oklch(49% 0.045 275)",
+          "oklch(59% 0.045 275)",
+          "oklch(73% 0.04 275)",
+          "oklch(85% 0.03 275)",
+          "oklch(95% 0.015 275)"
+        ]
       },
       "line": {
         "role": "neutral",
         "displayName": "Hairline",
         "canonical": "rgba(150,162,225,.16)",
-        "tonalRamp": ["rgba(150,162,225,.04)", "rgba(150,162,225,.08)", "rgba(150,162,225,.12)", "rgba(150,162,225,.16)", "rgba(150,162,225,.24)", "rgba(150,162,225,.34)", "rgba(150,162,225,.5)", "rgba(150,162,225,.7)"]
+        "tonalRamp": [
+          "rgba(150,162,225,.04)",
+          "rgba(150,162,225,.08)",
+          "rgba(150,162,225,.12)",
+          "rgba(150,162,225,.16)",
+          "rgba(150,162,225,.24)",
+          "rgba(150,162,225,.34)",
+          "rgba(150,162,225,.5)",
+          "rgba(150,162,225,.7)"
+        ]
       },
       "line-strong": {
         "role": "neutral",
         "displayName": "Hairline fuerte",
         "canonical": "rgba(150,162,225,.34)",
-        "tonalRamp": ["rgba(150,162,225,.04)", "rgba(150,162,225,.08)", "rgba(150,162,225,.12)", "rgba(150,162,225,.16)", "rgba(150,162,225,.24)", "rgba(150,162,225,.34)", "rgba(150,162,225,.5)", "rgba(150,162,225,.7)"]
+        "tonalRamp": [
+          "rgba(150,162,225,.04)",
+          "rgba(150,162,225,.08)",
+          "rgba(150,162,225,.12)",
+          "rgba(150,162,225,.16)",
+          "rgba(150,162,225,.24)",
+          "rgba(150,162,225,.34)",
+          "rgba(150,162,225,.5)",
+          "rgba(150,162,225,.7)"
+        ]
       },
       "blue": {
         "role": "primary",
         "displayName": "Azul eléctrico",
         "canonical": "#3B6BFF",
-        "tonalRamp": ["oklch(20% 0.12 268)", "oklch(30% 0.18 268)", "oklch(42% 0.22 268)", "oklch(53% 0.24 268)", "oklch(62% 0.22 268)", "oklch(73% 0.16 268)", "oklch(85% 0.09 268)", "oklch(95% 0.03 268)"]
+        "tonalRamp": [
+          "oklch(20% 0.12 268)",
+          "oklch(30% 0.18 268)",
+          "oklch(42% 0.22 268)",
+          "oklch(53% 0.24 268)",
+          "oklch(62% 0.22 268)",
+          "oklch(73% 0.16 268)",
+          "oklch(85% 0.09 268)",
+          "oklch(95% 0.03 268)"
+        ]
       },
       "violet": {
         "role": "primary",
         "displayName": "Violeta",
         "canonical": "#7B3BFF",
-        "tonalRamp": ["oklch(20% 0.12 295)", "oklch(30% 0.18 295)", "oklch(42% 0.24 295)", "oklch(53% 0.26 295)", "oklch(62% 0.22 295)", "oklch(73% 0.16 295)", "oklch(85% 0.09 295)", "oklch(95% 0.03 295)"]
+        "tonalRamp": [
+          "oklch(20% 0.12 295)",
+          "oklch(30% 0.18 295)",
+          "oklch(42% 0.24 295)",
+          "oklch(53% 0.26 295)",
+          "oklch(62% 0.22 295)",
+          "oklch(73% 0.16 295)",
+          "oklch(85% 0.09 295)",
+          "oklch(95% 0.03 295)"
+        ]
       },
       "focus-blue": {
         "role": "primary",
         "displayName": "Azul de foco",
         "canonical": "#8FA8FF",
-        "tonalRamp": ["oklch(20% 0.08 268)", "oklch(30% 0.12 268)", "oklch(42% 0.15 268)", "oklch(53% 0.16 268)", "oklch(64% 0.15 268)", "oklch(74% 0.12 268)", "oklch(85% 0.08 268)", "oklch(95% 0.03 268)"]
+        "tonalRamp": [
+          "oklch(20% 0.08 268)",
+          "oklch(30% 0.12 268)",
+          "oklch(42% 0.15 268)",
+          "oklch(53% 0.16 268)",
+          "oklch(64% 0.15 268)",
+          "oklch(74% 0.12 268)",
+          "oklch(85% 0.08 268)",
+          "oklch(95% 0.03 268)"
+        ]
       },
       "lavender-note": {
         "role": "tertiary",
         "displayName": "Lavanda de nota",
         "canonical": "#C7B4FF",
-        "tonalRamp": ["oklch(20% 0.08 295)", "oklch(30% 0.12 295)", "oklch(42% 0.15 295)", "oklch(53% 0.16 295)", "oklch(64% 0.15 295)", "oklch(78% 0.12 295)", "oklch(86% 0.08 295)", "oklch(95% 0.03 295)"]
+        "tonalRamp": [
+          "oklch(20% 0.08 295)",
+          "oklch(30% 0.12 295)",
+          "oklch(42% 0.15 295)",
+          "oklch(53% 0.16 295)",
+          "oklch(64% 0.15 295)",
+          "oklch(78% 0.12 295)",
+          "oklch(86% 0.08 295)",
+          "oklch(95% 0.03 295)"
+        ]
       },
       "white": {
         "role": "neutral",
         "displayName": "Blanco puro",
         "canonical": "#FFFFFF",
-        "tonalRamp": ["oklch(15% 0 0)", "oklch(25% 0 0)", "oklch(37% 0 0)", "oklch(49% 0 0)", "oklch(61% 0 0)", "oklch(73% 0 0)", "oklch(85% 0 0)", "oklch(100% 0 0)"]
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(37% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(100% 0 0)"
+        ]
       }
     },
     "typographyMeta": {
@@ -106,61 +205,234 @@
       }
     },
     "shadows": [
-      { "name": "glow", "value": "0 14px 30px -16px rgba(14,22,70,.95)", "purpose": "--glow. Solo bajo .btn con fondo de energía." },
-      { "name": "glow-hover", "value": "0 18px 34px -16px rgba(14,22,70,1)", "purpose": "Hover de .btn con puntero fino, junto a translateY(-1px)." },
-      { "name": "route-rocket-drop", "value": "drop-shadow(0 8px 10px rgba(4,6,20,.8))", "purpose": "filter del cohete pequeño sobre la ruta de servicios." },
-      { "name": "estela-halo", "value": "0 0 0 4px rgba(123,59,255,.28)", "purpose": "Anillo violeta alrededor de la cabeza lavanda de la estela (.estela::after)." },
-      { "name": "cierre-halo", "value": "radial-gradient(60% 60% at 50% 100%, rgba(59,107,255,.28), rgba(123,59,255,.10) 45%, transparent 75%)", "purpose": "Única luz ambiental; ::before de .orbita anclado abajo." },
-      { "name": "nav-scrim", "value": "linear-gradient(180deg, rgba(7,8,15,.94), rgba(7,8,15,.72)) + backdrop-filter: blur(10px)", "purpose": "Fondo de la nav sticky." },
-      { "name": "sticky-scrim", "value": "linear-gradient(180deg, rgba(7,8,15,0), rgba(7,8,15,.92) 30%, rgba(7,8,15,.98))", "purpose": "Fondo de la CTA fija en celular." }
+      {
+        "name": "glow",
+        "value": "0 14px 30px -16px rgba(14,22,70,.95)",
+        "purpose": "--glow. Solo bajo .btn con fondo de energía."
+      },
+      {
+        "name": "glow-hover",
+        "value": "0 18px 34px -16px rgba(14,22,70,1)",
+        "purpose": "Hover de .btn con puntero fino, junto a translateY(-1px)."
+      },
+      {
+        "name": "route-rocket-drop",
+        "value": "drop-shadow(0 8px 10px rgba(4,6,20,.8))",
+        "purpose": "filter del cohete pequeño sobre la ruta de servicios."
+      },
+      {
+        "name": "estela-halo",
+        "value": "0 0 0 4px rgba(123,59,255,.28)",
+        "purpose": "Anillo violeta alrededor de la cabeza lavanda de la estela (.estela::after)."
+      },
+      {
+        "name": "cierre-halo",
+        "value": "radial-gradient(60% 60% at 50% 100%, rgba(59,107,255,.28), rgba(123,59,255,.10) 45%, transparent 75%)",
+        "purpose": "Única luz ambiental; ::before de .orbita anclado abajo."
+      },
+      {
+        "name": "nav-scrim",
+        "value": "linear-gradient(180deg, rgba(7,8,15,.94), rgba(7,8,15,.72)) + backdrop-filter: blur(10px)",
+        "purpose": "Fondo de la nav sticky."
+      },
+      {
+        "name": "sticky-scrim",
+        "value": "linear-gradient(180deg, rgba(7,8,15,0), rgba(7,8,15,.92) 30%, rgba(7,8,15,.98))",
+        "purpose": "Fondo de la CTA fija en celular."
+      }
     ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "--ease-out. Entradas, reveals, acople, botón, CTA fija, intro WAAPI, flecha del enlace." },
-      { "name": "btn-press", "value": "transform 160ms var(--ease-out), box-shadow 200ms ease; :active scale(.97)", "purpose": "Tacto de todos los botones." },
-      { "name": "rise", "value": "800ms var(--ease-out) both; delays r1 280 / r2 380 / r3 520 / r4 680 / r5 820ms; from translate3d(0,22px,0) opacity 0", "purpose": "Entrada orquestada del hero: h1, lead, botón, enlace (solo .js, no reduced-motion)." },
-      { "name": "rail-in", "value": "900ms var(--ease-out) both; scaleY(0→1) desde abajo", "purpose": "La regla de progreso crece al cargar." },
-      { "name": "hover-float", "value": "5.6s ease-in-out 1.7s infinite; 50%: translate3d(0,-9px,0) rotate(-2deg)", "purpose": "Flote del cohete en reposo." },
-      { "name": "intro-ascent", "value": "WAAPI 1650ms cubic-bezier(.16,1,.3,1) fill backwards; keyframes 0% off-screen abajo-izquierda rot 6° op 0 → 12% op 1 → 62% 18%/16% rot 2° → 90% -6px rot -1° → 100% reposo", "purpose": "Ascenso del cohete al cargar; se salta con reduced-motion o ?shot=1." },
-      { "name": "dock", "value": "p = easeInOut(clamp(scrollY / max(240, hero.h*.85))); lerp slot→rail, scale 1→30px/w, rotate 0→-40deg", "purpose": "Acople del cohete del hero a la regla, ligado al scroll." },
-      { "name": "rail-fill", "value": "height = scrollY / (docH - vh) * 100%", "purpose": "Relleno de la regla de progreso; sin lectura numérica." },
-      { "name": "reveal", "value": "opacity/transform 620ms var(--ease-out); delay calc(var(--i,0) * 60ms); from translate3d(0,14px,0); IO threshold .12 rootMargin 0 0 -6%", "purpose": "Revelado por scroll, una sola vez." },
-      { "name": "route-progress", "value": "t = (scrollY - (route.top - vh*.62)) / route.h; offset-distance t*100%; stroke-dashoffset len*(1-t)", "purpose": "Cohete pequeño y trazo de energía por la ruta de servicios." },
-      { "name": "sticky-cta", "value": "transform 260ms var(--ease-out); translate3d(0,110%,0) → none con .on", "purpose": "CTA fija aparece cuando el CTA del hero sale y el cierre no está al 20%." },
-      { "name": "link-hover", "value": "color 150ms ease, text-decoration-color 150ms ease; svg transform 200ms var(--ease-out) translateY(2px)", "purpose": "Enlaces de nav y .link-more." },
-      { "name": "sheen", "value": "background-position -70% → 170% sobre background-clip:text, 7s var(--ease-out) infinite; capa 1 banda blanca .72, capa 2 el degradado base (--sheen-base)", "purpose": "Luz que recorre las dos cláusulas del h1 (desfase 1,5s / 2,1s) y 'Hablemos.'; one-shot de 1,4s en las cifras de Resultados con .counting." },
-      { "name": "estela-trails", "value": "dos <i> paralelos al trazo, clip-path inset(0 0 0 100%) → 0, 900ms con retardo 110ms y 190ms", "purpose": "Líneas de velocidad detrás de cada estela." },
-      { "name": "senal-mark", "value": "scaleX(0 → 1) desde la izquierda, 620ms, retardo calc(var(--i)*60ms + 180ms)", "purpose": "El guion de energía de cada dolor se traza al entrar." },
-      { "name": "libro-strike", "value": "text-decoration-color transparent → rgba(174,180,207,.45), 700ms, retardo calc(var(--i)*60ms + 260ms)", "purpose": "El tachado del 'hoy' se dibuja; se anima el color para que sobreviva al salto de línea." },
-      { "name": "reduced-motion", "value": "anula rise, rail-in, hover-float, intro, sheen, counting, trails, marca de dolores y tachado; .reveal visible; sticky sin transición; scroll-behavior auto", "purpose": "prefers-reduced-motion: reduce." },
-      { "name": "shot-mode", "value": "?shot=1 → html.shot: sin entradas, sin flote, sin sheen, reveals visibles, trazos completos, sticky oculta, intro saltada. ?full=1 → html.full: hero sin min-height", "purpose": "Modo captura para revisión." }
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "--ease-out. Entradas, reveals, acople, botón, CTA fija, intro WAAPI, flecha del enlace."
+      },
+      {
+        "name": "btn-press",
+        "value": "transform 160ms var(--ease-out), box-shadow 200ms ease; :active scale(.97)",
+        "purpose": "Tacto de todos los botones."
+      },
+      {
+        "name": "rise",
+        "value": "800ms var(--ease-out) both; delays r1 280 / r2 380 / r3 520 / r4 680 / r5 820ms; from translate3d(0,22px,0) opacity 0",
+        "purpose": "Entrada orquestada del hero: h1, lead, botón, enlace (solo .js, no reduced-motion)."
+      },
+      {
+        "name": "rail-in",
+        "value": "900ms var(--ease-out) both; scaleY(0→1) desde abajo",
+        "purpose": "La regla de progreso crece al cargar."
+      },
+      {
+        "name": "hover-float",
+        "value": "5.6s ease-in-out 1.7s infinite; 50%: translate3d(0,-9px,0) rotate(-2deg)",
+        "purpose": "Flote del cohete en reposo."
+      },
+      {
+        "name": "intro-ascent",
+        "value": "WAAPI 1650ms cubic-bezier(.16,1,.3,1) fill backwards; keyframes 0% off-screen abajo-izquierda rot 6° op 0 → 12% op 1 → 62% 18%/16% rot 2° → 90% -6px rot -1° → 100% reposo",
+        "purpose": "Ascenso del cohete al cargar; se salta con reduced-motion o ?shot=1."
+      },
+      {
+        "name": "dock",
+        "value": "p = easeInOut(clamp(scrollY / max(240, hero.h*.85))); lerp slot→rail, scale 1→30px/w, rotate 0→-40deg",
+        "purpose": "Acople del cohete del hero a la regla, ligado al scroll."
+      },
+      {
+        "name": "rail-fill",
+        "value": "height = scrollY / (docH - vh) * 100%",
+        "purpose": "Relleno de la regla de progreso; sin lectura numérica."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity/transform 620ms var(--ease-out); delay calc(var(--i,0) * 60ms); from translate3d(0,14px,0); IO threshold .12 rootMargin 0 0 -6%",
+        "purpose": "Revelado por scroll, una sola vez."
+      },
+      {
+        "name": "route-progress",
+        "value": "t = (scrollY - (route.top - vh*.62)) / route.h; offset-distance t*100%; stroke-dashoffset len*(1-t)",
+        "purpose": "Cohete pequeño y trazo de energía por la ruta de servicios."
+      },
+      {
+        "name": "sticky-cta",
+        "value": "transform 260ms var(--ease-out); translate3d(0,110%,0) → none con .on",
+        "purpose": "CTA fija aparece cuando el CTA del hero sale y el cierre no está al 20%."
+      },
+      {
+        "name": "link-hover",
+        "value": "color 150ms ease, text-decoration-color 150ms ease; svg transform 200ms var(--ease-out) translateY(2px)",
+        "purpose": "Enlaces de nav y .link-more."
+      },
+      {
+        "name": "sheen",
+        "value": "background-position -70% → 170% sobre background-clip:text, 7s var(--ease-out) infinite; capa 1 banda blanca .72, capa 2 el degradado base (--sheen-base)",
+        "purpose": "Luz que recorre las dos cláusulas del h1 (desfase 1,5s / 2,1s) y 'Hablemos.'; one-shot de 1,4s en las cifras de Resultados con .counting."
+      },
+      {
+        "name": "estela-trails",
+        "value": "dos <i> paralelos al trazo, clip-path inset(0 0 0 100%) → 0, 900ms con retardo 110ms y 190ms",
+        "purpose": "Líneas de velocidad detrás de cada estela."
+      },
+      {
+        "name": "senal-mark",
+        "value": "scaleX(0 → 1) desde la izquierda, 620ms, retardo calc(var(--i)*60ms + 180ms)",
+        "purpose": "El guion de energía de cada dolor se traza al entrar."
+      },
+      {
+        "name": "libro-strike",
+        "value": "text-decoration-color transparent → rgba(174,180,207,.45), 700ms, retardo calc(var(--i)*60ms + 260ms)",
+        "purpose": "El tachado del 'hoy' se dibuja; se anima el color para que sobreviva al salto de línea."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "anula rise, rail-in, hover-float, intro, sheen, counting, trails, marca de dolores y tachado; .reveal visible; sticky sin transición; scroll-behavior auto",
+        "purpose": "prefers-reduced-motion: reduce."
+      },
+      {
+        "name": "shot-mode",
+        "value": "?shot=1 → html.shot: sin entradas, sin flote, sin sheen, reveals visibles, trazos completos, sticky oculta, intro saltada. ?full=1 → html.full: hero sin min-height",
+        "purpose": "Modo captura para revisión."
+      }
     ],
     "breakpoints": [
-      { "name": "desktop", "value": "900px" }
+      {
+        "name": "desktop",
+        "value": "900px"
+      }
     ],
     "assets": {
       "mascot": {
         "format": "WebP RGBA a 2x del tamaño de render (escalado bicubic, q95) en assets/mascot/; los PNG quedan como fuente y el HTML ya no los referencia. Nunca ilustración CSS/SVG.",
         "used": [
-          { "file": "hero-rocket@2x.webp", "size": "1292x910", "where": "hero + marcador de la regla (un solo elemento fijo, preload con fetchpriority alto); 330px celular / 420px escritorio, baja a 44px acoplado" },
-          { "file": "acelerando@2x.webp", "size": "732x244", "where": "cohete de la ruta de servicios; 58px / 104px, offset-rotate auto" },
-          { "file": "pensativo@2x.webp", "size": "472x740", "where": "cabecera de dolores; 92px / 150px" },
-          { "file": "ascendiendo@2x.webp", "size": "552x660", "where": "cabecera de lo que cambia; 92px / 150px" },
-          { "file": "celebrando@2x.webp", "size": "420x580", "where": "cabecera de resultados; 92px / 150px" },
-          { "file": "despegue@2x.webp", "size": "400x644", "where": "cabecera de cómo trabajamos; 92px / 150px" },
-          { "file": "reposo@2x.webp", "size": "300x660", "where": "pie, 46px" }
+          {
+            "file": "hero-rocket@2x.webp",
+            "size": "1292x910",
+            "where": "hero + marcador de la regla (un solo elemento fijo, preload con fetchpriority alto); 330px celular / 420px escritorio, baja a 44px acoplado"
+          },
+          {
+            "file": "acelerando@2x.webp",
+            "size": "732x244",
+            "where": "cohete de la ruta de servicios; 58px / 104px, offset-rotate auto"
+          },
+          {
+            "file": "pensativo@2x.webp",
+            "size": "472x740",
+            "where": "cabecera de dolores; 92px / 150px"
+          },
+          {
+            "file": "ascendiendo@2x.webp",
+            "size": "552x660",
+            "where": "cabecera de lo que cambia; 92px / 150px"
+          },
+          {
+            "file": "celebrando@2x.webp",
+            "size": "420x580",
+            "where": "cabecera de resultados; 92px / 150px"
+          },
+          {
+            "file": "despegue@2x.webp",
+            "size": "400x644",
+            "where": "cabecera de cómo trabajamos; 92px / 150px"
+          },
+          {
+            "file": "reposo@2x.webp",
+            "size": "300x660",
+            "where": "pie, 46px"
+          }
         ],
-        "unused": ["frente", "espalda", "45-derecha", "135-derecha", "225-izquierda", "315-izquierda", "arriba", "lado-izquierdo", "lado-derecho", "feliz", "sorprendido", "apuntando", "descansando", "veloz", "confiado"]
+        "unused": [
+          "frente",
+          "espalda",
+          "45-derecha",
+          "135-derecha",
+          "225-izquierda",
+          "315-izquierda",
+          "arriba",
+          "lado-izquierdo",
+          "lado-derecho",
+          "feliz",
+          "sorprendido",
+          "apuntando",
+          "descansando",
+          "veloz",
+          "confiado"
+        ]
       },
       "logo": {
         "file": "assets/logo.webp",
         "size": "978x401",
         "where": "WebP sin pérdida (200KB PNG → 129KB). Nav 46px alto / 56px en escritorio; pie 34px. Su trazo azul→violeta es la fuente de la estela."
+      },
+      "casos": {
+        "format": "WebP q95 en assets/casos/, al tamano nativo del pantallazo; se muestran dentro de .tel a ~190px",
+        "used": [
+          {
+            "file": "creo-perfil.webp",
+            "size": "296x640",
+            "where": "Fundacion CREO, .tels-1"
+          },
+          {
+            "file": "tradicional-inicio.webp",
+            "size": "237x512",
+            "where": "El Tradicional, baraja .tels-3 (1 de 3)"
+          },
+          {
+            "file": "tradicional-app.webp",
+            "size": "237x512",
+            "where": "El Tradicional, baraja .tels-3 (2 de 3)"
+          },
+          {
+            "file": "tradicional-panel.webp",
+            "size": "237x512",
+            "where": "El Tradicional, baraja .tels-3 (3 de 3)"
+          }
+        ]
       }
     },
     "openItems": [
       "Archivo se carga desde Google Fonts (fonts.googleapis.com, wdth 100 a 400/500/700/900 y wdth 125 a 800/900); pendiente self-host.",
       "El código lleva el número +57 305 312 8087 (wa.me/573053128087) en los CTA y en el pie, sin marca de ejemplo; pendiente de que el cliente lo confirme como definitivo.",
-      "Cifras de resultados son de ejemplo, marcadas con comentario EJEMPLO en código y con el chip .ejemplo en pantalla."
+      "Resultados muestra dos casos reales (Fundación CREO, El Tradicional). Faltan: la cifra de partida de seguidores de CREO, confirmada por el cliente, y las cifras de ahorro de El Tradicional (empleados y horas). Quedan dos fichas comentadas, listas para las empresas 3 y 4.",
+      "Las capturas de casos llegaron comprimidas por el chat (296x640 y 237x512). Se piden los originales a resolucion completa para que los marcos de celular se vean nitidos en pantallas de alta densidad."
     ]
   },
   "components": [
@@ -267,14 +539,46 @@
       "Mascota real (PNG alfa) en tres poses y solo donde cuenta algo: hero-45 en el hero y la regla, lado-derecho en la ruta, celebrando en el cierre."
     ],
     "rules": [
-      { "name": "La regla de una sola energía", "body": "El degradado azul→violeta es el único color saturado y siempre aparece como degradado, nunca como azul o violeta planos (salvo `::selection`, el azul de foco `#8FA8FF` y el halo violeta al 28% de la cabeza de la estela). Se gasta en: la llama del cohete (viene en el PNG), el relleno de la regla (`--energy-v`), la estela de cada sección, la cláusula \"escala sin límites.\" del hero (`.grad`, `background-clip: text`), el botón principal, el trazo dibujado de la ruta, el centro de los puntos de ruta, la barra de 22×2px de cada señal, el círculo-tick del libro, el primer punto de la escalera y el halo radial del cierre. Una superficie nueva lo usa en un elemento por pantalla además de su estela y su CTA.", "section": "colors" },
-      { "name": "La regla de tres tintas", "body": "El texto solo usa `--ink`, `--ink-2` o `--ink-3` (excepción única: la cláusula degradada del hero). La jerarquía de lectura se hace bajando de tinta, no cambiando de color.", "section": "colors" },
-      { "name": "La regla del ancho", "body": "Lo que nombra una sección, un servicio, una cifra o el cierre va en wdth 125 a 800/900. Lo que se lee va en wdth 100. No se mezcla peso y ancho para inventar un tercer nivel; el hero es la única pieza a 900 en wdth 100.", "section": "typography" },
-      { "name": "La regla del numeral tabular", "body": "Toda cifra que se compara (cifras de resultado, duraciones de etapa) lleva `.num`. Ningún número decora: si no es un resultado o una duración, no aparece como numeral grande.", "section": "typography" },
-      { "name": "La regla del titular directo", "body": "Los `h2` dicen lo que la sección hace por el lector, en una frase; no hay kicker, cota, número de paso ni metáfora de vuelo encima o debajo.", "section": "typography" },
-      { "name": "La regla de la hairline", "body": "Dentro de una sección, las divisiones son líneas de 1px en `--line` o `--line-strong`; nunca un cambio de fondo. Si una superficie nueva necesita agrupar, usa una regla arriba y otra abajo, no una caja.", "section": "elevation" },
-      { "name": "La regla de la estela", "body": "Entre secciones no hay hairline: cada sección abre con una `.estela` y solo una. La estela nunca se usa dentro de una fila ni como subrayado.", "section": "elevation" },
-      { "name": "La regla de la sombra con dueño", "body": "Solo llevan sombra o halo el botón de energía, la mascota y la cabeza de la estela. Texto, filas, nav y puntos no proyectan.", "section": "elevation" }
+      {
+        "name": "La regla de una sola energía",
+        "body": "El degradado azul→violeta es el único color saturado y siempre aparece como degradado, nunca como azul o violeta planos (salvo `::selection`, el azul de foco `#8FA8FF` y el halo violeta al 28% de la cabeza de la estela). Se gasta en: la llama del cohete (viene en el PNG), el relleno de la regla (`--energy-v`), la estela de cada sección, la cláusula \"escala sin límites.\" del hero (`.grad`, `background-clip: text`), el botón principal, el trazo dibujado de la ruta, el centro de los puntos de ruta, la barra de 22×2px de cada señal, el círculo-tick del libro, el primer punto de la escalera y el halo radial del cierre. Una superficie nueva lo usa en un elemento por pantalla además de su estela y su CTA.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla de tres tintas",
+        "body": "El texto solo usa `--ink`, `--ink-2` o `--ink-3` (excepción única: la cláusula degradada del hero). La jerarquía de lectura se hace bajando de tinta, no cambiando de color.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla del ancho",
+        "body": "Lo que nombra una sección, un servicio, una cifra o el cierre va en wdth 125 a 800/900. Lo que se lee va en wdth 100. No se mezcla peso y ancho para inventar un tercer nivel; el hero es la única pieza a 900 en wdth 100.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla del numeral tabular",
+        "body": "Toda cifra que se compara (cifras de resultado, duraciones de etapa) lleva `.num`. Ningún número decora: si no es un resultado o una duración, no aparece como numeral grande.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla del titular directo",
+        "body": "Los `h2` dicen lo que la sección hace por el lector, en una frase; no hay kicker, cota, número de paso ni metáfora de vuelo encima o debajo.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla de la hairline",
+        "body": "Dentro de una sección, las divisiones son líneas de 1px en `--line` o `--line-strong`; nunca un cambio de fondo. Si una superficie nueva necesita agrupar, usa una regla arriba y otra abajo, no una caja.",
+        "section": "elevation"
+      },
+      {
+        "name": "La regla de la estela",
+        "body": "Entre secciones no hay hairline: cada sección abre con una `.estela` y solo una. La estela nunca se usa dentro de una fila ni como subrayado.",
+        "section": "elevation"
+      },
+      {
+        "name": "La regla de la sombra con dueño",
+        "body": "Solo llevan sombra o halo el botón de energía, la mascota y la cabeza de la estela. Texto, filas, nav y puntos no proyectan.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "**Do** usar `--energy` (100°) en horizontal y `--energy-v` (violeta arriba, azul abajo) en cualquier relleno vertical, como la regla.",

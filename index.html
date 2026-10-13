@@ -213,6 +213,7 @@ main, .nav, .foot{position:relative; z-index:1}
 .shot .senal b{transform:none !important}
 .shot .estela i{clip-path:none !important}
 .shot .libro-hoy{text-decoration-color:rgba(174,180,207,.45) !important}
+.shot .tel{transform:rotate(var(--t,0deg)) !important; animation:none !important}
 .full .hero{min-height:0}
 .shot .sticky{display:none}
 /* entrada orquestada (solo con JS y sin reduced-motion) */
@@ -332,21 +333,64 @@ main, .nav, .foot{position:relative; z-index:1}
 .cta-band p{font-size:1.08rem; font-weight:600; color:var(--ink); letter-spacing:-.01em; max-width:34ch; text-wrap:pretty}
 .cta-band .btn{display:none; justify-self:start} /* en celular ya está el CTA fijo abajo */
 @media (min-width:900px){ .cta-band{grid-template-columns:minmax(0,1fr) auto; gap:32px; padding:28px 0 0} .cta-band p{max-width:40ch} .cta-band .btn{display:inline-flex} }
-.ejemplo{
-  display:inline-flex; align-items:center; gap:8px; margin-top:6px;
-  font-size:.78rem; font-weight:600; color:#C7B4FF; letter-spacing:.01em;
-  padding:6px 10px; border:1px dashed rgba(199,180,255,.45); border-radius:999px;
+/* Cada caso se muestra donde de verdad se usa: en la pantalla de un celular.
+   La captura es la prueba; la cifra grande, al lado, es lo que se lee de lejos. */
+.casos{display:grid; gap:18px}
+.caso{display:grid; gap:14px}
+.caso-txt{display:grid; gap:7px; align-content:center}
+.caso h3{font-size:1.35rem; font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.05}
+.caso-que{color:var(--ink-2); font-size:.97rem; max-width:44ch; text-wrap:pretty}
+.caso-n{color:var(--ink-2); font-size:.98rem; line-height:1.3; margin-top:2px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.caso-n b{font-size:clamp(2.2rem,9vw,3.2rem); font-stretch:125%; font-weight:900; letter-spacing:-.03em; line-height:1; white-space:nowrap; background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
+.caso-lista{display:grid; gap:6px; margin-top:4px}
+.caso-lista li{position:relative; padding-left:21px; color:var(--ink); font-size:.98rem; line-height:1.35; text-wrap:pretty}
+.caso-lista li::before{content:""; position:absolute; left:0; top:.52em; width:11px; height:2px; border-radius:2px; background:var(--energy)}
+
+/* --- el celular: marco metálico, pantalla real adentro --- */
+/* padding-block deja aire para las esquinas giradas, que si no se recortan
+   contra el borde del contenedor que hace scroll */
+.tels{display:flex; gap:12px; overflow-x:auto; padding-block:9px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none}
+.tels::-webkit-scrollbar{display:none}
+.tel{
+  position:relative; flex:none; margin:0; width:var(--tel-w,164px); scroll-snap-align:center;
+  border-radius:21px; padding:4px; isolation:isolate;
+  background:linear-gradient(158deg, rgba(226,233,255,.62), rgba(116,130,186,.30) 46%, rgba(226,233,255,.46));
+  box-shadow:0 18px 32px -18px rgba(4,6,20,.95);
+  transform:rotate(var(--t,0deg));
+  transition:transform 760ms var(--ease-out); transition-delay:calc(var(--d,0) * 90ms + 140ms);
 }
-.logs{display:grid; gap:0; border-top:1px solid var(--line)}
-.log{display:grid; gap:5px; padding:13px 0 15px; border-bottom:1px solid var(--line)}
-.log h3{font-size:1.2rem; font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.1}
-.log-what{color:var(--ink-2); font-size:.98rem; max-width:46ch; text-wrap:pretty}
-.log-n{color:var(--ink-2); font-size:1rem; line-height:1.3; margin-top:4px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
-.log-n b{font-size:clamp(2.2rem,9vw,3.2rem); font-stretch:125%; font-weight:900; letter-spacing:-.03em; line-height:1; white-space:nowrap; background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
+.tel img{display:block; width:100%; height:auto; border-radius:17px; background:#0B0D18}
+/* reflejo diagonal sobre el vidrio */
+.tel::after{content:""; position:absolute; inset:4px; border-radius:17px; pointer-events:none;
+  background:linear-gradient(152deg, rgba(255,255,255,.17) 0 16%, rgba(255,255,255,.04) 30%, transparent 46%)}
+.tels-1 .tel{--t:-3deg; --tel-w:184px}
+.tels-3 .tel:nth-child(1){--t:-4deg; --d:0}
+.tels-3 .tel:nth-child(2){--t:0deg;  --d:1}
+.tels-3 .tel:nth-child(3){--t:4deg;  --d:2}
+/* entran girando desde más inclinado y luego flotan despacio */
+.js .caso.reveal:not(.in) .tel{transform:translate3d(0,24px,0) rotate(calc(var(--t,0deg) * 3.2)) scale(.96)}
+.js .caso.in .tel{animation:tel-float 6.8s ease-in-out infinite; animation-delay:calc(var(--d,0) * 760ms + 400ms)}
+@keyframes tel-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media (min-width:900px){
-  .log{grid-template-columns:200px minmax(0,1fr) 300px; column-gap:40px; align-items:start; padding:17px 0 19px}
-  .log h3{padding-top:6px}
-  .log-n{margin-top:0; justify-self:end; text-align:right; flex-direction:column; align-items:flex-end; gap:6px}
+  .casos{gap:28px}
+  /* la columna de los celulares es siempre la 'auto' (se ajusta a la baraja) y
+     la del texto la flexible; al alternar lados hay que invertir la plantilla,
+     no solo cambiar de celda, o el celular se desborda de la ficha */
+  .caso{grid-template-columns:auto minmax(0,1fr); column-gap:40px; align-items:center}
+  .caso:nth-child(even){grid-template-columns:minmax(0,1fr) auto}
+  .caso:nth-child(even) .tels{grid-column:2; grid-row:1}
+  .caso:nth-child(even) .caso-txt{grid-column:1; grid-row:1}
+  .caso h3{font-size:1.6rem}
+  /* el ancho sigue al de la ventana: con medida fija, la baraja de tres se
+     desbordaba de la ficha entre 900 y 1150px y la tercera pantalla se cortaba */
+  .tel{--tel-w:clamp(132px, 13vw, 188px)}
+  .tels-1 .tel{--tel-w:clamp(168px, 15vw, 214px)}
+  /* en escritorio las tres pantallas se montan como una baraja */
+  .tels{overflow:visible; gap:0; padding-inline:6px}
+  .tels-3 .tel + .tel{margin-left:calc(var(--tel-w) * -.24)}
+  .tels-3 .tel:nth-child(1){z-index:1}
+  .tels-3 .tel:nth-child(2){z-index:3}
+  .tels-3 .tel:nth-child(3){z-index:2}
 }
 
 /* --- cómo trabajamos · escalera --- */
@@ -504,22 +548,20 @@ main, .nav, .foot{position:relative; z-index:1}
 #servicios .lead{color:#C4CBF0}
 
 /* --- sala de datos: RESULTADOS en fichas con filo de energía --- */
-#resultados .logs{border-top:0; gap:12px}
-#resultados .log{
-  position:relative; overflow:hidden; border-bottom:0; border-radius:16px;
+#resultados .caso{
+  position:relative; border-radius:16px;
   border:1px solid rgba(143,168,255,.20);
   background:linear-gradient(180deg, rgba(143,168,255,.10), rgba(143,168,255,.025));
-  padding:18px 16px 20px;
+  padding:16px 16px 20px;
 }
-#resultados .log::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--energy)}
+#resultados .caso::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; border-radius:16px 16px 0 0; background:var(--energy)}
 #resultados .cta-band{
   margin-top:20px; padding:18px; border-radius:18px;
   background:linear-gradient(100deg, rgba(43,130,255,.20), rgba(111,43,245,.22));
   border:1px solid rgba(143,168,255,.28);
 }
 @media (min-width:900px){
-  #resultados .logs{gap:14px}
-  #resultados .log{padding:24px 26px 26px}
+  #resultados .caso{padding:24px 28px 26px}
   #resultados .cta-band{padding:22px 26px; margin-top:26px}
 }
 
@@ -610,7 +652,7 @@ main, .nav, .foot{position:relative; z-index:1}
 .js .libro-row.reveal:not(.in) .libro-hoy{text-decoration-color:transparent}
 
 /* --- resultados: la cifra recibe un destello metálico mientras cuenta --- */
-.log-n b{
+.caso-n b{
   background-image:
     linear-gradient(100deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.72) 50%, rgba(255,255,255,0) 62%),
     var(--metal);
@@ -618,7 +660,7 @@ main, .nav, .foot{position:relative; z-index:1}
   background-repeat:no-repeat;
   background-position:-70% 0, 0 0;
 }
-.log-n b.counting{animation:sheen 1.4s ease-out 1}
+.caso-n b.counting{animation:sheen 1.4s ease-out 1}
 
 /* --- altímetro: el número viaja pegado al cohete --- */
 /* la lectura va centrada sobre la regla: ahí no toca ni el texto ni la
@@ -633,7 +675,10 @@ main, .nav, .foot{position:relative; z-index:1}
   .js .rise, .js .alt-rail, .js .rocket-inner{animation:none}
   .js .reveal{opacity:1; transform:none; transition:none}
   .sticky{transition:none}
-  .js .sheen, .js .hero h1 .sheen, .js .orbita-word .sheen, .log-n b.counting{animation:none !important}
+  .js .sheen, .js .hero h1 .sheen, .js .orbita-word .sheen, .caso-n b.counting{animation:none !important}
+  .tel{transition:none}
+  .js .caso.reveal:not(.in) .tel{transform:rotate(var(--t,0deg))}
+  .js .caso.in .tel{animation:none}
   .estela i, .libro-hoy{transition:none}
   .js .estela:not(.in) i{clip-path:none}
   .senal b{transition:none}
@@ -793,27 +838,85 @@ main, .nav, .foot{position:relative; z-index:1}
       <div class="cota-head">
         <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/celebrando@2x.webp" width="420" height="580" alt="" loading="lazy">
         <h2 class="d-wide reveal">Resultados <span class="grad">que se miden</span></h2>
-        <p class="lead reveal" style="--i:1">Así se ven los números después de tres años trabajando con empresas como la tuya.
-          <!-- EJEMPLO: reemplazar por casos reales del cliente -->
-          <span class="ejemplo">Cifras de ejemplo hasta cargar los casos reales</span>
-        </p>
+        <p class="lead reveal" style="--i:1">Trabajo que ya está corriendo, en el celular de quien lo usa todos los días.</p>
       </div>
-      <div class="logs">
-        <article class="log reveal" style="--i:0">
-          <h3>Distribuidora industrial</h3>
-          <p class="log-what">Automatización y web. Las cotizaciones salen del catálogo y el seguimiento es automático.</p>
-          <p class="log-n num"><b>4 h</b><span>para cotizar, antes tardaban 3 días</span></p>
+      <div class="casos">
+
+        <article class="caso reveal">
+          <div class="tels tels-1">
+            <figure class="tel">
+              <img src="/assets/casos/creo-perfil.webp" width="296" height="640" alt="Perfil de Instagram de Fundación CREO con 9.794 seguidores y 309 publicaciones" loading="lazy">
+            </figure>
+          </div>
+          <div class="caso-txt">
+            <h3>Fundación CREO</h3>
+            <p class="caso-que">Campaña de marketing y publicidad para una organización sin ánimo de lucro: contenido, pauta y una comunidad que crece sola.</p>
+            <p class="caso-n num"><b>9.794</b><span>seguidores en Instagram, sobre 309 publicaciones</span></p>
+          </div>
         </article>
-        <article class="log reveal" style="--i:1">
-          <h3>Clínica con cuatro sedes</h3>
-          <p class="log-what">Pauta y video. Campañas por sede con agenda conectada a WhatsApp.</p>
-          <p class="log-n num"><b>+62 %</b><span>citas agendadas en 90 días</span></p>
+
+        <article class="caso reveal">
+          <div class="tels tels-3">
+            <figure class="tel">
+              <img src="/assets/casos/tradicional-inicio.webp" width="237" height="512" alt="La app de El Tradicional instalada en la pantalla de inicio de un iPhone" loading="lazy">
+            </figure>
+            <figure class="tel">
+              <img src="/assets/casos/tradicional-app.webp" width="237" height="512" alt="Pantalla de inicio de la app de El Tradicional: menú del día, pedido a domicilio y galería del local" loading="lazy">
+            </figure>
+            <figure class="tel">
+              <img src="/assets/casos/tradicional-panel.webp" width="237" height="512" alt="Panel del dueño de El Tradicional: menú del día, sopas, proteínas, carta y promociones" loading="lazy">
+            </figure>
+          </div>
+          <div class="caso-txt">
+            <h3>El Tradicional</h3>
+            <p class="caso-que">Restaurante de comida típica en Envigado. Automatizamos los pedidos y le construimos su app: una cara para el cliente y un panel para el dueño.</p>
+            <ul class="caso-lista">
+              <li>Menos gente atada a tomar pedidos por teléfono</li>
+              <li>Horas de administración recuperadas cada semana</li>
+              <li>Menú, proteínas, promociones y pedidos en un solo panel</li>
+            </ul>
+          </div>
         </article>
-        <article class="log reveal" style="--i:2">
-          <h3>Operador logístico</h3>
-          <p class="log-what">App interna. Reemplazó tres hojas de cálculo y un grupo de WhatsApp de 40 personas.</p>
-          <p class="log-n num"><b>12 h</b><span>recuperadas cada semana por administración</span></p>
+
+        <!-- ================================================================
+             ESPACIO RESERVADO PARA DOS EMPRESAS MÁS.
+             Están listas para entrar: descomenta el bloque, cambia el nombre,
+             el texto y las capturas, y pon los .webp en /assets/casos/.
+             Las pantallas van a 2x de su tamaño de render y en WebP.
+             Usa .tels-1 para una sola captura o .tels-3 para tres.
+
+        <article class="caso reveal">
+          <div class="tels tels-1">
+            <figure class="tel">
+              <img src="/assets/casos/EMPRESA-3.webp" width="296" height="640" alt="DESCRIBIR LA CAPTURA" loading="lazy">
+            </figure>
+          </div>
+          <div class="caso-txt">
+            <h3>Empresa 3</h3>
+            <p class="caso-que">Qué se hizo, en una frase.</p>
+            <p class="caso-n num"><b>000</b><span>qué mide esa cifra</span></p>
+          </div>
         </article>
+
+        <article class="caso reveal">
+          <div class="tels tels-3">
+            <figure class="tel"><img src="/assets/casos/EMPRESA-4-a.webp" width="237" height="512" alt="DESCRIBIR LA CAPTURA" loading="lazy"></figure>
+            <figure class="tel"><img src="/assets/casos/EMPRESA-4-b.webp" width="237" height="512" alt="DESCRIBIR LA CAPTURA" loading="lazy"></figure>
+            <figure class="tel"><img src="/assets/casos/EMPRESA-4-c.webp" width="237" height="512" alt="DESCRIBIR LA CAPTURA" loading="lazy"></figure>
+          </div>
+          <div class="caso-txt">
+            <h3>Empresa 4</h3>
+            <p class="caso-que">Qué se hizo, en una frase.</p>
+            <ul class="caso-lista">
+              <li>Primer resultado</li>
+              <li>Segundo resultado</li>
+              <li>Tercer resultado</li>
+            </ul>
+          </div>
+        </article>
+
+             ================================================================ -->
+
       </div>
       <div class="cta-band reveal">
         <p>¿Quieres números así en tu empresa? Empieza por una llamada de treinta minutos.</p>
@@ -1081,13 +1184,16 @@ main, .nav, .foot{position:relative; z-index:1}
   /* ---------- cifras que cuentan al aparecer ---------- */
   const countIO = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return; countIO.unobserve(e.target);
-    const el = e.target, m = el.textContent.match(/^(\D*)(\d+)(.*)$/); if (!m || reduce || shot) return;
+    /* el grupo de dígitos puede traer separador de miles (9.794), así que se
+       limpia para contar y se vuelve a formatear en cada cuadro */
+    const el = e.target, m = el.textContent.match(/^(\D*)([\d.]+)(.*)$/); if (!m || reduce || shot) return;
+    const target = +m[2].replace(/\./g, ''); if (!isFinite(target)) return;
     el.classList.add('counting'); el.addEventListener('animationend', () => el.classList.remove('counting'), { once: true });
-    const target = +m[2], t0 = performance.now(), dur = 900;
-    const step = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(target * (1 - Math.pow(1 - k, 3))); el.textContent = m[1] + v + m[3]; if (k < 1) requestAnimationFrame(step); };
+    const t0 = performance.now(), dur = 900;
+    const step = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(target * (1 - Math.pow(1 - k, 3))); el.textContent = m[1] + fmt(v) + m[3]; if (k < 1) requestAnimationFrame(step); };
     requestAnimationFrame(step);
   }), { threshold: .6 });
-  $$('.log-n b').forEach(el => countIO.observe(el));
+  $$('.caso-n b').forEach(el => countIO.observe(el));
 
   /* ---------- cielo: estrellas con paralaje de ascenso ---------- */
   const sky = $('#sky'), sctx = sky.getContext('2d'); let stars = [], skyW = 0, skyH = 0, dpr = 1, lastSky = -1;

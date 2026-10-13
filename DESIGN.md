@@ -164,7 +164,7 @@ Un fondo, tres tintas, dos hairlines, dos colores de energía que solo aparecen 
 - **Violeta** (`--violet`): extremo cálido del mismo degradado, color de `::selection`, punta sólida de la estela (parada 100%) y, al 28% de alfa, halo de 4px alrededor de la cabeza de la estela. Fuera de esos sitios no se usa plano.
 
 ### Tertiary
-- **Lavanda de nota** (`lavender-note`, `#C7B4FF`): dos usos, ambos pequeños: la cabeza de 10px de la estela (el punto que brilla al final del trazo) y el chip "Cifras de ejemplo" que marca cifras provisionales. Es la luz al final de la energía, no un acento de marca para superficies.
+- **Lavanda de nota** (`lavender-note`, `#C7B4FF`): dos usos, ambos pequeños: la cabeza de 10px de la estela (el punto que brilla al final del trazo). Es la luz al final de la energía, no un acento de marca para superficies. (El chip `.ejemplo` que marcaba cifras provisionales se retiró el 13 de octubre, al entrar los casos reales.)
 
 ### Neutral
 - **Noche** (`--ground`): fondo de página, de `html`, del `theme-color`, del centro de los puntos de ruta y etapa, y base de los degradados de scrim (nav y CTA fija) como `rgba(7,8,15,…)`.
@@ -254,7 +254,7 @@ Píldora sólida de energía, sin borde, texto blanco a 700. Tacto amortiguado: 
 - **Enlace secundario (`.link-more`):** el único CTA secundario. Texto `--ink-2` a 600, subrayado de 1px en `--line-strong` con offset 5px, flecha SVG de 16px que baja 2px en hover (200ms `--ease-out`); hover a `--ink` y subrayado `#8FA8FF`; `padding: 4px 0`, `white-space: nowrap`. No existe variante de botón fantasma.
 
 ### Chips
-- **Chip de ejemplo (`.ejemplo`):** píldora transparente con borde punteado `rgba(199,180,255,.45)`, texto `#C7B4FF` a .78rem/600, `padding: 6px 10px`, `margin-top: 6px` dentro del lead. Marca en pantalla cifras provisionales. Es el único chip; no hay variantes de filtro ni de selección.
+- **Chips:** no hay. El `.ejemplo` que marcaba cifras provisionales se retiró al entrar los casos reales; si vuelve a hacer falta marcar algo como provisional, se reconstruye con la píldora punteada en lavanda de nota.
 
 ### Cards / Containers
 No hay tarjetas. El contenedor del sistema es la **fila con hairlines**: `border-top: 1px solid var(--line)` en cada fila y `border-bottom` en la última (señales) o en cada una (libro, registros), padding vertical 20–22px / 26–36px, sin fondo, sin radio, sin sombra. Cuatro instancias: `.senal`, `.libro-row`, `.log`, `.stop` (esta última sin regla; la ruta SVG hace de eje).
@@ -289,7 +289,7 @@ Fila de tres celdas: clave (`.libro-k`, `--ink-3`, 500), estado de hoy (`.libro-
 Lista de seis paradas con `.stop-dot` (círculo con anillo hairline fuerte y centro de energía). Un SVG absoluto dibuja una curva Bézier por los centros de los puntos (`buildRoute()`): trazo punteado de fondo y trazo de energía (`#energyStroke`) que se dibuja por `stroke-dashoffset` según el scroll. El cohete pequeño `.route-rocket` (`lado-derecho.png`, 40px / 72px) recorre la curva con `offset-path` / `offset-distance` y `offset-rotate: auto`, con sombra proyectada. El progreso va de que la ruta entre al 62% del viewport hasta que salga por el mismo punto. En celular los puntos están alineados y la curva serpentea ±9px; en escritorio alterna lados con ±58px.
 
 ### Resultado (`.log`)
-Fila con nombre del caso (`h3` wdth 125), qué se hizo (`.log-what`) y cifra (`.log-n.num`: número grande `figure` + descripción en `--ink-2`). Precedido en la cabecera por el chip de ejemplo mientras las cifras sean provisionales.
+Ficha por caso (`.caso`): la prueba a la izquierda, en pantalla de celular (`.tels` / `.tel`), y a la derecha el nombre (`h3` wdth 125), qué se hizo (`.caso-que`) y el resultado, sea cifra grande (`.caso-n.num`) o lista de logros (`.caso-lista`). En escritorio los lados alternan por ficha.
 
 ### Escalera del proceso (`.steps`, `.step`)
 En celular, lista vertical con `border-left: 1px solid var(--line-strong)` y un punto de 11px por etapa (borde `#8FA8FF`; el primero relleno de energía). En escritorio, cuatro columnas con `border-top` y `border-left` en hairline fuerte y `margin-top` decreciente (168/112/56/0) para que los bordes dibujen los peldaños. Cada etapa: título wdth 125 a 800, duración `.step-d.num` en `--ink-3` alineada al final, párrafo en `--ink-2`.
@@ -323,7 +323,7 @@ Las demás poses de la hoja (frente, espalda, 135/225/315, arriba, lado-izquierd
 - **Do** anclar en celular las acciones del hero al pie de la primera pantalla con la rejilla `auto minmax(0,1fr) auto`.
 - **Do** usar la mascota como PNG alfa desde `assets/mascot/`, con `pointer-events: none`, y solo en hero/regla, ruta y cierre.
 - **Do** mover cualquier cosa ligada al scroll dentro del mismo `frame()` y respetar `prefers-reduced-motion` anulando las animaciones autónomas.
-- **Do** marcar cifras provisionales con el chip `.ejemplo` mientras no haya casos reales.
+- **Do** publicar solo cifras verificables en la propia captura o confirmadas por el cliente; si no hay número, el caso va con lista de logros en vez de inventar uno.
 
 ### Don't:
 - **Don't** usar azul o violeta planos como relleno, fondo o texto; la energía es siempre degradado (excepciones cerradas: `::selection`, el azul de foco `#8FA8FF` y el halo al 28% de la estela).
@@ -455,3 +455,25 @@ Reglas para no romperlo:
 - `.sheen` no se reparte: tres piezas de texto y las cifras de Resultados. Es un acento de jerarquía, no un efecto de superficie.
 - Cualquier mascota nueva entra como WebP a 2× de su tamaño de render, nunca por debajo; si se escala con `transform`, una sola capa compuesta.
 - Los metros del altímetro no salen de la regla. Si un número de altitud aparece en un titular, un párrafo o una ficha, está mal.
+
+## Revisión del 13 de octubre de 2026 (casos reales en pantalla de celular)
+
+Resultados deja de mostrar cifras de ejemplo y pasa a mostrar trabajo real, en el soporte donde de verdad se usa: la pantalla de un celular.
+
+**La ficha de caso (`.caso`).** Sustituye a `.log`. Es la misma ficha de la sala de datos (radio 16px, borde `rgba(143,168,255,.20)`, filo superior de 3px en `--energy`), pero ahora con dos columnas: la prueba y el texto. En escritorio los lados alternan ficha a ficha. La columna de los celulares es siempre la `auto` y la del texto la flexible; al alternar hay que invertir la plantilla de columnas, no solo mover las celdas de celda — hacerlo mal deja la baraja en la columna flexible y el celular se sale de la ficha entre 900 y 1150px.
+
+**El celular (`.tel`).** Marco metálico de 4px con el mismo degradado frío del logo, radio 21px fuera y 17px en la pantalla, sombra baja y un reflejo diagonal al 17% sobre el vidrio. Dentro va la captura tal cual, sin retocar. El ancho es fluido en escritorio (`clamp(132px, 13vw, 188px)`, y `clamp(168px, 15vw, 214px)` cuando va sola) para que la baraja nunca empuje fuera de la ficha.
+
+**Cómo se agrupan (`.tels`).** Una sola captura va en `.tels-1`. Tres van en `.tels-3`: en celular es una fila con scroll horizontal y `scroll-snap` al centro, para pasarlas con el pulgar; en escritorio se montan como una baraja (solape del 24% del ancho, la del medio al frente) con rotaciones de −4°, 0° y +4°. El `padding-block` de 9px existe para que las esquinas giradas no se recorten contra el contenedor que hace scroll.
+
+**Movimiento.** Cada celular entra girando desde una inclinación 3,2 veces mayor que la de reposo, con escala .96 y 24px de desplazamiento, escalonado 90ms por posición. Ya revelado, flota despacio (6px, 6,8s) con la misma técnica que el cohete, pero por la propiedad `translate` en vez de `transform`, para no pisar la rotación de reposo. Todo se apaga con `prefers-reduced-motion` y en `?shot=1`.
+
+**El contador de cifras** ahora entiende separador de miles: limpia los puntos para contar y vuelve a formatear con `fmt` en cada cuadro, así "9.794" cuenta hasta 9.794 en vez de hasta 9.
+
+**Honestidad de las pruebas.** Una captura que se presenta como resultado de un cliente no se retoca nunca, ni "sutilmente". Si el dato de partida no está en una captura, va escrito como texto y confirmado por el cliente, no fabricado dentro de la imagen. Un caso sin número confirmado se publica con lista de logros (`.caso-lista`), no con una cifra inventada.
+
+Reglas para no romperlo:
+
+- Las capturas entran en WebP dentro de `/assets/casos/`, al tamaño nativo del pantallazo; si el original es de un iPhone a resolución completa, mejor, porque el marco las muestra a ~190px y agradece la densidad.
+- Las dos fichas comentadas al final de la sección son el molde para las empresas 3 y 4: se descomentan y se rellenan, no se reinventan.
+- `.tel` no lleva `overflow:hidden` en la ficha que lo contiene: las esquinas giradas y el flotado necesitan salirse un poco.
