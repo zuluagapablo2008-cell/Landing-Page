@@ -517,3 +517,21 @@ Reglas para no romperlo:
 - El formulario vive en `formulario.html`. Si cambia un campo, cambia ahí; la landing ya no tiene copia.
 - `.tels-2` nunca lleva scroll: si no caben las dos capturas, se encogen.
 - Las capturas de caso se publican a 640px de ancho. Con original de iPhone, se baja a 640; sin él, se sube a 2x y se anota que falta el original.
+
+## Revisión del 14 de octubre de 2026 (el cohete manda, capturas sólidas, secciones más amplias)
+
+**El cohete del hero nunca había crecido en escritorio.** La regla de celular `.hero-row .rocket-slot` (0,2,0) le ganaba por especificidad a la de escritorio `.rocket-slot` (0,1,0), y como en escritorio `.hero-row` es `display:contents` —desaparece del layout pero sigue en el DOM— el selector seguía casando. El cohete medía 330px en todas las resoluciones. Ahora la regla de escritorio usa el mismo selector y el ancho sale de la columna más el aire que sobra: `--bleed: max(0px, (100vw − var(--maxw)) / 2) + 20px`. A 1440px pasa de 330 a 667px, y a 1920 llega a 907, sin recortarse ni invadir el titular.
+
+**Las capturas parecían transparentes y no era opacidad.** Casi todas son de modo oscuro, y sobre una página casi negra la pantalla se fundía con el fondo: el marco de 4px en `rgba` no alcanzaba a separarlas. La solución no fue tocar la imagen sino el objeto: marco de 6px en color sólido, un filo oscuro de 1px entre marco y pantalla (`box-shadow` en la `img`) y una sombra más honda que lo despega de la página. Nada se superpone a la captura.
+
+**La baraja de tres en celular ya no hace scroll.** Mostraba una pantalla y media y la mayoría nunca desliza, así que dos tercios del caso no se veían. Ahora es abanico también en celular: `--w: clamp(112px, 32vw, 230px)` con solape de `−.46 × --w`, de modo que el conjunto mide 2,08 anchos y entra desde 320px. El `clamp` acota por arriba a propósito: con porcentajes del contenedor, entre 760 y 900px los celulares crecían tanto que se salían de la ficha.
+
+**Lo que cambia** pasa de cuatro filas a ocho, una por frente de servicio, porque cuatro no mostraban de lo que son capaces. **Cómo trabajamos** mantiene la escalera de cuatro etapas pero cada una suma tres viñetas (`.step-lista`) con lo que se entrega.
+
+**El titular del hero va centrado en celular** y a la izquierda en escritorio. La franja de autoridad dice 15 empresas acompañadas.
+
+Reglas para no romperlo:
+
+- En escritorio, cualquier regla sobre `.rocket-slot` tiene que escribirse `.hero-row .rocket-slot` o la pierde contra la de celular.
+- Ninguna fila de capturas lleva scroll horizontal. Si no caben, se encogen.
+- El marco del celular va en color sólido. Nada translúcido encima de una captura.

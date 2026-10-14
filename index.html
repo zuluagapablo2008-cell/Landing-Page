@@ -175,7 +175,10 @@ main, .nav, .foot{position:relative; z-index:1}
 .hero{position:relative; padding-top:34px; padding-bottom:36px; min-height:calc(100dvh - var(--nav-h)); display:flex; align-items:stretch}
 .hero-in{display:grid; grid-template-rows:auto minmax(0,1fr) auto auto; gap:11px; width:100%}
 .hero-copy{display:contents}
-.hero h1{font-size:clamp(2.5rem,11vw,4.9rem)}
+/* en celular el titular y su bajada van centrados: con el cohete justo debajo
+   la primera pantalla queda simétrica. En escritorio vuelven a la izquierda. */
+.hero h1{font-size:clamp(2.5rem,11vw,4.9rem); text-align:center}
+.hero-row .lead{text-align:center; margin-inline:auto}
 .grad{background:var(--energy); -webkit-background-clip:text; background-clip:text; color:transparent}
 .metal{background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
 .hero-row{display:flex; flex-direction:column; align-items:stretch; justify-content:space-between; gap:12px; min-height:0}
@@ -194,18 +197,30 @@ main, .nav, .foot{position:relative; z-index:1}
 .cred strong{color:var(--ink); font-weight:700}
 @media (min-width:900px){
   .hero{padding-top:40px; padding-bottom:64px; align-items:center}
-  .hero-in{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); grid-template-rows:auto auto auto auto; align-items:center; column-gap:48px; row-gap:28px}
+  .hero-in{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); grid-template-rows:auto auto auto auto; align-items:center; column-gap:48px; row-gap:28px}
   .hero-copy, .hero-row{display:contents}
   .hero h1, .hero .lead, .hero-actions{grid-column:1}
-  .hero h1{align-self:end}
-  .hero .lead{font-size:1.15rem; max-width:40ch}
+  .hero h1{align-self:end; text-align:left}
+  .hero .lead{font-size:1.15rem; max-width:40ch; text-align:left; margin-inline:0}
   .hero-actions{display:flex; flex-wrap:wrap; justify-content:flex-start; align-items:center; gap:22px; align-self:start; padding-top:6px}
   .hero-actions .btn{width:auto; min-height:56px; padding:0 28px; font-size:1.05rem}
   .cred{grid-column:1; grid-template-columns:repeat(2,auto); justify-content:start; gap:14px 0; padding-top:20px; margin-top:0; align-self:start}
   .cred li:nth-child(odd){padding-right:26px; margin-right:26px; border-right:1px solid rgba(226,233,255,.22)}
   .cred b{font-size:1.9rem}
   .cred span{font-size:.92rem; max-width:24ch}
-  .rocket-slot{--rocket-w:420px; width:var(--rocket-w); order:0; margin:0; grid-column:2; grid-row:1 / span 4; justify-self:center; align-self:center}
+  /* El cohete manda en la primera pantalla: ocupa su columna entera y además
+     se derrama por el aire que queda entre la caja de texto y el borde de la
+     ventana. El derrame se calcula, no se adivina, así que nunca se recorta:
+     es la mitad de lo que sobra a cada lado del contenedor, más 20px de aire.
+     OJO con el selector: en escritorio .hero-row es display:contents, pero
+     sigue existiendo en el DOM, así que la regla de celular `.hero-row
+     .rocket-slot` gana por especificidad si aquí se escribe solo `.rocket-slot`.
+     Por eso iba pequeño: nunca se aplicaba el ancho de escritorio. */
+  .hero-row .rocket-slot{
+    --bleed:calc(max(0px, (100vw - var(--maxw)) / 2) + 20px);
+    width:calc(100% + var(--bleed)); margin:0 calc(-1 * var(--bleed)) 0 0;
+    order:0; grid-column:2; grid-row:1 / span 4; justify-self:end; align-self:center;
+  }
 }
 /* modo captura: sin entradas, para revisar el render en reposo */
 .shot .rise, .shot .alt-rail, .shot .rocket-inner, .shot .sheen{animation:none !important}
@@ -351,21 +366,35 @@ main, .nav, .foot{position:relative; z-index:1}
    contra el borde del contenedor que hace scroll */
 .tels{display:flex; gap:12px; overflow-x:auto; padding-block:9px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none}
 .tels::-webkit-scrollbar{display:none}
+/* Casi todas las capturas son de modo oscuro, y sobre una página casi negra
+   la pantalla se fundía con el fondo: parecía que el celular se transparentaba.
+   Por eso el marco va en color sólido (nada de rgba), más grueso, con un filo
+   oscuro entre marco y pantalla y una sombra que lo despega de la página.
+   Nada se superpone a la captura: se ve exactamente como el pantallazo. */
 .tel{
   position:relative; flex:none; margin:0; width:var(--tel-w,200px); scroll-snap-align:center;
-  border-radius:21px; padding:4px; isolation:isolate;
-  background:linear-gradient(158deg, rgba(226,233,255,.62), rgba(116,130,186,.30) 46%, rgba(226,233,255,.46));
-  box-shadow:0 18px 32px -18px rgba(4,6,20,.95);
+  border-radius:24px; padding:6px; isolation:isolate;
+  background:linear-gradient(158deg, #E6ECFF 0%, #9AA7D8 38%, #6C78AE 56%, #D9E1FB 100%);
+  box-shadow:0 26px 46px -18px rgba(2,3,12,.96), 0 2px 0 0 rgba(255,255,255,.22) inset;
   transform:rotate(var(--t,0deg));
   transition:transform 760ms var(--ease-out); transition-delay:calc(var(--d,0) * 90ms + 140ms);
 }
-/* la captura va limpia: sin reflejo encima, que la dejaba lavada y parecía
-   translúcida. El marco es lo único que decora. */
-.tel img{display:block; width:100%; height:auto; border-radius:17px; background:#0B0D18}
+.tel img{
+  display:block; width:100%; height:auto; border-radius:18px; background:#0B0D18;
+  box-shadow:0 0 0 1px rgba(6,8,22,.95);
+}
 .tels-1 .tel{--t:-3deg; --tel-w:240px}
-.tels-3 .tel:nth-child(1){--t:-4deg; --d:0}
-.tels-3 .tel:nth-child(2){--t:0deg;  --d:1}
-.tels-3 .tel:nth-child(3){--t:4deg;  --d:2}
+/* En celular las tres pantallas también van en abanico, nunca con scroll:
+   una fila que hay que deslizar esconde dos tercios del caso y la mayoría
+   nunca la desliza. El ancho se acota con clamp y el solape se deriva de él,
+   así el conjunto mide 2,08 × el ancho de una y entra desde 320px, sin que
+   en tablet se desborden por crecer con el contenedor. */
+.tels-3{--w:clamp(112px, 32vw, 230px); overflow:visible; gap:0; scroll-snap-type:none; padding-inline:10px}
+.tels-3 .tel{width:var(--w)}
+.tels-3 .tel + .tel{margin-left:calc(var(--w) * -.46)}
+.tels-3 .tel:nth-child(1){--t:-5deg; --d:0; z-index:1}
+.tels-3 .tel:nth-child(2){--t:0deg;  --d:1; z-index:3}
+.tels-3 .tel:nth-child(3){--t:5deg;  --d:2; z-index:2}
 /* antes y después: las dos se ven de un vistazo, nunca una detrás de la otra,
    así que esta variante no hace scroll y se encoge con la ventana */
 .tels-2{overflow:visible; gap:10px; padding-block:9px 32px}
@@ -394,12 +423,10 @@ main, .nav, .foot{position:relative; z-index:1}
   .tel{--tel-w:clamp(150px, 15vw, 224px)}
   .tels-1 .tel{--tel-w:clamp(190px, 19vw, 284px)}
   .tels-2 .tel{--tel-w:clamp(140px, 14vw, 196px)}
-  /* en escritorio las tres pantallas se montan como una baraja */
+  /* en escritorio hay sitio de sobra, así que la baraja vuelve a medidas fijas */
   .tels{overflow:visible; gap:0; padding-inline:6px}
+  .tels-3 .tel{width:var(--tel-w)}
   .tels-3 .tel + .tel{margin-left:calc(var(--tel-w) * -.24)}
-  .tels-3 .tel:nth-child(1){z-index:1}
-  .tels-3 .tel:nth-child(2){z-index:3}
-  .tels-3 .tel:nth-child(3){z-index:2}
 }
 
 /* --- cómo trabajamos · escalera --- */
@@ -427,6 +454,9 @@ main, .nav, .foot{position:relative; z-index:1}
 .step h3{font-size:1.25rem; font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.1}
 .step-d{font-size:.85rem; color:var(--ink-3); font-variant-numeric:tabular-nums; white-space:nowrap}
 .step p{color:var(--ink-2); margin-top:5px; max-width:40ch; text-wrap:pretty}
+.step-lista{display:grid; gap:5px; margin-top:10px}
+.step-lista li{position:relative; padding-left:16px; font-size:.88rem; line-height:1.35; color:var(--ink-3); text-wrap:pretty}
+.step-lista li::before{content:""; position:absolute; left:0; top:.52em; width:7px; height:2px; border-radius:2px; background:rgba(143,168,255,.62)}
 @media (min-width:900px){
   .plan{padding-top:0; padding-bottom:62px}
   .plan-head{margin-bottom:26px}
@@ -561,7 +591,7 @@ main, .nav, .foot{position:relative; z-index:1}
   position:relative; border-radius:16px;
   border:1px solid rgba(143,168,255,.20);
   background:linear-gradient(180deg, rgba(143,168,255,.10), rgba(143,168,255,.025));
-  padding:16px 16px 20px;
+  padding:16px 12px 20px;
 }
 #resultados .caso::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; border-radius:16px 16px 0 0; background:var(--energy)}
 #resultados .cta-band{
@@ -742,7 +772,7 @@ main, .nav, .foot{position:relative; z-index:1}
         </div>
         <ul class="cred rise r5" aria-label="Por qué confiar en Kairo Escala">
           <li><b class="metal num">3</b><span>años en negocios digitales</span></li>
-          <li><b class="metal num">4</b><span>empresas de experiencia</span></li>
+          <li><b class="metal num">15</b><span>empresas acompañadas</span></li>
           <li><b class="cred-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.3 1.9 3-.2.8 2.9 2.5 1.7-1.2 2.7 1.2 2.7-2.5 1.7-.8 2.9-3-.2L12 21l-2.3-1.9-3 .2-.8-2.9-2.5-1.7 1.2-2.7-1.2-2.7 2.5-1.7.8-2.9 3 .2z" fill="currentColor" opacity=".18"/><path d="M8.5 12.2l2.3 2.3 4.7-4.8" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></b><span>Certificados en <strong>Meta Ads</strong></span></li>
           <li><b class="cred-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.9"/><circle cx="16.5" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.9"/><path d="M3.5 18.5c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6M15 15.2c2.4.1 4.3 1.3 5 3.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></b><span>Un <strong>equipo</strong> completo, no un freelancer</span></li>
         </ul>
@@ -777,26 +807,46 @@ main, .nav, .foot{position:relative; z-index:1}
       <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="cota-head">
         <h2 class="d-wide reveal">Lo que cambia <span class="grad">con Kairo Escala</span></h2>
-        <p class="lead reveal" style="--i:1">Cuatro cosas que dejan de ser tu problema.</p>
+        <p class="lead reveal" style="--i:1">Ocho frentes que dejan de ser tu problema, y que hoy probablemente llevas tú.</p>
         <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/ascendiendo@2x.webp" width="552" height="660" alt="" loading="lazy">
       </div>
       <div class="libro">
         <div class="libro-row reveal" style="--i:0">
           <div class="libro-k">Tu tiempo</div>
           <div class="libro-hoy">Apagas incendios todos los días.</div>
-          <div class="libro-alt"><i></i>Procesos que corren solos.</div>
+          <div class="libro-alt"><i></i>Procesos que corren solos, sin que nadie los empuje.</div>
         </div>
         <div class="libro-row reveal" style="--i:1">
-          <div class="libro-k">Tu diseño</div>
+          <div class="libro-k">Tus ventas</div>
+          <div class="libro-hoy">La web es un folleto que nadie contesta.</div>
+          <div class="libro-alt"><i></i>Un embudo que convierte visitas en conversaciones.</div>
+        </div>
+        <div class="libro-row reveal" style="--i:2">
+          <div class="libro-k">Tu operación</div>
+          <div class="libro-hoy">Tareas repetitivas que se comen el día.</div>
+          <div class="libro-alt"><i></i>Asistentes con IA que responden, clasifican y resumen.</div>
+        </div>
+        <div class="libro-row reveal" style="--i:3">
+          <div class="libro-k">Tu marca</div>
           <div class="libro-hoy">Una web que da pena mandar.</div>
           <div class="libro-alt"><i></i>Una marca del tamaño de tu empresa.</div>
         </div>
-        <div class="libro-row reveal" style="--i:2">
+        <div class="libro-row reveal" style="--i:4">
           <div class="libro-k">Tu presencia</div>
           <div class="libro-hoy">Publicas cuando te acuerdas.</div>
           <div class="libro-alt"><i></i>Contenido y pauta con calendario y reporte.</div>
         </div>
-        <div class="libro-row reveal" style="--i:3">
+        <div class="libro-row reveal" style="--i:5">
+          <div class="libro-k">Tu catálogo</div>
+          <div class="libro-hoy">Vendes contestando mensajes uno por uno.</div>
+          <div class="libro-alt"><i></i>Una tienda que cobra y despacha sola.</div>
+        </div>
+        <div class="libro-row reveal" style="--i:6">
+          <div class="libro-k">Tu video</div>
+          <div class="libro-hoy">Grabas y ahí queda, sin editar.</div>
+          <div class="libro-alt"><i></i>Reels y piezas corporativas listas cada semana.</div>
+        </div>
+        <div class="libro-row reveal" style="--i:7">
           <div class="libro-k">Tu claridad</div>
           <div class="libro-hoy">Reportes que nadie lee.</div>
           <div class="libro-alt"><i></i>Un tablero en tu celular con lo que importa.</div>
@@ -953,25 +1003,45 @@ main, .nav, .foot{position:relative; z-index:1}
       <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="plan-head">
         <h2 class="d-wide reveal">Cómo <span class="grad">trabajamos</span></h2>
-        <p class="lead reveal" style="--i:1">Cuatro etapas. Sabes qué se entrega y cuánto cuesta antes de empezar.</p>
+        <p class="lead reveal" style="--i:1">Cuatro etapas, y en cada una sabes qué recibes, cuándo y por cuánto. Nada se decide sobre la marcha.</p>
         <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/despegue@2x.webp" width="400" height="644" alt="" loading="lazy">
       </div>
       <ol class="steps" id="steps">
         <li class="step reveal" style="--i:0">
           <div class="step-t"><h3>Llamada estratégica</h3><span class="step-d num">30 min</span></div>
-          <p>Llegamos con tus respuestas leídas. Sales con tres acciones concretas, trabajemos juntos o no.</p>
+          <p>Llegamos con tus respuestas leídas, así que no se gasta en presentaciones.</p>
+          <ul class="step-lista">
+            <li>Dónde se te está yendo el tiempo</li>
+            <li>Qué automatizar primero</li>
+            <li>Qué todavía no vale la pena</li>
+          </ul>
         </li>
         <li class="step reveal" style="--i:1">
           <div class="step-t"><h3>Propuesta con precio cerrado</h3><span class="step-d num">5 días</span></div>
-          <p>Alcance, tiempos y precio por escrito.</p>
+          <p>Alcance, tiempos y precio por escrito, sin letra pequeña.</p>
+          <ul class="step-lista">
+            <li>Qué se entrega y qué no</li>
+            <li>Precio y plazo fijos</li>
+            <li>Qué ves funcionando cada semana</li>
+          </ul>
         </li>
         <li class="step reveal" style="--i:2">
           <div class="step-t"><h3>Construcción y lanzamiento</h3><span class="step-d num">2 a 8 semanas</span></div>
-          <p>Entregas semanales que ves funcionando.</p>
+          <p>Entregas semanales que puedes abrir y probar, no informes de avance.</p>
+          <ul class="step-lista">
+            <li>Tu equipo entrenado en lo nuevo</li>
+            <li>Pruebas con datos reales</li>
+            <li>Salida a producción acompañada</li>
+          </ul>
         </li>
         <li class="step reveal" style="--i:3">
           <div class="step-t"><h3>Operación y crecimiento</h3><span class="step-d num">mes a mes</span></div>
-          <p>Optimizamos, reportamos y abrimos la siguiente etapa.</p>
+          <p>Lo construido se queda tuyo y nosotros lo mantenemos corriendo.</p>
+          <ul class="step-lista">
+            <li>Reporte de lo que volvió</li>
+            <li>Ajustes sobre lo que se mide</li>
+            <li>Abrimos el siguiente frente</li>
+          </ul>
         </li>
       </ol>
     </div>

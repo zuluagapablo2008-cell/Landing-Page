@@ -454,7 +454,8 @@
       "El formulario no guarda nada: sin backend, las respuestas viajan en el mensaje de WhatsApp. Pendiente decidir si se conecta un servicio de formularios o una funcion serverless para dejar registro.",
       "Resultados muestra tres casos reales (Fundacion CREO, El Tradicional, Tic Tac Shop). Falta: las cifras de ahorro de El Tradicional, que hoy van como lista sin numero. Queda una ficha comentada de molde.",
       "Las capturas de El Tradicional siguen siendo las comprimidas del chat (237x512). Las de CREO y Tic Tac ya vienen de originales de iPhone a 3x. Pedir las de El Tradicional en resolucion completa.",
-      "Las capturas de Tic Tac Shop incluyen la barra del navegador y el dominio myshopify.com. Pendiente decidir si se recortan."
+      "Las capturas de Tic Tac Shop incluyen la barra del navegador y el dominio myshopify.com. Pendiente decidir si se recortan.",
+      "El hero en escritorio depende de que la regla del cohete se escriba .hero-row .rocket-slot; con .rocket-slot a secas la gana la de celular por especificidad."
     ]
   },
   "components": [
