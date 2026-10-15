@@ -535,3 +535,26 @@ Reglas para no romperlo:
 - En escritorio, cualquier regla sobre `.rocket-slot` tiene que escribirse `.hero-row .rocket-slot` o la pierde contra la de celular.
 - Ninguna fila de capturas lleva scroll horizontal. Si no caben, se encogen.
 - El marco del celular va en color sólido. Nada translúcido encima de una captura.
+
+## Revisión del 15 de octubre de 2026 (el CTA que no abría, y la capacidad que no se leía)
+
+**El botón "Cuéntanos de tu negocio" no llevaba a ninguna parte.** Los seis CTA apuntaban a `/formulario` con `target="_blank"`. La ruta absoluta solo existe en Vercel (la resuelve `cleanUrls`), así que fuera de ahí —vista previa, copia local, cualquier otro host— caía en la raíz del dominio equivocado; y el `target="_blank"` lo bloquean los iframes con `sandbox` y los navegadores embebidos de Instagram y WhatsApp, que es por donde llega casi todo el tráfico. Ahora los seis apuntan a `formulario.html`, relativo y en la misma pestaña. Relativo funciona en los cuatro contextos sin excepción; la misma pestaña elimina de raíz el bloqueo de ventanas emergentes. El formulario sigue siendo una página aparte, que era lo que se pedía: página aparte no quiere decir pestaña aparte. La vuelta a la landing está en el logo y en el enlace "Volver" de la cabecera.
+
+**La página no decía que podemos hacer casi cualquier cosa.** Leída de corrido se entendía un catálogo de ocho casillas: si lo tuyo no está en la lista, no es para ti. Cuatro cambios lo corrigen sin inflar la página:
+
+- **Ficha `.abierto`**, al cierre de Servicios: lo único con borde y fondo propio en toda la página, para que corte la lectura en lista. Dice que los ocho son los frentes que más piden, no el límite, y explica cómo se trabaja un caso que no encaja: lo cuentas en tus palabras → lo cruzamos con lo construido → sale propuesta con alcance, tiempo y precio. También dice que si no es lo nuestro, lo decimos. Sin esa frase la promesa no es creíble.
+- **Dos señales más** en Dolores (seis, no cuatro): la información repartida en cuadernos y chats, y tener claro el problema pero no a quién encargárselo. La segunda es la que conecta con la ficha: cada proveedor vende su pedazo y ninguno responde por el resto.
+- **Cierres de sección** que abren la puerta: "tu caso no tiene que estar en esta lista" en Dolores, "la fila que falta la pone tu negocio" en Lo que cambia.
+- **Señales 3 y 4 reescritas.** "Tu página web se ve de hace tres años. Porque es de hace tres años." era un juego de palabras que había que releer; "Inviertes en publicidad y no sabes qué volvió" dejaba el sujeto en el aire. Ahora nombran al responsable y la consecuencia.
+
+**Cómo trabajamos pasa a cinco etapas.** La primera es el formulario ("Nos cuentas tu caso", 2 min), que antes estaba en todos los CTA pero en ninguna etapa: el proceso arrancaba en la llamada y contradecía al botón. Con cinco columnas la escalera horizontal pide más ancho, así que su punto de quiebre sube de 900 a 1080px; entre 900 y 1080 se queda el riel vertical, que con cinco etapas sigue leyéndose. El JS que enciende los peldaños usa el mismo 1080.
+
+**Nueve empresas acompañadas**, no quince (dato corregido por el cliente).
+
+**Arreglos de 320px** encontrados al barrer anchos: el rótulo del botón no parte línea, así que su `min-content` estiraba la columna del hero fuera del margen (padding y cuerpo menores por debajo de 360px); la baraja de tres y el antes/después pedían más ancho del disponible; y el cohete del hero se salía por el margen negativo.
+
+Reglas para no romperlo:
+
+- Los enlaces entre `index.html` y `formulario.html` van **relativos y sin `target`**. Una ruta que empiece por `/` solo funciona en Vercel.
+- Cualquier servicio nuevo entra en la ruta de ocho paradas, pero la ficha `.abierto` se queda: es la que dice que la lista no es la frontera.
+- La escalera horizontal es de cinco columnas desde 1080px. Si se agrega una etapa, hay que subir ese punto de quiebre y el `innerWidth >= 1080` del JS a la vez.

@@ -25,12 +25,14 @@ Un solo equipo que cubre todo el frente digital de una empresa (automatización 
 ## Operating Context
 
 - Visita casi siempre en celular, en vertical, con una mano; la versión móvil es la prioridad y la de escritorio es secundaria.
-- El CTA único es "Cuéntanos de tu negocio" y abre `/formulario` en otra pestaña (página aparte, `formulario.html`). El formulario recoge el contexto de la empresa (a qué se dedica, tamaño, qué necesita, dolor principal, cuánto puede invertir, cuándo quiere empezar) y al enviarlo abre WhatsApp con todas las respuestas escritas; la llamada se agenda ahí, al final.
+- El CTA único es "Cuéntanos de tu negocio" y lleva a `formulario.html`, una página aparte, en la misma pestaña (el enlace es relativo y sin `target`: con ruta absoluta solo funcionaba en Vercel, y `target="_blank"` lo bloquean los navegadores embebidos de Instagram y WhatsApp, que es por donde llega casi todo el tráfico). El formulario recoge el contexto de la empresa (a qué se dedica, tamaño, qué necesita, dolor principal, cuánto puede invertir, cuándo quiere empezar) y al enviarlo abre WhatsApp con todas las respuestas escritas; la llamada se agenda ahí, al final.
 - Toda la página es un embudo: cada bloque empuja al mismo CTA (dolor → promesa → servicios → prueba → proceso → cierre).
 
 ## Capabilities and Constraints
 
 - Servicios confirmados (8): automatización de procesos, funnels de venta y diseños web, soluciones con IA, marketing digital, publicidad paga en redes sociales, edición de videos, tiendas virtuales, creación de contenido.
+- Los ocho son la puerta de entrada, **no el límite**: el encargo real suele ser una mezcla, y la propuesta se arma a partir del problema que trae el visitante. La página lo dice explícitamente (ficha "¿Y si lo tuyo no está en la lista?" al cierre de Servicios) junto con el compromiso de decir que no cuando algo no sea para nosotros.
+- Trayectoria: 3 años en negocios digitales y **9 empresas acompañadas**.
 - Idioma: español neutro latinoamericano.
 - **Abierto:** número de WhatsApp real (marcador `+57 300 000 0000` hasta recibirlo).
 - **Abierto:** resultados reales con números (el cliente los tiene y los enviará; hasta entonces se usan cifras de ejemplo marcadas como tal en el código y en pantalla).

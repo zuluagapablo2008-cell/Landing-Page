@@ -93,6 +93,11 @@ a{color:inherit}
 }
 .btn:active{transform:scale(.97)}
 .btn svg{flex:none}
+/* A 320px el rótulo no cabe con el padding completo: como el botón no parte
+   la línea, su min-content estiraba la columna del hero fuera del margen. */
+@media (max-width:359px){
+  .btn{padding:0 15px; gap:8px; font-size:.93rem}
+}
 @media (hover:hover) and (pointer:fine){
   .btn:hover{transform:translateY(-1px); box-shadow:0 18px 34px -16px rgba(14,22,70,1)}
 }
@@ -183,11 +188,19 @@ main, .nav, .foot{position:relative; z-index:1}
 .metal{background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent}
 .hero-row{display:flex; flex-direction:column; align-items:stretch; justify-content:space-between; gap:12px; min-height:0}
 .hero-row .rocket-slot{order:-1; align-self:flex-end; width:min(330px, calc(100% + 34px)); margin-right:-20px; margin-top:-6px}
+/* En pantallas muy angostas (iPhone SE, Fold cerrado) el cohete se sale del
+   ancho y aparece scroll horizontal: ahí se queda dentro del margen. */
+@media (max-width:359px){
+  .hero-row .rocket-slot{width:100%; margin-right:0}
+}
 .hero-row .lead{flex:0 0 auto}
 .hero-actions{display:grid; gap:16px; justify-items:start; padding-top:8px}
 .hero-actions .btn{width:100%}
 /* franja de autoridad: cuatro datos, números plateados como el logo */
-.cred{display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; padding-top:18px; margin-top:6px; position:relative}
+/* minmax(0,1fr) y no 1fr: con 1fr el mínimo es el min-content de la celda y
+   en pantallas de 320px la franja estiraba toda la columna del hero, lo que
+   sacaba el titular fuera del margen. */
+.cred{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px 18px; padding-top:18px; margin-top:6px; position:relative}
 .cred::before{content:""; position:absolute; left:0; right:0; top:0; height:1px; background:var(--metal-line); opacity:.55}
 .cred li{display:flex; align-items:center; gap:10px; min-width:0}
 .cred b{flex:none; font-stretch:125%; font-weight:900; font-size:1.7rem; line-height:1; letter-spacing:-.03em}
@@ -343,6 +356,31 @@ main, .nav, .foot{position:relative; z-index:1}
   .route-rocket{width:104px}
 }
 
+/* --- lo que no está en la lista: el catálogo no es la frontera ---
+   Los ocho servicios son la puerta de entrada, no el límite. Esta ficha
+   cierra la sección diciendo cómo se trabaja un caso que no encaja en
+   ninguna de las ocho casillas: el visitante trae el problema, nosotros
+   armamos la solución. Sin esto, la lista se lee como un menú cerrado. */
+.abierto{
+  margin-top:12px; padding:18px; border:1px solid var(--line-strong); border-radius:18px;
+  background:linear-gradient(180deg, rgba(143,168,255,.075), rgba(7,8,15,0) 72%);
+  display:grid; gap:16px;
+}
+.abierto-in{display:grid; gap:12px}
+.abierto-k{font-size:clamp(1.18rem,5vw,1.6rem); font-stretch:125%; font-weight:800; letter-spacing:-.02em; line-height:1.1}
+.abierto-p{color:var(--ink-2); font-size:1rem; max-width:64ch; text-wrap:pretty}
+.abierto-pasos{display:grid; gap:10px}
+.abierto-pasos li{display:grid; grid-template-columns:26px minmax(0,1fr); gap:12px; align-items:start; color:var(--ink); font-size:.98rem; line-height:1.38; text-wrap:pretty}
+.abierto-pasos b{
+  width:26px; height:26px; border-radius:50%; display:grid; place-items:center;
+  font-size:.82rem; font-weight:800; color:#fff; background:var(--energy);
+}
+.abierto .btn{display:none; justify-self:start} /* en celular ya está el CTA fijo abajo */
+@media (min-width:900px){
+  .abierto{padding:26px 30px; grid-template-columns:minmax(0,1fr) auto; column-gap:34px; align-items:center}
+  .abierto .btn{display:inline-flex}
+}
+
 /* --- resultados --- */
 .cta-band{display:grid; gap:14px; padding:22px 0 4px; align-items:center}
 .cta-band p{font-size:1.08rem; font-weight:600; color:var(--ink); letter-spacing:-.01em; max-width:34ch; text-wrap:pretty}
@@ -408,6 +446,16 @@ main, .nav, .foot{position:relative; z-index:1}
 .js .caso.reveal:not(.in) .tel{transform:translate3d(0,24px,0) rotate(calc(var(--t,0deg) * 3.2)) scale(.96)}
 .js .caso.in .tel{animation:tel-float 6.8s ease-in-out infinite; animation-delay:calc(var(--d,0) * 760ms + 400ms)}
 @keyframes tel-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
+/* Pantallas de 320px (iPhone SE de primera generación, Fold cerrado): la
+   baraja de tres, el antes/después y la tabla piden más ancho del que hay y
+   sacaban scroll horizontal. Aquí se aprietan lo justo. Va después de las
+   reglas base porque comparten especificidad y gana la última. */
+@media (max-width:359px){
+  .tels-3{--w:clamp(84px, 27vw, 230px); padding-inline:2px}
+  .tels-2 .tel{--tel-w:clamp(94px, 29vw, 150px)}
+  .libro-row{grid-template-columns:66px minmax(0,1fr); gap:3px 10px}
+  .libro-alt{font-size:1.05rem}
+}
 @media (min-width:900px){
   .casos{gap:28px}
   /* la columna de los celulares es siempre la 'auto' (se ajusta a la baraja) y
@@ -460,19 +508,25 @@ main, .nav, .foot{position:relative; z-index:1}
 @media (min-width:900px){
   .plan{padding-top:0; padding-bottom:62px}
   .plan-head{margin-bottom:26px}
-  .steps{grid-template-columns:repeat(4,minmax(0,1fr)); border-left:0; margin-left:0; align-items:stretch; gap:0}
-  .step{padding:26px 28px 0 0; border-top:1px solid var(--line-strong)}
-  .step + .step{border-left:1px solid var(--line-strong); padding-left:24px}
+}
+/* La escalera horizontal son cinco columnas, así que necesita más ancho que
+   el resto del escritorio: por debajo de 1080px se queda el riel vertical,
+   que con cinco etapas sigue leyéndose bien. */
+@media (min-width:1080px){
+  .steps{grid-template-columns:repeat(5,minmax(0,1fr)); border-left:0; margin-left:0; align-items:stretch; gap:0}
+  .step{padding:26px 22px 0 0; border-top:1px solid var(--line-strong)}
+  .step + .step{border-left:1px solid var(--line-strong); padding-left:20px}
   .step::before{left:-6px; top:-6px}
   .step:first-child::before{left:0}
   .steps::before{display:none}
   .step::after{display:block}
   .step + .step::after{left:-1px}
   /* escalera: cada etapa un peldaño más arriba; los bordes dibujan los escalones */
-  .step:nth-child(1){margin-top:108px}
-  .step:nth-child(2){margin-top:72px}
-  .step:nth-child(3){margin-top:36px}
-  .step:nth-child(4){margin-top:0}
+  .step:nth-child(1){margin-top:144px}
+  .step:nth-child(2){margin-top:108px}
+  .step:nth-child(3){margin-top:72px}
+  .step:nth-child(4){margin-top:36px}
+  .step:nth-child(5){margin-top:0}
   .step p{max-width:none}
 }
 
@@ -749,7 +803,7 @@ main, .nav, .foot{position:relative; z-index:1}
       <a href="#resultados">Resultados</a>
       <a href="#proceso">Cómo trabajamos</a>
     </nav>
-    <a class="btn" data-cta href="/formulario" target="_blank" rel="noopener">Cuéntanos de tu negocio</a>
+    <a class="btn" data-cta href="formulario.html">Cuéntanos de tu negocio</a>
   </div>
   <span class="nav-trail" id="navTrail" aria-hidden="true"></span>
 </header>
@@ -761,18 +815,18 @@ main, .nav, .foot{position:relative; z-index:1}
       <div class="hero-copy">
         <h1 class="d-tight rise r1"><span class="metal sheen">Impulsa tu negocio,</span> <span class="grad sheen">escala sin límites.</span></h1>
         <div class="hero-row">
-          <p class="lead rise r2">Automatización, marketing, IA y ventas en un solo equipo que te devuelve el tiempo.</p>
+          <p class="lead rise r2">Automatización, web, IA, pauta y contenido en un solo equipo. Cuéntanos qué te está frenando y te decimos qué construir.</p>
           <div class="rocket-slot" id="rocketSlot"></div>
         </div>
         <div class="hero-actions">
-          <a class="btn rise r3" data-cta data-hero-cta href="/formulario" target="_blank" rel="noopener">
+          <a class="btn rise r3" data-cta data-hero-cta href="formulario.html">
             Cuéntanos de tu negocio
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
         <ul class="cred rise r5" aria-label="Por qué confiar en Kairo Escala">
           <li><b class="metal num">3</b><span>años en negocios digitales</span></li>
-          <li><b class="metal num">15</b><span>empresas acompañadas</span></li>
+          <li><b class="metal num">9</b><span>empresas acompañadas</span></li>
           <li><b class="cred-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.3 1.9 3-.2.8 2.9 2.5 1.7-1.2 2.7 1.2 2.7-2.5 1.7-.8 2.9-3-.2L12 21l-2.3-1.9-3 .2-.8-2.9-2.5-1.7 1.2-2.7-1.2-2.7 2.5-1.7.8-2.9 3 .2z" fill="currentColor" opacity=".18"/><path d="M8.5 12.2l2.3 2.3 4.7-4.8" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></b><span>Certificados en <strong>Meta Ads</strong></span></li>
           <li><b class="cred-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.9"/><circle cx="16.5" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.9"/><path d="M3.5 18.5c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6M15 15.2c2.4.1 4.3 1.3 5 3.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></b><span>Un <strong>equipo</strong> completo, no un freelancer</span></li>
         </ul>
@@ -793,10 +847,12 @@ main, .nav, .foot{position:relative; z-index:1}
         <ol class="senales-grid">
           <li class="senal reveal" style="--i:0"><b></b><span>Sientes que te estás quedando atrás en lo digital y no sabes por dónde empezar.<em>Cada mes que pasa, ponerse al día cuesta más.</em></span></li>
           <li class="senal reveal" style="--i:1"><b></b><span>Trabajas más horas que nunca y el negocio sigue dependiendo de ti para todo.<em>Si te desconectas una semana, se frena.</em></span></li>
-          <li class="senal reveal" style="--i:2"><b></b><span>Tu página web se ve de hace tres años. Porque es de hace tres años.<em>Es lo primero que revisa un cliente.</em></span></li>
-          <li class="senal reveal" style="--i:3"><b></b><span>Inviertes en publicidad y no sabes qué volvió.<em>Sabes cuánto gastaste, no cuánto entró.</em></span></li>
+          <li class="senal reveal" style="--i:2"><b></b><span>Tu página web ya no se parece a la empresa que tienes hoy.<em>Y es lo primero que mira un cliente antes de escribirte.</em></span></li>
+          <li class="senal reveal" style="--i:3"><b></b><span>Pagas publicidad todos los meses y nadie te dice qué entró por ahí.<em>Sabes cuánto gastaste; no cuántos clientes te dejó.</em></span></li>
+          <li class="senal reveal" style="--i:4"><b></b><span>La información del negocio está repartida en cuadernos, chats y archivos.<em>Nadie tiene el número completo cuando hay que decidir.</em></span></li>
+          <li class="senal reveal" style="--i:5"><b></b><span>Tienes claro el problema, pero no a quién encargárselo.<em>Cada proveedor te vende su pedazo y ninguno responde por el resto.</em></span></li>
         </ol>
-        <p class="lead reveal" style="margin-top:18px; max-width:52ch">Nada de esto se arregla solo.</p>
+        <p class="lead reveal" style="margin-top:18px; max-width:56ch">Nada de esto se arregla solo. Y tu caso no tiene que estar en esta lista: nos cuentas qué te está frenando y te decimos qué haríamos.</p>
       </div>
     </div>
   </section>
@@ -852,6 +908,7 @@ main, .nav, .foot{position:relative; z-index:1}
           <div class="libro-alt"><i></i>Un tablero en tu celular con lo que importa.</div>
         </div>
       </div>
+      <p class="lead reveal" style="margin-top:18px; max-width:58ch">La fila que falta la pone tu negocio. Si tu cuello de botella no está en esta tabla, lo miramos igual y te decimos cómo se destraba.</p>
     </div>
   </section>
 
@@ -861,7 +918,7 @@ main, .nav, .foot{position:relative; z-index:1}
       <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="cota-head">
         <h2 class="d-wide reveal">Todo lo que tu negocio necesita, <span class="grad">en un solo equipo</span></h2>
-        <p class="lead reveal" style="--i:1">Ocho servicios, un solo responsable. Contratas lo que necesites.</p>
+        <p class="lead reveal" style="--i:1">Ocho frentes con equipo propio y un solo responsable. No es un catálogo cerrado: tú traes el problema y nosotros armamos lo que hace falta.</p>
       </div>
 
       <div class="route" id="route">
@@ -886,6 +943,22 @@ main, .nav, .foot{position:relative; z-index:1}
           <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3><span class="grad">Tiendas</span> virtuales</h3><p>Tu catálogo vendiendo las 24 horas, con pagos y envíos conectados.</p></div></li>
           <li class="stop reveal"><span class="stop-dot"></span><div class="stop-body"><h3>Creación <span class="grad">de contenido</span></h3><p>Ideas, guiones y piezas para redes que suenan a tu marca.</p></div></li>
         </ol>
+      </div>
+
+      <div class="abierto reveal">
+        <div class="abierto-in">
+          <p class="abierto-k">¿Y si lo tuyo no está en la lista?</p>
+          <p class="abierto-p">Esos ocho son los frentes que más nos piden, no el límite de lo que hacemos. Casi ningún negocio llega con un problema que caiga en una sola casilla. Si tiene que ver con lo digital de tu empresa, lo construimos; y si no es lo nuestro, te lo decimos de frente.</p>
+          <ol class="abierto-pasos">
+            <li><b class="num">1</b><span>Nos cuentas qué te está frenando, en tus palabras y sin tecnicismos.</span></li>
+            <li><b class="num">2</b><span>Lo cruzamos con lo que ya hemos construido y te decimos qué atacaríamos primero.</span></li>
+            <li><b class="num">3</b><span>Sale una propuesta con alcance, tiempo y precio antes de que inviertas un peso.</span></li>
+          </ol>
+        </div>
+        <a class="btn" data-cta href="formulario.html">
+          Cuéntanos de tu negocio
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -992,7 +1065,7 @@ main, .nav, .foot{position:relative; z-index:1}
       </div>
       <div class="cta-band reveal">
         <p>¿Quieres resultados así en tu empresa? Empieza por contarnos cómo opera.</p>
-        <a class="btn" data-cta href="/formulario" target="_blank" rel="noopener">Cuéntanos de tu negocio</a>
+        <a class="btn" data-cta href="formulario.html">Cuéntanos de tu negocio</a>
       </div>
     </div>
   </section>
@@ -1003,20 +1076,29 @@ main, .nav, .foot{position:relative; z-index:1}
       <div class="estela" aria-hidden="true"><i></i><i></i></div>
       <div class="plan-head">
         <h2 class="d-wide reveal">Cómo <span class="grad">trabajamos</span></h2>
-        <p class="lead reveal" style="--i:1">Cuatro etapas, y en cada una sabes qué recibes, cuándo y por cuánto. Nada se decide sobre la marcha.</p>
+        <p class="lead reveal" style="--i:1">Cinco etapas, y en cada una sabes qué recibes, cuándo y por cuánto. Nada se decide sobre la marcha.</p>
         <img class="mascot head-mascot reveal" style="--i:2" src="/assets/mascot/despegue@2x.webp" width="400" height="644" alt="" loading="lazy">
       </div>
       <ol class="steps" id="steps">
         <li class="step reveal" style="--i:0">
+          <div class="step-t"><h3>Nos cuentas tu caso</h3><span class="step-d num">2 min</span></div>
+          <p>Empieza por el formulario: cómo opera tu empresa y qué te está frenando hoy.</p>
+          <ul class="step-lista">
+            <li>En tus palabras, sin categorías cerradas</li>
+            <li>Lo leemos antes de hablar contigo</li>
+            <li>La llamada se agenda al final</li>
+          </ul>
+        </li>
+        <li class="step reveal" style="--i:1">
           <div class="step-t"><h3>Llamada estratégica</h3><span class="step-d num">30 min</span></div>
           <p>Llegamos con tus respuestas leídas, así que no se gasta en presentaciones.</p>
           <ul class="step-lista">
             <li>Dónde se te está yendo el tiempo</li>
-            <li>Qué automatizar primero</li>
-            <li>Qué todavía no vale la pena</li>
+            <li>Qué atacamos primero y qué puede esperar</li>
+            <li>Qué todavía no vale la pena pagar</li>
           </ul>
         </li>
-        <li class="step reveal" style="--i:1">
+        <li class="step reveal" style="--i:2">
           <div class="step-t"><h3>Propuesta con precio cerrado</h3><span class="step-d num">5 días</span></div>
           <p>Alcance, tiempos y precio por escrito, sin letra pequeña.</p>
           <ul class="step-lista">
@@ -1025,7 +1107,7 @@ main, .nav, .foot{position:relative; z-index:1}
             <li>Qué ves funcionando cada semana</li>
           </ul>
         </li>
-        <li class="step reveal" style="--i:2">
+        <li class="step reveal" style="--i:3">
           <div class="step-t"><h3>Construcción y lanzamiento</h3><span class="step-d num">2 a 8 semanas</span></div>
           <p>Entregas semanales que puedes abrir y probar, no informes de avance.</p>
           <ul class="step-lista">
@@ -1034,7 +1116,7 @@ main, .nav, .foot{position:relative; z-index:1}
             <li>Salida a producción acompañada</li>
           </ul>
         </li>
-        <li class="step reveal" style="--i:3">
+        <li class="step reveal" style="--i:4">
           <div class="step-t"><h3>Operación y crecimiento</h3><span class="step-d num">mes a mes</span></div>
           <p>Lo construido se queda tuyo y nosotros lo mantenemos corriendo.</p>
           <ul class="step-lista">
@@ -1056,7 +1138,7 @@ main, .nav, .foot{position:relative; z-index:1}
         <h2 class="reveal" style="--i:1">Cuéntanos de tu empresa y te decimos por dónde empezar.</h2>
         <p class="lead reveal" style="--i:2">Dos minutos de preguntas. Así llegamos a la llamada sabiendo de qué hablamos, y tú sales con algo concreto.</p>
         <div class="orbita-actions reveal" style="--i:3">
-          <a class="btn" data-cta href="/formulario" target="_blank" rel="noopener">
+          <a class="btn" data-cta href="formulario.html">
             Cuéntanos de tu negocio
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -1110,7 +1192,7 @@ main, .nav, .foot{position:relative; z-index:1}
 </footer>
 
 <div class="sticky" id="sticky" aria-hidden="true">
-  <a class="btn" data-cta tabindex="-1" href="/formulario" target="_blank" rel="noopener">Cuéntanos de tu negocio</a>
+  <a class="btn" data-cta tabindex="-1" href="formulario.html">Cuéntanos de tu negocio</a>
 </div>
 
 <script>
@@ -1200,7 +1282,7 @@ main, .nav, .foot{position:relative; z-index:1}
     /* cómo trabajamos: la línea se llena y cada círculo se enciende al pasar */
     const sp = sy + M.vh * .62;
     stepsEl.style.setProperty('--fill', (clamp((sp - M.steps.top) / Math.max(1, M.steps.h), 0, 1) * 100).toFixed(2) + '%');
-    const stair = innerWidth >= 900, prog = clamp((sp - M.steps.top) / Math.max(1, M.steps.h), 0, 1);
+    const stair = innerWidth >= 1080, prog = clamp((sp - M.steps.top) / Math.max(1, M.steps.h), 0, 1);
     stepItems.forEach((el, i) => el.classList.toggle('done', stair ? prog >= (i + .5) / stepItems.length : sp >= M.steps.items[i] + 6));
   }
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };

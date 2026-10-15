@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-16T23:40:00Z",
+  "generatedAt": "2026-10-15T00:00:00Z",
   "title": "Design System: Kairo Escala",
   "extensions": {
     "colorMeta": {
@@ -337,6 +337,16 @@
       {
         "name": "desktop",
         "value": "900px"
+      },
+      {
+        "name": "escalera",
+        "value": "1080px",
+        "note": "Solo para la escalera de 'Cómo trabajamos': con cinco etapas, cinco columnas no caben a 900px. El JS que enciende los peldaños usa el mismo umbral."
+      },
+      {
+        "name": "angosto",
+        "value": "359px",
+        "note": "Tope para pantallas de 320px: botón con padding y cuerpo menores, baraja y antes/después encogidos, cohete del hero sin margen negativo."
       }
     ],
     "assets": {
@@ -455,7 +465,8 @@
       "Resultados muestra tres casos reales (Fundacion CREO, El Tradicional, Tic Tac Shop). Falta: las cifras de ahorro de El Tradicional, que hoy van como lista sin numero. Queda una ficha comentada de molde.",
       "Las capturas de El Tradicional siguen siendo las comprimidas del chat (237x512). Las de CREO y Tic Tac ya vienen de originales de iPhone a 3x. Pedir las de El Tradicional en resolucion completa.",
       "Las capturas de Tic Tac Shop incluyen la barra del navegador y el dominio myshopify.com. Pendiente decidir si se recortan.",
-      "El hero en escritorio depende de que la regla del cohete se escriba .hero-row .rocket-slot; con .rocket-slot a secas la gana la de celular por especificidad."
+      "El hero en escritorio depende de que la regla del cohete se escriba .hero-row .rocket-slot; con .rocket-slot a secas la gana la de celular por especificidad.",
+      "La franja de autoridad dice 9 empresas acompañadas (corregido por el cliente el 15/10; antes decía 15)."
     ]
   },
   "components": [
@@ -546,6 +557,15 @@
       "description": "Instrumento fijo sin números: marcas hairline y relleno vertical de energía que crece con el scroll.",
       "html": "<div class=\"ds-alt\"><div class=\"ds-alt-rail\"><div class=\"ds-alt-fill\" style=\"height:38%\"></div></div></div>",
       "css": ".ds-alt{position:relative;width:22px;height:260px}.ds-alt-rail{position:absolute;left:0;right:0;top:6px;bottom:0;border-left:1px solid rgba(150,162,225,.34);background:repeating-linear-gradient(180deg,rgba(150,162,225,.16) 0 1px,transparent 1px 10px) left top / 7px 100% no-repeat,repeating-linear-gradient(180deg,rgba(150,162,225,.34) 0 1px,transparent 1px 50px) left top / 13px 100% no-repeat}.ds-alt-fill{position:absolute;left:-1px;bottom:0;width:3px;background:linear-gradient(180deg,#7B3BFF 0%,#3B6BFF 100%);border-radius:2px}"
+    },
+    {
+      "name": "Ficha abierta",
+      "kind": "card",
+      "refersTo": "abierto",
+      "description": "Cierra Servicios diciendo que los ocho frentes son la puerta de entrada y no el límite, y cómo se trabaja un caso que no encaja. Es lo único de la página con borde y fondo propio: corta la lectura en lista a propósito.",
+      "html": "<div class=\"ds-abierto\"><div><p class=\"ds-abierto-k\">¿Y si lo tuyo no está en la lista?</p><p class=\"ds-abierto-p\">Esos ocho son los frentes que más nos piden, no el límite de lo que hacemos.</p><ol class=\"ds-abierto-pasos\"><li><b>1</b><span>Nos cuentas qué te está frenando.</span></li></ol></div><a class=\"ds-btn\" href=\"#\">Cuéntanos de tu negocio</a></div>",
+      "css": ".ds-abierto{margin-top:12px;padding:18px;border:1px solid var(--line-strong);border-radius:18px;background:linear-gradient(180deg,rgba(143,168,255,.075),rgba(7,8,15,0) 72%);display:grid;gap:16px}\n.ds-abierto-k{font-stretch:125%;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-size:clamp(1.18rem,5vw,1.6rem)}\n.ds-abierto-p{color:var(--ink-2);max-width:64ch}\n.ds-abierto-pasos li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:start}\n.ds-abierto-pasos b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.82rem;font-weight:800;color:#fff;background:var(--energy)}\n.ds-abierto .ds-btn{display:none;justify-self:start}\n@media (min-width:900px){.ds-abierto{padding:26px 30px;grid-template-columns:minmax(0,1fr) auto;column-gap:34px;align-items:center}.ds-abierto .ds-btn{display:inline-flex}}",
+      "usage": "Una sola instancia, al final de Servicios. No duplicar: si aparece dos veces deja de cortar la lista y se vuelve ruido."
     }
   ],
   "narrative": {
@@ -601,7 +621,9 @@
         "name": "La regla de la sombra con dueño",
         "body": "Solo llevan sombra o halo el botón de energía, la mascota y la cabeza de la estela. Texto, filas, nav y puntos no proyectan.",
         "section": "elevation"
-      }
+      },
+      "Los enlaces entre `index.html` y `formulario.html` van relativos y sin `target`: una ruta que empiece por `/` solo resuelve en Vercel, y `target=\"_blank\"` lo bloquean los iframes con sandbox y los navegadores embebidos de Instagram y WhatsApp.",
+      "El catálogo de ocho servicios nunca se presenta como frontera: la ficha `.abierto` y los cierres de Dolores y Lo que cambia dicen que el caso que no está en la lista también entra."
     ],
     "dos": [
       "**Do** usar `--energy` (100°) en horizontal y `--energy-v` (violeta arriba, azul abajo) en cualquier relleno vertical, como la regla.",
