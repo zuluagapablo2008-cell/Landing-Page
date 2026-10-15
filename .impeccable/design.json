@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-15T00:00:00Z",
+  "generatedAt": "2026-10-15T12:00:00Z",
   "title": "Design System: Kairo Escala",
   "extensions": {
     "colorMeta": {
@@ -466,7 +466,8 @@
       "Las capturas de El Tradicional siguen siendo las comprimidas del chat (237x512). Las de CREO y Tic Tac ya vienen de originales de iPhone a 3x. Pedir las de El Tradicional en resolucion completa.",
       "Las capturas de Tic Tac Shop incluyen la barra del navegador y el dominio myshopify.com. Pendiente decidir si se recortan.",
       "El hero en escritorio depende de que la regla del cohete se escriba .hero-row .rocket-slot; con .rocket-slot a secas la gana la de celular por especificidad.",
-      "La franja de autoridad dice 9 empresas acompañadas (corregido por el cliente el 15/10; antes decía 15)."
+      "La franja de autoridad dice 9 empresas acompañadas (corregido por el cliente el 15/10; antes decía 15).",
+      "El paso de agenda del formulario no consulta ningún calendario: manda el día y la hora preferidos dentro del mensaje de WhatsApp. Pendiente decidir si se conecta Calendly o Cal.com para que la franja quede reservada de verdad."
     ]
   },
   "components": [
@@ -623,7 +624,9 @@
         "section": "elevation"
       },
       "Los enlaces entre `index.html` y `formulario.html` van relativos y sin `target`: una ruta que empiece por `/` solo resuelve en Vercel, y `target=\"_blank\"` lo bloquean los iframes con sandbox y los navegadores embebidos de Instagram y WhatsApp.",
-      "El catálogo de ocho servicios nunca se presenta como frontera: la ficha `.abierto` y los cierres de Dolores y Lo que cambia dicen que el caso que no está en la lista también entra."
+      "El catálogo de ocho servicios nunca se presenta como frontera: la ficha `.abierto` y los cierres de Dolores y Lo que cambia dicen que el caso que no está en la lista también entra.",
+      "Dolores no pasa de cinco señales y la tabla de Lo que cambia no pasa de seis filas: a partir de ahí el visitante deja de reconocerse y empieza a leer una lista.",
+      "El paso 2 del formulario recoge una preferencia de día y hora, no una reserva: sin servicio de agenda conectado, nada en pantalla puede decir que la llamada quedó agendada."
     ],
     "dos": [
       "**Do** usar `--energy` (100°) en horizontal y `--energy-v` (violeta arriba, azul abajo) en cualquier relleno vertical, como la regla.",

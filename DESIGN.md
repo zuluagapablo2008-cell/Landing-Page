@@ -558,3 +558,19 @@ Reglas para no romperlo:
 - Los enlaces entre `index.html` y `formulario.html` van **relativos y sin `target`**. Una ruta que empiece por `/` solo funciona en Vercel.
 - Cualquier servicio nuevo entra en la ruta de ocho paradas, pero la ficha `.abierto` se queda: es la que dice que la lista no es la frontera.
 - La escalera horizontal es de cinco columnas desde 1080px. Si se agrega una etapa, hay que subir ese punto de quiebre y el `innerWidth >= 1080` del JS a la vez.
+
+### Ajustes del mismo día (señales, tabla y agenda en el formulario)
+
+**Dolores vuelve a cinco señales.** La de la información repartida en cuadernos y chats salió: el bloque no es un inventario de problemas, es un espejo, y a partir de cierto número el visitante deja de reconocerse y empieza a leer una lista. Se queda la de "tienes claro el problema, pero no a quién encargárselo", que es la que conecta con la ficha `.abierto`. Las otras dos se afinaron: la web ahora cubre los dos casos reales ("no tienes página web, o la que tienes quedó obsoleta") y la de pauta dice la consecuencia en vez de insinuarla ("no tienes claro en qué te ayudó").
+
+**Lo que cambia pasa de ocho filas a seis.** Ocho se leían como catálogo y ninguna pegaba. Seis filas con la frase más corta que diga la verdad: tiempo, página, operación, catálogo, alcance, claridad. "Tu presencia" y "Tu video" se fundieron en "Tu alcance" (contenido con calendario, campañas con reporte) porque eran el mismo frente contado dos veces, y "Tu marca" se fundió en "Tu página". La columna del Hoy ya no describe la tarea sino lo que se siente: "El negocio se frena cuando tú te frenas", "Decides con lo que alcanzas a acordarte".
+
+**El formulario gana un paso de agenda.** Era una sola pantalla que terminaba abriendo WhatsApp; ahora son dos. El paso 1 valida y el paso 2 pregunta cuándo: ocho días hábiles (desde mañana, sin fines de semana) y ocho franjas de 8:00 a 17:00. Lo elegido aparece en una ficha de resumen y viaja como primera línea del mensaje de WhatsApp. **No consulta ningún calendario real**: el sitio es estático y no hay servicio de reservas conectado, así que recoge la franja que le sirve a quien escribe y una persona confirma por WhatsApp. El texto lo dice en esos términos ("te confirmamos", nunca "quedó agendada"), y el botón de volver conserva las respuestas. Si algún día se conecta Calendly o Cal.com, el paso 2 es el único que cambia.
+
+**Fuera dos campos:** tamaño del equipo y cuándo quiere empezar. El primero no cambiaba la conversación y el segundo lo responde ahora la agenda.
+
+Reglas para no romperlo:
+
+- Las señales de Dolores no pasan de cinco. Si entra una, sale otra.
+- La tabla de Lo que cambia no pasa de seis filas. Cada fila tiene que doler o no entra.
+- Mientras no haya servicio de reservas, el paso 2 pide una preferencia y lo dice así. Nada en pantalla puede afirmar que la llamada quedó agendada.

@@ -25,7 +25,7 @@ Un solo equipo que cubre todo el frente digital de una empresa (automatización 
 ## Operating Context
 
 - Visita casi siempre en celular, en vertical, con una mano; la versión móvil es la prioridad y la de escritorio es secundaria.
-- El CTA único es "Cuéntanos de tu negocio" y lleva a `formulario.html`, una página aparte, en la misma pestaña (el enlace es relativo y sin `target`: con ruta absoluta solo funcionaba en Vercel, y `target="_blank"` lo bloquean los navegadores embebidos de Instagram y WhatsApp, que es por donde llega casi todo el tráfico). El formulario recoge el contexto de la empresa (a qué se dedica, tamaño, qué necesita, dolor principal, cuánto puede invertir, cuándo quiere empezar) y al enviarlo abre WhatsApp con todas las respuestas escritas; la llamada se agenda ahí, al final.
+- El CTA único es "Cuéntanos de tu negocio" y lleva a `formulario.html`, una página aparte, en la misma pestaña (el enlace es relativo y sin `target`: con ruta absoluta solo funcionaba en Vercel, y `target="_blank"` lo bloquean los navegadores embebidos de Instagram y WhatsApp, que es por donde llega casi todo el tráfico). El formulario recoge el contexto de la empresa (a qué se dedica, qué necesita, dolor principal, cuánto puede invertir) y después pide día y hora para la llamada; al confirmar abre WhatsApp con todas las respuestas y la franja elegida.
 - Toda la página es un embudo: cada bloque empuja al mismo CTA (dolor → promesa → servicios → prueba → proceso → cierre).
 
 ## Capabilities and Constraints
@@ -37,6 +37,7 @@ Un solo equipo que cubre todo el frente digital de una empresa (automatización 
 - **Abierto:** número de WhatsApp real (marcador `+57 300 000 0000` hasta recibirlo).
 - **Abierto:** resultados reales con números (el cliente los tiene y los enviará; hasta entonces se usan cifras de ejemplo marcadas como tal en el código y en pantalla).
 - Formulario propio en su propia página, pero **sin backend**: el sitio es estático y las respuestas no se guardan en ninguna parte, viajan dentro del mensaje de WhatsApp. Si se quiere que queden registradas (hoja de cálculo, CRM, correo), hace falta conectar un servicio de formularios o una función serverless.
+- El paso de agenda **no reserva nada**: no hay calendario conectado, así que recoge el día y la hora que le sirven al visitante y los manda en el mensaje; la confirmación la da una persona por WhatsApp. Para que la franja quede bloqueada de verdad hay que conectar Calendly, Cal.com o la agenda de citas de Google Calendar.
 
 ## Brand Commitments
 

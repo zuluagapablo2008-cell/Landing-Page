@@ -143,6 +143,40 @@ body::before{
   .form-pie .btn{width:auto}
 }
 
+/* ---------- paso 2: la agenda ----------
+   El sitio es estático, así que esto no consulta la agenda real de nadie:
+   recoge el día y la hora que le sirven a quien escribe y los manda dentro
+   del mensaje de WhatsApp, donde se confirma. Por eso el texto dice
+   "te confirmamos" y no "tu llamada quedó agendada". */
+.agenda{display:grid; gap:18px; padding-block:22px 44px}
+.agenda h2{font-size:clamp(1.6rem,6.5vw,2.4rem)}
+.agenda-grupo{display:grid; gap:9px}
+.opts{display:flex; flex-wrap:wrap; gap:8px}
+.opt{
+  font-family:inherit; font-size:.86rem; font-weight:500; color:var(--ink-2); cursor:pointer;
+  padding:9px 15px; border-radius:16px; border:1px solid rgba(143,168,255,.26);
+  background:rgba(10,13,32,.6); line-height:1.3; text-align:center; min-width:72px;
+  transition:color 180ms ease, border-color 180ms ease, background 180ms ease, transform 160ms var(--ease-out);
+}
+.opt b{display:block; font-weight:800; font-size:1.02rem; color:var(--ink); letter-spacing:-.01em}
+.opt[aria-pressed="true"]{color:#fff; border-color:transparent; background:var(--energy)}
+.opt[aria-pressed="true"] b{color:#fff}
+.opt:active{transform:scale(.97)}
+.opts.horas .opt{border-radius:999px; min-width:0; padding:10px 16px; font-size:.95rem; color:var(--ink)}
+.agenda-resumen{
+  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  padding:14px 16px; border-radius:14px; border:1px solid rgba(143,168,255,.26);
+  background:linear-gradient(180deg, rgba(143,168,255,.09), rgba(7,8,15,0));
+}
+.agenda-resumen span{font-size:.84rem; font-weight:600; color:var(--ink-3)}
+.agenda-resumen b{font-size:1.05rem; font-weight:800; letter-spacing:-.015em; color:var(--ink)}
+.volver-form{
+  justify-self:start; background:none; border:0; padding:0; cursor:pointer;
+  font-family:inherit; font-size:.9rem; color:var(--ink-3); text-decoration:underline;
+}
+.volver-form:hover{color:var(--ink-2)}
+@media (prefers-reduced-motion: reduce){ .opt{transition:none} }
+
 .foot{border-top:1px solid rgba(150,162,225,.16); padding-block:22px 30px; color:var(--ink-3); font-size:.85rem}
 .foot-in{display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between}
 .foot a{text-decoration:none}
@@ -168,10 +202,10 @@ body::before{
   <div class="wrap cabeza">
     <h1 class="d-wide"><span class="metal">Cuéntanos</span> <span class="grad">de tu negocio.</span></h1>
     <p class="lead">Dos minutos de preguntas. No importa si tu caso no encaja en una categoría: con esto llegamos a la llamada sabiendo de qué hablamos, y tú sales con algo concreto.</p>
-    <ol class="pasos">
+    <ol class="pasos" id="pasos">
       <li class="hoy"><b>1</b> Responde esto</li>
-      <li><b>2</b> Agendamos la llamada</li>
-      <li><b>3</b> Sales con tres acciones</li>
+      <li><b>2</b> Eliges la hora</li>
+      <li><b>3</b> Sales de la llamada con tres acciones</li>
     </ol>
   </div>
 
@@ -193,17 +227,6 @@ body::before{
             <div class="campo">
               <label for="f-web">Sitio web o Instagram</label>
               <input id="f-web" name="web" type="text" inputmode="url" placeholder="@tumarca o tumarca.com">
-            </div>
-            <div class="campo sel">
-              <label for="f-equipo">Tamaño del equipo</label>
-              <select id="f-equipo" name="equipo">
-                <option value="">Selecciona</option>
-                <option>Solo yo</option>
-                <option>2 a 10 personas</option>
-                <option>11 a 50 personas</option>
-                <option>51 a 200 personas</option>
-                <option>Más de 200 personas</option>
-              </select>
             </div>
             <div class="campo ancho">
               <span class="grupo-t" id="lbl-servicios">¿Qué crees que necesitas? Marca lo que aplique; si no lo tienes claro, lo definimos nosotros</span>
@@ -236,16 +259,6 @@ body::before{
                 <option>Todavía no lo sé</option>
               </select>
             </div>
-            <div class="campo sel">
-              <label for="f-cuando">¿Cuándo quieres empezar?</label>
-              <select id="f-cuando" name="cuando">
-                <option value="">Selecciona</option>
-                <option>Lo antes posible</option>
-                <option>Este mes</option>
-                <option>En dos o tres meses</option>
-                <option>Estoy explorando</option>
-              </select>
-            </div>
             <div class="campo">
               <label for="f-whatsapp">WhatsApp <span class="req" aria-hidden="true">*</span></label>
               <input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+57 300 000 0000">
@@ -260,14 +273,42 @@ body::before{
 
           <div class="form-pie">
             <button class="btn" type="submit">
-              Enviar y agendar la llamada
+              Continuar y elegir la hora
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <p class="form-nota">Al enviar se abre WhatsApp con tus respuestas ya escritas. Ahí cerramos la hora de la llamada.</p>
+            <p class="form-nota">Después de esto eliges el día y la hora de la llamada.</p>
           </div>
-
-          <p class="form-ok" id="formOk" hidden>Listo, tus respuestas están preparadas. <a id="formLink" href="#" target="_blank" rel="noopener">Ábrelas en WhatsApp</a> para terminar de agendar.</p>
         </form>
+  </div>
+
+  <div class="wrap" id="pasoAgenda" hidden>
+    <section class="agenda" aria-labelledby="agenda-t">
+      <h2 class="d-wide" id="agenda-t"><span class="metal">¿Cuándo</span> <span class="grad">te llamamos?</span></h2>
+      <p class="lead">Elige el día y la hora que te sirven. Atendemos de lunes a viernes, de 8:00 a 18:00 (hora de Colombia), y la llamada dura 30 minutos.</p>
+
+      <div class="agenda-grupo">
+        <span class="grupo-t" id="lbl-dia">Día</span>
+        <div class="opts dias" id="dias" role="group" aria-labelledby="lbl-dia"></div>
+      </div>
+      <div class="agenda-grupo">
+        <span class="grupo-t" id="lbl-hora">Hora</span>
+        <div class="opts horas" id="horas" role="group" aria-labelledby="lbl-hora"></div>
+      </div>
+
+      <p class="agenda-resumen" id="agendaResumen" hidden><span>Tu llamada</span><b id="agendaTexto"></b></p>
+      <p class="form-error" id="agendaError" role="alert" hidden></p>
+
+      <div class="form-pie">
+        <button class="btn" type="button" id="confirmar">
+          Confirmar y abrir WhatsApp
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="form-nota">Se abre WhatsApp con tus respuestas y la hora que elegiste. Te confirmamos ahí mismo; si esa hora se nos cruza, te proponemos la más cercana.</p>
+      </div>
+
+      <p class="form-ok" id="formOk" hidden>Listo, todo quedó preparado. <a id="formLink" href="#" target="_blank" rel="noopener">Ábrelo en WhatsApp</a> para terminar de agendar.</p>
+      <button class="volver-form" type="button" id="volverForm">Volver a mis respuestas</button>
+    </section>
   </div>
 </main>
 
@@ -287,6 +328,9 @@ body::before{
 
   const form = $('#form'); if (!form) return;
   const err = $('#formError'), ok = $('#formOk'), link = $('#formLink');
+  const pasoForm = form.parentElement, pasoAgenda = $('#pasoAgenda'), pasos = $$('#pasos li');
+  const dias = $('#dias'), horas = $('#horas'), agendaErr = $('#agendaError');
+  const resumen = $('#agendaResumen'), resumenTxt = $('#agendaTexto');
   const OBLIGATORIOS = [
     ['nombre', 'tu nombre'], ['empresa', 'el nombre de la empresa'], ['giro', 'a qué se dedica'],
     ['dolor', 'tu mayor dolor de cabeza'], ['inversion', 'cuánto puedes invertir'], ['whatsapp', 'tu WhatsApp']
@@ -311,20 +355,108 @@ body::before{
       return;
     }
     err.hidden = true;
+    irAAgenda();
+  });
+
+  form.addEventListener('input', e => {
+    if (e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid');
+  });
+
+  /* ---------- paso 2: día y hora ----------
+     No hay backend ni calendario conectado: esto recoge la franja que le
+     sirve a quien escribe y la manda dentro del mensaje. La confirmación
+     la da una persona por WhatsApp. */
+  const HORAS = ['8:00 a. m.', '9:00 a. m.', '10:00 a. m.', '11:00 a. m.',
+                 '2:00 p. m.', '3:00 p. m.', '4:00 p. m.', '5:00 p. m.'];
+  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const SEMANA = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  let dia = null, hora = null, montada = false;
+
+  // los ocho próximos días hábiles, empezando mañana
+  const proximosHabiles = n => {
+    const out = [], d = new Date(); d.setHours(0, 0, 0, 0);
+    while (out.length < n) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() !== 0 && d.getDay() !== 6) out.push(new Date(d));
+    }
+    return out;
+  };
+
+  const marcar = (cont, btn) => {
+    $$('.opt', cont).forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+  };
+
+  const pintarResumen = () => {
+    if (dia && hora) {
+      resumenTxt.textContent = dia.largo + ', ' + hora;
+      resumen.hidden = false;
+      agendaErr.hidden = true;
+    } else {
+      resumen.hidden = true;
+    }
+  };
+
+  const montarAgenda = () => {
+    if (montada) return; montada = true;
+    proximosHabiles(8).forEach(f => {
+      const largo = SEMANA[f.getDay()] + ' ' + f.getDate() + ' de ' + MESES[f.getMonth()];
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = '<b>' + SEMANA[f.getDay()].slice(0, 3) + ' ' + f.getDate() + '</b>' + MESES[f.getMonth()].slice(0, 3);
+      b.addEventListener('click', () => { dia = { largo }; marcar(dias, b); pintarResumen(); });
+      dias.appendChild(b);
+    });
+    HORAS.forEach(h => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.textContent = h; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => { hora = h; marcar(horas, b); pintarResumen(); });
+      horas.appendChild(b);
+    });
+  };
+
+  const cabezaLead = $('.cabeza .lead');
+
+  const irAAgenda = () => {
+    montarAgenda();
+    pasoForm.hidden = true; pasoAgenda.hidden = false;
+    cabezaLead.hidden = true; // ya no describe lo que hay en pantalla
+    pasos.forEach((li, i) => li.classList.toggle('hoy', i === 1));
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    ($('.opt', dias) || $('#confirmar')).focus({ preventScroll: true });
+  };
+
+  $('#volverForm').addEventListener('click', () => {
+    pasoAgenda.hidden = true; pasoForm.hidden = false;
+    cabezaLead.hidden = false;
+    pasos.forEach((li, i) => li.classList.toggle('hoy', i === 0));
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    form.elements['nombre'].focus({ preventScroll: true });
+  });
+
+  $('#confirmar').addEventListener('click', () => {
+    if (!dia || !hora) {
+      agendaErr.textContent = !dia && !hora ? 'Elige el día y la hora de la llamada.'
+        : !dia ? 'Falta el día de la llamada.' : 'Falta la hora de la llamada.';
+      agendaErr.hidden = false;
+      (!dia ? dias : horas).scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+      return;
+    }
+    agendaErr.hidden = true;
 
     const servicios = $$('[name="servicio"]:checked', form).map(c => c.value);
     const lineas = [
       'Hola, equipo de Kairo Escala. Quiero agendar la llamada.',
       '',
+      'Prefiero: ' + dia.largo + ', ' + hora + ' (hora de Colombia)',
+      '',
       'Nombre: ' + val('nombre'),
       'Empresa: ' + val('empresa'),
       'A qué se dedica: ' + val('giro'),
       val('web') && 'Web o Instagram: ' + val('web'),
-      val('equipo') && 'Tamaño del equipo: ' + val('equipo'),
       servicios.length && 'Le interesa: ' + servicios.join(', '),
       'Mayor dolor de cabeza: ' + val('dolor'),
       'Puede invertir al mes: ' + val('inversion'),
-      val('cuando') && 'Quiere empezar: ' + val('cuando'),
       'WhatsApp: ' + val('whatsapp'),
       val('correo') && 'Correo: ' + val('correo')
     ].filter(Boolean);
@@ -334,10 +466,6 @@ body::before{
     ok.hidden = false;
     const w = open(url, '_blank', 'noopener');
     if (!w) link.focus();
-  });
-
-  form.addEventListener('input', e => {
-    if (e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid');
   });
 })();
 </script>
