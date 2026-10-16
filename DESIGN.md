@@ -574,3 +574,16 @@ Reglas para no romperlo:
 - Las señales de Dolores no pasan de cinco. Si entra una, sale otra.
 - La tabla de Lo que cambia no pasa de seis filas. Cada fila tiene que doler o no entra.
 - Mientras no haya servicio de reservas, el paso 2 pide una preferencia y lo dice así. Nada en pantalla puede afirmar que la llamada quedó agendada.
+
+### Ajustes del 16 de octubre de 2026 (la tesis, el plazo de CREO, fuera el correo)
+
+**La tesis.** "Dinos en qué estás perdiendo plata y tiempo. Nosotros lo solucionamos." Componente nuevo (`.tesis`): tamaño de titular, barra de energía vertical a la izquierda, con la mitad acusadora en degradado. Va en dos sitios y en ninguno más. El primero es el cierre de Dolores, en el punto exacto en que el visitante acaba de reconocerse en las cinco señales: ahí la frase no es una promesa suelta sino la respuesta a lo que acaba de leer. El segundo es el titular del cierre, como última palabra antes del botón. En el medio no se repite, porque una tesis que aparece cinco veces deja de ser tesis y se vuelve eslogan.
+
+**El plazo de CREO.** Duplicar en tres meses y duplicar en tres años no es el mismo trabajo, así que el plazo entra como parte del resultado: píldora `.caso-plazo` bajo la cifra grande, "Seguidores y conversiones al doble, en tres meses". La cifra verificable (`+5.121`, de 4.673 a 9.794) se queda arriba porque los dos extremos están en las capturas; el dato de conversiones lo aporta el cliente y no tiene captura, por eso va en la píldora y no como cifra grande.
+
+**Fuera el correo del pie.** Queda WhatsApp y el horario. El formulario ya recoge el correo de quien escribe, y el canal de entrada es uno solo.
+
+Reglas para no romperlo:
+
+- `.tesis` aparece dos veces en toda la página: cierre de Dolores y titular del cierre. Ni una más.
+- Un dato sin captura que lo respalde va en la píldora del plazo o en la lista, nunca como cifra grande: la cifra grande es la que el visitante puede verificar mirando la ficha.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-15T12:00:00Z",
+  "generatedAt": "2026-10-16T00:00:00Z",
   "title": "Design System: Kairo Escala",
   "extensions": {
     "colorMeta": {
@@ -567,6 +567,15 @@
       "html": "<div class=\"ds-abierto\"><div><p class=\"ds-abierto-k\">¿Y si lo tuyo no está en la lista?</p><p class=\"ds-abierto-p\">Esos ocho son los frentes que más nos piden, no el límite de lo que hacemos.</p><ol class=\"ds-abierto-pasos\"><li><b>1</b><span>Nos cuentas qué te está frenando.</span></li></ol></div><a class=\"ds-btn\" href=\"#\">Cuéntanos de tu negocio</a></div>",
       "css": ".ds-abierto{margin-top:12px;padding:18px;border:1px solid var(--line-strong);border-radius:18px;background:linear-gradient(180deg,rgba(143,168,255,.075),rgba(7,8,15,0) 72%);display:grid;gap:16px}\n.ds-abierto-k{font-stretch:125%;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-size:clamp(1.18rem,5vw,1.6rem)}\n.ds-abierto-p{color:var(--ink-2);max-width:64ch}\n.ds-abierto-pasos li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:start}\n.ds-abierto-pasos b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.82rem;font-weight:800;color:#fff;background:var(--energy)}\n.ds-abierto .ds-btn{display:none;justify-self:start}\n@media (min-width:900px){.ds-abierto{padding:26px 30px;grid-template-columns:minmax(0,1fr) auto;column-gap:34px;align-items:center}.ds-abierto .ds-btn{display:inline-flex}}",
       "usage": "Una sola instancia, al final de Servicios. No duplicar: si aparece dos veces deja de cortar la lista y se vuelve ruido."
+    },
+    {
+      "name": "Tesis",
+      "kind": "text",
+      "refersTo": "tesis",
+      "description": "La promesa de la página en una frase, a tamaño de titular y con barra de energía a la izquierda. Dos instancias: cierre de Dolores y titular del cierre.",
+      "html": "<p class=\"ds-tesis\">Dinos <span class=\"ds-grad\">en qué estás perdiendo plata y tiempo.</span> Nosotros lo solucionamos.</p>",
+      "css": ".ds-tesis{margin-top:22px;max-width:17ch;position:relative;padding-left:18px;font-stretch:125%;font-weight:900;font-size:clamp(1.45rem,6.4vw,2.5rem);letter-spacing:-.028em;line-height:1.08;color:var(--ink);text-wrap:balance}\n.ds-tesis::before{content:\"\";position:absolute;left:0;top:.16em;bottom:.16em;width:4px;border-radius:3px;background:var(--energy-v)}\n@media (min-width:900px){.ds-tesis{margin-top:30px;max-width:28ch;padding-left:24px}}",
+      "usage": "Dos instancias en toda la página. Una tercera la convierte en eslogan y deja de pesar."
     }
   ],
   "narrative": {
@@ -626,7 +635,9 @@
       "Los enlaces entre `index.html` y `formulario.html` van relativos y sin `target`: una ruta que empiece por `/` solo resuelve en Vercel, y `target=\"_blank\"` lo bloquean los iframes con sandbox y los navegadores embebidos de Instagram y WhatsApp.",
       "El catálogo de ocho servicios nunca se presenta como frontera: la ficha `.abierto` y los cierres de Dolores y Lo que cambia dicen que el caso que no está en la lista también entra.",
       "Dolores no pasa de cinco señales y la tabla de Lo que cambia no pasa de seis filas: a partir de ahí el visitante deja de reconocerse y empieza a leer una lista.",
-      "El paso 2 del formulario recoge una preferencia de día y hora, no una reserva: sin servicio de agenda conectado, nada en pantalla puede decir que la llamada quedó agendada."
+      "El paso 2 del formulario recoge una preferencia de día y hora, no una reserva: sin servicio de agenda conectado, nada en pantalla puede decir que la llamada quedó agendada.",
+      "La tesis ('en qué estás perdiendo plata y tiempo') aparece dos veces: al cerrar Dolores y como titular del cierre. Nunca más.",
+      "Un dato sin captura que lo respalde va en la píldora del plazo o en la lista, nunca como cifra grande: la cifra grande tiene que poder verificarse mirando la ficha."
     ],
     "dos": [
       "**Do** usar `--energy` (100°) en horizontal y `--energy-v` (violeta arriba, azul abajo) en cualquier relleno vertical, como la regla.",

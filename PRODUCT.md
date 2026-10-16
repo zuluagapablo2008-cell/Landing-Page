@@ -33,6 +33,9 @@ Un solo equipo que cubre todo el frente digital de una empresa (automatización 
 - Servicios confirmados (8): automatización de procesos, funnels de venta y diseños web, soluciones con IA, marketing digital, publicidad paga en redes sociales, edición de videos, tiendas virtuales, creación de contenido.
 - Los ocho son la puerta de entrada, **no el límite**: el encargo real suele ser una mezcla, y la propuesta se arma a partir del problema que trae el visitante. La página lo dice explícitamente (ficha "¿Y si lo tuyo no está en la lista?" al cierre de Servicios) junto con el compromiso de decir que no cuando algo no sea para nosotros.
 - Trayectoria: 3 años en negocios digitales y **9 empresas acompañadas**.
+- Frase rectora, tal como la dio el cliente: **"Dinos en qué estás perdiendo plata y tiempo. Nosotros lo solucionamos."** Es el argumento de la página y va en dos puntos: al cerrar Dolores y como titular del cierre.
+- Fundación CREO: la campaña duró **tres meses** y en ese plazo se duplicaron seguidores y conversiones. Los seguidores son verificables en las capturas (4.673 → 9.794); las conversiones las aporta el cliente y van en la píldora de plazo, no como cifra grande.
+- Contacto público: solo WhatsApp y el horario. El correo salió del pie el 16/10 por decisión del cliente.
 - Idioma: español neutro latinoamericano.
 - **Abierto:** número de WhatsApp real (marcador `+57 300 000 0000` hasta recibirlo).
 - **Abierto:** resultados reales con números (el cliente los tiene y los enviará; hasta entonces se usan cifras de ejemplo marcadas como tal en el código y en pantalla).
