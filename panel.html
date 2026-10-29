@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel · Kairo Escala</title>
+<meta name="description" content="Panel interno de Kairo Escala.">
+<meta name="theme-color" content="#07080F">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,700;100,900;125,800;125,900&display=swap">
+<script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+
+<style>
+/* =====================================================================
+   KAIRO ESCALA · panel interno. Misma noche que la landing, pero aquí
+   manda el dato: nada de animaciones ni de cohetes, solo números que se
+   leen rápido desde el celular.
+   ===================================================================== */
+:root{
+  --ground:#07080F;
+  --panel:#0E1222;
+  --linea:#232943;
+  --ink:#F3F4FB;
+  --ink-2:#AEB4CF;
+  --ink-3:#7A819F;
+  --azul:#3B8CFF;
+  --morado:#7B3BFF;
+  --energy:linear-gradient(100deg,#2B82FF 0%,#6F2BF5 100%);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --gutter:20px;
+  color-scheme:dark;
+}
+@media (min-width:900px){ :root{ --gutter:40px } }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; background:var(--ground)}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--display); font-size:16px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:100%; max-width:1180px; margin-inline:auto; padding-inline:var(--gutter)}
+h1,h2,h3{margin:0; font-weight:900; letter-spacing:-.03em; line-height:1.08}
+.grad{background:var(--energy); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+/* ---------- cabecera ---------- */
+.top{border-bottom:1px solid var(--linea); padding-block:18px; position:sticky; top:0; background:rgba(7,8,15,.92); backdrop-filter:blur(10px); z-index:5}
+.top-in{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+.marca{display:flex; align-items:baseline; gap:10px; font-weight:900; letter-spacing:-.02em}
+.marca span{font-size:.8rem; font-weight:700; letter-spacing:.16em; color:var(--ink-3); text-transform:uppercase}
+.top-acc{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.sello{font-size:.82rem; color:var(--ink-3)}
+
+/* ---------- botones ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:8px; border:0; cursor:pointer;
+  height:40px; padding:0 18px; border-radius:999px; background:var(--energy);
+  color:#fff; font:inherit; font-size:.92rem; font-weight:700; letter-spacing:-.01em;
+}
+.btn.fantasma{background:transparent; border:1px solid var(--linea); color:var(--ink-2)}
+.btn.fantasma:hover{color:var(--ink); border-color:#39415f}
+.btn:disabled{opacity:.5; cursor:progress}
+
+/* ---------- puerta ---------- */
+.puerta{min-height:70vh; display:grid; place-items:center; padding-block:60px}
+.puerta-caja{width:100%; max-width:420px; background:var(--panel); border:1px solid var(--linea); border-radius:20px; padding:36px}
+.puerta h1{font-size:1.9rem; margin-bottom:10px}
+.puerta p{color:var(--ink-2); font-size:.95rem; margin:0 0 22px}
+.campo{display:grid; gap:7px; margin-bottom:16px}
+.campo label{font-size:.85rem; font-weight:700; color:var(--ink-2)}
+input[type=password],input[type=search]{
+  width:100%; height:46px; padding:0 14px; border-radius:12px; font:inherit;
+  background:#07080F; border:1px solid var(--linea); color:var(--ink);
+}
+input:focus-visible{outline:2px solid var(--azul); outline-offset:1px}
+.aviso{font-size:.88rem; color:#FF8FA6; margin:0 0 14px; min-height:1.2em}
+
+/* ---------- bloques ---------- */
+section{padding-block:34px}
+.titulo{display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:18px}
+.titulo h2{font-size:1.5rem}
+.titulo .nota{font-size:.84rem; color:var(--ink-3)}
+
+/* ---------- embudo ---------- */
+.embudo{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px}
+.ficha{background:var(--panel); border:1px solid var(--linea); border-radius:16px; padding:22px}
+.ficha .k{font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3)}
+.ficha .v{font-size:2.5rem; font-weight:900; letter-spacing:-.04em; line-height:1.05; margin-top:6px}
+.ficha .pct{font-size:.86rem; color:var(--azul); font-weight:700; margin-top:4px}
+.ficha.fin .v{color:var(--azul)}
+
+/* ---------- barras por día ---------- */
+.grafico{background:var(--panel); border:1px solid var(--linea); border-radius:16px; padding:24px 20px 16px}
+.barras{display:flex; align-items:flex-end; gap:6px; height:170px}
+/* Las dos barras van lado a lado dentro de la columna: apiladas, la suma
+   se salía del alto del gráfico cuando el día tenía muchos envíos. */
+.col{flex:1; height:100%; display:flex; align-items:flex-end; gap:2px; min-width:0}
+.col .b{flex:1; border-radius:4px 4px 0 0; background:var(--energy); min-height:2px}
+.col .b.b2{background:#2A3357}
+.ejes{display:flex; gap:6px; margin-top:10px}
+.ejes span{flex:1; text-align:center; font-size:.68rem; color:var(--ink-3); min-width:0; overflow:hidden; white-space:nowrap}
+.leyenda{display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:.82rem; color:var(--ink-2)}
+.leyenda i{display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:7px; vertical-align:-1px}
+
+/* ---------- listas de conteo ---------- */
+.rejilla{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px}
+.tabla{background:var(--panel); border:1px solid var(--linea); border-radius:16px; padding:22px}
+.tabla h3{font-size:1rem; margin-bottom:14px; color:var(--azul)}
+.fila{display:flex; align-items:center; gap:12px; padding:7px 0; border-top:1px solid #1A2038; font-size:.92rem}
+.fila:first-of-type{border-top:0}
+.fila .n{margin-left:auto; font-weight:800; font-variant-numeric:tabular-nums}
+.fila .txt{color:var(--ink-2); min-width:0; overflow-wrap:anywhere}
+.vacio{color:var(--ink-3); font-size:.9rem; margin:0}
+
+/* ---------- leads ---------- */
+.barra-leads{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px}
+.barra-leads input{max-width:280px; height:40px}
+.leads{display:grid; gap:14px}
+.lead{background:var(--panel); border:1px solid var(--linea); border-radius:16px; padding:22px}
+.lead-top{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:4px}
+.lead-top b{font-size:1.15rem; font-weight:900; letter-spacing:-.02em}
+.lead-top .emp{color:var(--azul); font-weight:700}
+.lead-top time{margin-left:auto; font-size:.8rem; color:var(--ink-3)}
+.lead dl{display:grid; grid-template-columns:auto 1fr; gap:6px 16px; margin:14px 0 0; font-size:.92rem}
+.lead dt{font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); padding-top:2px}
+.lead dd{margin:0; color:var(--ink-2); overflow-wrap:anywhere}
+.lead .chips{display:flex; flex-wrap:wrap; gap:6px}
+.lead .chips span{font-size:.8rem; padding:3px 10px; border-radius:999px; border:1px solid var(--linea); color:var(--ink-2)}
+.lead-acc{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap}
+.lead-acc a{
+  display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+  height:36px; padding:0 15px; border-radius:999px; border:1px solid var(--linea);
+  color:var(--ink-2); font-size:.86rem; font-weight:700;
+}
+.lead-acc a:hover{color:var(--ink); border-color:#39415f}
+@media (max-width:520px){ .lead dl{grid-template-columns:1fr; gap:2px 0} .lead dt{margin-top:10px} }
+
+.foot{border-top:1px solid var(--linea); padding-block:24px; color:var(--ink-3); font-size:.84rem}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<!-- ============ puerta ============ -->
+<div class="wrap puerta" id="puerta">
+  <form class="puerta-caja" id="formClave">
+    <h1>Panel <span class="grad">Kairo</span></h1>
+    <p>Uso interno. Los números de la página y las respuestas del formulario.</p>
+    <p class="aviso" id="aviso" role="alert"></p>
+    <div class="campo">
+      <label for="clave">Clave</label>
+      <input id="clave" type="password" autocomplete="current-password" required>
+    </div>
+    <button class="btn" type="submit" id="btnEntrar">Entrar</button>
+  </form>
+</div>
+
+<!-- ============ tablero ============ -->
+<div id="tablero" hidden>
+  <header class="top">
+    <div class="wrap top-in">
+      <div class="marca">Kairo Escala <span>Panel</span></div>
+      <div class="top-acc">
+        <span class="sello" id="sello"></span>
+        <button class="btn fantasma" type="button" id="btnRefrescar">Actualizar</button>
+        <button class="btn fantasma" type="button" id="btnSalir">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap">
+      <div class="titulo">
+        <h2>El embudo</h2>
+        <span class="nota">Desde que se conectó el panel</span>
+      </div>
+      <div class="embudo" id="embudo"></div>
+    </section>
+
+    <section class="wrap">
+      <div class="titulo">
+        <h2>Últimos 14 días</h2>
+        <span class="nota">Hora de Colombia</span>
+      </div>
+      <div class="grafico">
+        <div class="barras" id="barras"></div>
+        <div class="ejes" id="ejes"></div>
+        <p class="leyenda">
+          <span><i style="background:linear-gradient(100deg,#2B82FF,#6F2BF5)"></i>Visitantes</span>
+          <span><i style="background:#2A3357"></i>Formularios enviados</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="titulo"><h2>De dónde viene y qué piden</h2></div>
+      <div class="rejilla" id="rejilla"></div>
+    </section>
+
+    <section class="wrap">
+      <div class="titulo">
+        <h2>Respuestas del formulario</h2>
+        <span class="nota" id="conteoLeads"></span>
+      </div>
+      <div class="barra-leads">
+        <input type="search" id="buscar" placeholder="Buscar por nombre, empresa o dolor" aria-label="Buscar en las respuestas">
+        <button class="btn fantasma" type="button" id="btnCsv">Bajar CSV</button>
+      </div>
+      <div class="leads" id="leads"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">Panel interno de Kairo Escala · <a href="index.html" style="color:#9FB4FF">volver a la página</a></div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const el = (t, clase, txt) => { const n = document.createElement(t); if (clase) n.className = clase; if (txt != null) n.textContent = txt; return n; };
+  const num = n => Number(n || 0).toLocaleString('es-CO');
+  const pct = (a, b) => (b > 0 ? Math.round((a / b) * 1000) / 10 : 0);
+
+  const puerta = $('#puerta'), tablero = $('#tablero'), aviso = $('#aviso');
+  const LLAVE = 'kairo-panel-clave';
+  let datos = null;
+
+  /* ---------- entrar ---------- */
+  async function pedir(clave) {
+    const r = await fetch('/api/panel', { headers: { 'x-clave': clave } });
+    let cuerpo = null;
+    try { cuerpo = await r.json(); } catch { /* respuesta no-JSON */ }
+    if (r.ok && cuerpo && cuerpo.ok) return cuerpo;
+    const e = new Error((cuerpo && cuerpo.error) || ('error ' + r.status));
+    e.codigo = (cuerpo && cuerpo.error) || String(r.status);
+    throw e;
+  }
+
+  const MENSAJES = {
+    'clave incorrecta': 'Esa clave no es.',
+    'sin-clave': 'Falta configurar PANEL_CLAVE en las variables de entorno de Vercel.',
+    'sin-tienda': 'Falta conectar el store de Upstash en Vercel. Sin él no hay dónde guardar nada.',
+  };
+
+  async function entrar(clave, guardar) {
+    $('#btnEntrar').disabled = true;
+    aviso.textContent = '';
+    try {
+      datos = await pedir(clave);
+      if (guardar) { try { sessionStorage.setItem(LLAVE, clave); } catch {} }
+      puerta.hidden = true; tablero.hidden = false;
+      pintar();
+    } catch (e) {
+      aviso.textContent = MENSAJES[e.codigo] || 'No se pudo entrar: ' + e.message;
+      try { sessionStorage.removeItem(LLAVE); } catch {}
+    } finally {
+      $('#btnEntrar').disabled = false;
+    }
+  }
+
+  $('#formClave').addEventListener('submit', ev => { ev.preventDefault(); entrar($('#clave').value, true); });
+  $('#btnSalir').addEventListener('click', () => { try { sessionStorage.removeItem(LLAVE); } catch {} location.reload(); });
+  $('#btnRefrescar').addEventListener('click', async () => {
+    const b = $('#btnRefrescar'); b.disabled = true;
+    try { datos = await pedir(sessionStorage.getItem(LLAVE) || ''); pintar(); }
+    catch { location.reload(); }
+    finally { b.disabled = false; }
+  });
+
+  /* ---------- pintar ---------- */
+  function pintar() {
+    const t = datos.totales;
+    $('#sello').textContent = 'Al ' + new Date(datos.generado).toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' });
+
+    // embudo
+    const embudo = $('#embudo'); embudo.textContent = '';
+    [
+      ['Visitantes', datos.unicos, null, 'Personas distintas que abrieron la página'],
+      ['Visitas', t.visita, null, 'Veces que se cargó la página'],
+      ['Clics en el CTA', t.cta, pct(t.cta, t.visita)],
+      ['Formulario abierto', t.form_abierto, pct(t.form_abierto, t.cta)],
+      ['Formulario enviado', t.form_enviado, pct(t.form_enviado, t.form_abierto), null, true],
+    ].forEach(([k, v, p, ayuda, fin]) => {
+      const f = el('div', 'ficha' + (fin ? ' fin' : ''));
+      f.appendChild(el('div', 'k', k));
+      f.appendChild(el('div', 'v', num(v)));
+      if (p !== null && p !== undefined) f.appendChild(el('div', 'pct', p + '% del paso anterior'));
+      else if (ayuda) f.appendChild(el('div', 'pct', ayuda));
+      embudo.appendChild(f);
+    });
+
+    // barras
+    const barras = $('#barras'), ejes = $('#ejes');
+    barras.textContent = ''; ejes.textContent = '';
+    const tope = Math.max(1, ...datos.serie.map(d => Math.max(d.unicos, d.form_enviado)));
+    const alto = v => Math.min(150, (v / tope) * 150) + 'px';
+    datos.serie.forEach(d => {
+      const col = el('div', 'col');
+      col.title = d.fecha + ': ' + d.unicos + ' visitantes, ' + d.form_enviado + ' enviados';
+      const b = el('div', 'b'); b.style.height = alto(d.unicos); col.appendChild(b);
+      const b2 = el('div', 'b b2'); b2.style.height = alto(d.form_enviado); col.appendChild(b2);
+      barras.appendChild(col);
+      ejes.appendChild(el('span', null, d.fecha.slice(8) + '/' + d.fecha.slice(5, 7)));
+    });
+
+    // conteos
+    const NOMBRE_CTA = {
+      nav: 'Barra de arriba', hero: 'Portada', servicios: 'Tras los servicios',
+      resultados: 'Tras los resultados', cierre: 'Cierre de la página', barra: 'Barra fija del celular',
+    };
+    const rejilla = $('#rejilla'); rejilla.textContent = '';
+    [
+      ['Botón que tocaron', datos.cta, NOMBRE_CTA],
+      ['De dónde llegaron', datos.fuente, null],
+      ['Servicios que piden', datos.servicios, null],
+      ['Cuánto pueden invertir', datos.inversion, null],
+    ].forEach(([titulo, mapa, nombres]) => {
+      const caja = el('div', 'tabla');
+      caja.appendChild(el('h3', null, titulo));
+      const pares = Object.entries(mapa || {}).sort((a, b) => b[1] - a[1]).slice(0, 10);
+      if (!pares.length) caja.appendChild(el('p', 'vacio', 'Todavía no hay datos.'));
+      pares.forEach(([k, v]) => {
+        const fila = el('div', 'fila');
+        fila.appendChild(el('span', 'txt', (nombres && nombres[k]) || k));
+        fila.appendChild(el('span', 'n', num(v)));
+        caja.appendChild(fila);
+      });
+      rejilla.appendChild(caja);
+    });
+
+    pintarLeads();
+  }
+
+  /* ---------- leads ---------- */
+  function pintarLeads() {
+    const q = ($('#buscar').value || '').toLowerCase().trim();
+    const lista = datos.leads.filter(l => !q ||
+      [l.nombre, l.empresa, l.giro, l.dolor, l.whatsapp, l.correo].join(' ').toLowerCase().includes(q));
+
+    $('#conteoLeads').textContent = q
+      ? lista.length + ' de ' + datos.leads.length
+      : datos.leads.length + (datos.leads.length === 1 ? ' respuesta' : ' respuestas');
+
+    const cont = $('#leads'); cont.textContent = '';
+    if (!lista.length) {
+      cont.appendChild(el('p', 'vacio', q ? 'Nada coincide con esa búsqueda.' : 'Todavía no ha llegado ninguna respuesta.'));
+      return;
+    }
+
+    lista.forEach(l => {
+      const c = el('div', 'lead');
+      const top = el('div', 'lead-top');
+      top.appendChild(el('b', null, l.nombre));
+      top.appendChild(el('span', 'emp', l.empresa));
+      const time = el('time', null, new Date(l.fecha).toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }));
+      time.dateTime = l.fecha;
+      top.appendChild(time);
+      c.appendChild(top);
+
+      const dl = el('dl');
+      const par = (k, v) => {
+        if (!v) return;
+        dl.appendChild(el('dt', null, k));
+        const dd = el('dd');
+        if (Array.isArray(v)) {
+          const chips = el('div', 'chips');
+          v.forEach(s => chips.appendChild(el('span', null, s)));
+          dd.appendChild(chips);
+        } else dd.textContent = v;
+        dl.appendChild(dd);
+      };
+      par('Se dedica a', l.giro);
+      par('Dolor', l.dolor);
+      par('Quiere', l.servicios && l.servicios.length ? l.servicios : '');
+      par('Invierte', l.inversion);
+      par('Web', l.web);
+      par('Correo', l.correo);
+      par('Llegó por', l.fuente);
+      c.appendChild(dl);
+
+      const acc = el('div', 'lead-acc');
+      const tel = String(l.whatsapp || '').replace(/[^\d]/g, '');
+      if (tel) {
+        const a = el('a', null, 'WhatsApp ' + l.whatsapp);
+        a.href = 'https://wa.me/' + (tel.length <= 10 ? '57' + tel : tel);
+        a.target = '_blank'; a.rel = 'noopener';
+        acc.appendChild(a);
+      }
+      if (l.correo) {
+        const a = el('a', null, 'Escribir correo');
+        a.href = 'mailto:' + l.correo;
+        acc.appendChild(a);
+      }
+      if (acc.children.length) c.appendChild(acc);
+      cont.appendChild(c);
+    });
+  }
+
+  $('#buscar').addEventListener('input', () => { if (datos) pintarLeads(); });
+
+  /* ---------- CSV ---------- */
+  $('#btnCsv').addEventListener('click', () => {
+    if (!datos || !datos.leads.length) return;
+    const cols = ['fecha', 'nombre', 'empresa', 'giro', 'web', 'servicios', 'dolor', 'inversion', 'whatsapp', 'correo', 'fuente'];
+    const esc = v => '"' + String(Array.isArray(v) ? v.join(' | ') : (v == null ? '' : v)).replace(/"/g, '""') + '"';
+    const filas = [cols.join(',')].concat(datos.leads.map(l => cols.map(c => esc(l[c])).join(',')));
+    // El BOM hace que Excel en español abra los acentos bien.
+    const blob = new Blob(['﻿' + filas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'kairo-leads-' + new Date().toISOString().slice(0, 10) + '.csv';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  });
+
+  /* ---------- si ya entró en esta pestaña, no vuelve a pedir la clave ---------- */
+  let guardada = null;
+  try { guardada = sessionStorage.getItem(LLAVE); } catch {}
+  if (guardada) entrar(guardada, false);
+  else $('#clave').focus();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "kairo-landing",
+  "private": true,
+  "description": "Landing de Kairo Escala. Sitio estático + funciones en /api para el panel interno.",
+  "engines": {
+    "node": "22.x"
+  }
+}
